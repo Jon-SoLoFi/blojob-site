@@ -96,7 +96,6 @@
     margin-top: 4px;
   }
 
-  /* Progress */
   .progress-title { font-size: 0.95rem; opacity: 0.9; }
   .progress-bar {
     width: 100%;
@@ -112,6 +111,10 @@
     width: 0%;
     background: linear-gradient(90deg, #ff6bd9, #ffb4ff);
     transition: width 0.4s ease-out;
+  }
+  .progress-amounts {
+    font-size: 0.9rem;
+    opacity: 0.85;
   }
 
   /* Wallet + Copy */
@@ -183,6 +186,51 @@
     font-weight: 600;
     color: #ff93e6;
   }
+
+  /* TX Instructions */
+  .howto-list {
+    margin-top: 12px;
+    padding-left: 20px;
+  }
+  .howto-list li {
+    margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    background: #222;
+    border: 1px solid #444;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Leaderboard */
+  .leaderboard {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+  .leaderboard th,
+  .leaderboard td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #333;
+    text-align: left;
+  }
+  .leaderboard th {
+    background: #141414;
+    font-weight: 600;
+  }
+  .tier-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    background: #1b1b1b;
+    border: 1px solid #ff6bd9;
+  }
 </style>
 </head>
 
@@ -211,7 +259,9 @@
   <div class="card">
     <div class="card-title">📊 Presale Progress</div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
-    <p id="progress-amounts" class="progress-amounts">Raised: $0 / $6,900</p>
+    <p id="progress-amounts" class="progress-amounts">
+      Raised: $0 / $6,900 (soft cap) • Hard cap: $9,600
+    </p>
   </div>
 </div>
 
@@ -224,8 +274,8 @@
 
   <div class="callout">
     <strong>Presale is simple:</strong><br>
-    • Send SOL to the presale wallet.<br>
-    • After TGE, tokens distributed proportionally.<br>
+    • Send SOL to the presale wallet during the 36h window.<br>
+    • After TGE, tokens distributed proportionally to your total $ contribution.<br>
     • No bullshit. No slow rug. Only pump.
   </div>
 </div>
@@ -246,8 +296,7 @@
   <h2>💵 Presale Price</h2>
 
   <p><strong>1 BLOJOB = $0.000001</strong> (fixed)</p>
-
-  <p><strong>Minimum buy: 0.1 SOL</strong></p>
+  <p><strong>Minimum buy: 0.1 SOL</strong> • No max (whales welcome 🐋)</p>
 
   <h3>📌 What You Get (Examples)</h3>
   <ul>
@@ -263,6 +312,77 @@
     <input id="solInput" class="calc-input" type="number" step="0.01" placeholder="Enter SOL amount">
     <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
   </div>
+</div>
+
+<!-- HOW TO BUY + WHALE-SAFE -->
+<div class="section">
+  <h2>🧾 How To Ape Into Presale (Step-by-Step)</h2>
+
+  <div class="callout">
+    <strong>1️⃣ Use a non-custodial Solana wallet</strong><br>
+    Phantom, Solflare, Backpack, XDEFI, etc.<br>
+    <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
+  </div>
+
+  <ul class="howto-list">
+    <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
+    <li><strong>Step 2:</strong> Copy the presale wallet and send your SOL during the 36h window.</li>
+    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet.</li>
+    <li><strong>Step 4 (Public route):</strong> Drop your TX link in the Telegram group with:
+      <br>— Amount of SOL sent<br>— Wallet tag (optional nickname)
+    </li>
+    <li><strong>Step 5 (Whale-safe route):</strong> If you're sending <strong>≥ 1 SOL</strong>, you can DM the dev/mods your TX link instead of posting size in public chat.
+      <br><span class="badge">🐳 Whale-friendly</span> <span class="badge">🛡 Privacy-respect</span>
+    </li>
+    <li><strong>Step 6:</strong> After presale closes & numbers are locked, $BLOJOB will be distributed to the same wallet that sent the SOL.</li>
+  </ul>
+
+  <p>
+    Every contribution is tracked from on-chain data + your TX links.<br>
+    <strong>No manual “trust me bro” balances. Everything is verifiable.</strong>
+  </p>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="section">
+  <h2>🏆 Live CumUnity Leaderboard (Manual)</h2>
+
+  <p>
+    During presale, the dev updates this table so everyone can see who’s aped in and what tier they’re in.
+    Final allocations are always based on <strong>on-chain totals at close</strong>.
+  </p>
+
+  <p><strong>Tiers:</strong></p>
+  <ul class="howto-list">
+    <li>🦐 <strong>Shrimp Degen</strong> — &lt; 1 SOL</li>
+    <li>🐳 <strong>Sperm Whale</strong> — 1 → 9 SOL</li>
+    <li>🐋 <strong>Mo’ B DICK</strong> — ≥ 10 SOL</li>
+    <li>🐙 <strong>Goon Lord</strong> — ≥ 20 SOL</li>
+  </ul>
+
+  <table class="leaderboard">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Wallet / Name</th>
+        <th>SOL Committed</th>
+        <th>Tier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Update these rows manually during presale -->
+      <tr>
+        <td>1</td>
+        <td>Coming soon…</td>
+        <td>—</td>
+        <td><span class="tier-pill">🤍 Waiting for first ape</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:0.9rem; opacity:0.8; margin-top:10px;">
+    Leaderboard is for hype & flex only — final distribution = on-chain math at presale close.
+  </p>
 </div>
 
 <!-- Tokenomics -->
@@ -296,9 +416,11 @@
 </footer>
 
 <script>
-/* Presale timing */
+/* =========================
+   Presale timing
+   ========================= */
 const presaleStart = new Date("2025-11-29T20:00:00-05:00");
-const presaleEnd = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
+const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
 
 /* Countdown */
 function pad(n){return n.toString().padStart(2,'0')}
@@ -341,15 +463,16 @@ async function updateCalc(){
   const sol = parseFloat(document.getElementById("solInput").value);
   const resultEl = document.getElementById("calcResult");
 
-  if(!sol){ resultEl.textContent="Enter SOL to calculate."; return; }
+  if(!sol){
+    resultEl.textContent="Enter SOL to calculate.";
+    return;
+  }
 
-  // minimum check
   if(sol < 0.1){
     resultEl.textContent="Minimum buy is 0.1 SOL 🚫";
     return;
   }
 
-  // fetch SOL price
   try{
     const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
     const data = await res.json();
@@ -358,20 +481,28 @@ async function updateCalc(){
     const usdValue = sol * solPrice;
     const blojobTokens = usdValue / 0.000001; // price per token
 
-    resultEl.textContent = 
+    resultEl.textContent =
       `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
   } catch {
     resultEl.textContent = "Error fetching SOL price.";
   }
 }
 
-/* Progress (manual update) */
+/* Progress (manual update during presale)
+   Set currentRaisedUSD = total USD value raised so far,
+   the bar + text will update automatically. */
 let currentRaisedUSD = 0;
 function updateProgress(){
-  const percent = Math.min(currentRaisedUSD/9600,1)*100;
+  const hardCapUSD = 9600;
+  const softCapUSD = 6900;
+  const percent = Math.min(currentRaisedUSD/hardCapUSD,1)*100;
   document.getElementById("progress-fill").style.width = percent+"%";
-  document.getElementById("progress-amounts").textContent = 
-    `Raised: $${currentRaisedUSD.toLocaleString()} / $6,900`;
+
+  const softCapStatus =
+    currentRaisedUSD >= softCapUSD ? "✅ Soft cap reached" : "⏳ Soft cap not reached";
+
+  document.getElementById("progress-amounts").textContent =
+    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
 }
 
 /* Listeners */
