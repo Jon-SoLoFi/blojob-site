@@ -203,7 +203,40 @@
     border: 1px solid #444;
     margin-left: 6px;
     vertical-align: middle;
-  }
+    /* Section D: Pink Bar Bullet Style */
+.pinkbar-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 12px;
+}
+
+.pinkbar-list li {
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: #111;
+  border-left: 4px solid #ff6bd9;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+/* Tokenomics emoji bullets */
+.token-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.token-list li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+}
+
+.token-emoji {
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+    
 </style>
 </head>
 
@@ -292,27 +325,30 @@
 
 <!-- HOW TO BUY + WHALE-SAFE -->
 <div class="section">
-  <h2>🧾 How To Join The Presale</h2>
+  <h2>🧾 How To Join the Presale</h2>
 
-  <div class="callout">
-    <strong>Use a non-custodial Solana wallet:</strong><br>
-    Phantom, Solflare, Backpack, XDEFI, etc.
-    <span class="badge">No CEX deposits (Binance, Coinbase, etc.)</span>
-  </div>
+  <ul class="pinkbar-list">
+    <li><strong>Use a non-custodial Solana wallet.</strong><br>
+      Phantom, Solflare, Backpack, XDEFI, etc.</li>
 
-  <ul class="howto-list">
-    <li><strong>Step 1:</strong> Load your wallet with SOL for your allocation + gas.</li>
-    <li><strong>Step 2:</strong> Copy the presale wallet address and send your SOL during the presale window.</li>
-    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet or Solscan.</li>
-    <li><strong>Step 4 (default):</strong> Post your TX link in the Telegram group with your SOL amount and (optional) nickname so it can be logged.</li>
-    <li><strong>Step 5 (whale-safe):</strong> If you prefer privacy at higher sizes, you can send your TX link privately to the dev/mods instead of posting size publicly.
-      <span class="badge">Whale-friendly</span>
-    </li>
-    <li><strong>Step 6:</strong> After presale close and final accounting, $BLOJOB is distributed to the same wallet that sent the SOL.</li>
+    <li><strong>Send SOL to the presale wallet</strong> during the 36-hour window.<br>
+      Minimum buy: <strong>0.1 SOL</strong></li>
+
+    <li><strong>Grab your transaction link</strong> from your wallet after sending.</li>
+
+    <li><strong>Regular buyers:</strong> Drop your TX link inside the Telegram group.</li>
+
+    <li><strong>Whales (≥ 1 SOL):</strong>  
+      DM your TX link privately if you prefer staying low-key.<br>
+      No pressure, no exposure—just smooth entry.</li>
+
+    <li><strong>After presale closes:</strong>  
+      BLOJOB is distributed to the same wallet that sent SOL.</li>
   </ul>
 
-  <p>
-    Final allocations are always based on <strong>on-chain totals at presale close</strong> — manual logs and the progress bar are just for tracking & hype.
+  <p style="margin-top:12px; opacity:0.85;">
+    All funds and allocations are double-verified on-chain.<br>
+    <strong>No manual fudge. No hidden numbers. Everything verifiable on Solscan.</strong>
   </p>
 </div>
 
@@ -320,14 +356,29 @@
 <div class="section">
   <h2>🪙 Tokenomics (69B Supply)</h2>
 
-  <p>
-    <strong>SpankBank (Vault):</strong> 69% — Long-term reserves, treasury operations, stabilization, staking pools, and community incentives<br>
-    <strong>PreLoad (Presale):</strong> 10% — Distributed proportionally at TGE based on contribution size<br>
-    <strong>MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth, micro-liquidity support<br>
-    <strong>StickyLiquidity (LP):</strong> 14.1% — Added and locked for 6 months<br>
-    
-  </p>
+  <ul class="token-list">
+    <li>
+      <span class="token-emoji">🍑</span>
+      <strong>SpankBank (Vault):</strong> 69% — long-term CumUnity reserves
+    </li>
+
+    <li>
+      <span class="token-emoji">💦</span>
+      <strong>PreLoad (Presale):</strong> 10% (6.9B)
+    </li>
+
+    <li>
+      <span class="token-emoji">🫦</span>
+      <strong>MILF Fund:</strong> 6.9% — marketing, incentives, hype-engine
+    </li>
+
+    <li>
+      <span class="token-emoji">🫟</span>
+      <strong>StickyLiquidity (LP):</strong> 4.1% — locked 6 months
+    </li>
+  </ul>
 </div>
+
 
 <!-- Socials -->
 <div class="section">
