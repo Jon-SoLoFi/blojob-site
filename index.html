@@ -347,104 +347,137 @@
 </footer>
 
 <script>
-/* =========================
-   Presale timing (EDIT IF NEEDED)
-   ========================= */
-const presaleStart = new Date("2025-11-29T20:00:00-05:00"); // 8 PM EST
-const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000); // 36 hours
+/* ===========================================
+   TWO-NUMBER MODE — UPDATE ONLY THESE
+   =========================================== */
+let TOTAL_SOL = 0;  
+// ← Add all presale buys here: 0.1, 0.25, 1.4, etc.
 
-/* Countdown */
+let SOL_PRICE_OVERRIDE = null;
+// ← OPTIONAL. Example: 195.00 (forces SOL price)
+// Leave null to use live Coingecko price.
+
+/* ===========================================
+   CONSTANTS
+   =========================================== */
+const TOKEN_PRICE = 0.000001; // 1 BLOJOB = $0.000001
+const SOFT_CAP_USD = 6900;
+const HARD_CAP_USD = 9600;
+
+/* Presale timing */
+const presaleStart = new Date("2025-11-29T20:00:00-05:00");
+const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
+
+/* Countdown logic */
 function pad(n){return n.toString().padStart(2,'0')}
 function updateCountdown(){
   const now = new Date();
   let mode, target;
 
-  if(now < presaleStart){ mode="pre"; target=presaleStart; }
-  else if(now >= presaleStart && now <= presaleEnd){ mode="live"; target=presaleEnd; }
-  else { mode="ended"; }
+  if(now < presaleStart){ mode = "pre"; target = presaleStart; }
+  else if(now >= presaleStart && now <= presaleEnd){ mode = "live"; target = presaleEnd; }
+  else { mode = "ended"; }
 
   const label = document.getElementById("countdown-label");
   const timer = document.getElementById("countdown-timer");
 
   if(mode === "ended"){
-    label.textContent="Presale ended";
-    timer.textContent="--:--:--";
+    label.textContent = "Presale ended";
+    timer.textContent = "--:--:--";
     return;
   }
 
-  const diff = target-now;
-  const s = Math.max(0,Math.floor(diff/1000));
-  const d = Math.floor(s/86400);
-  const h = Math.floor((s%86400)/3600);
-  const m = Math.floor((s%3600)/60);
-  const sec = s%60;
+  const diff = target - now;
+  const s = Math.max(0, Math.floor(diff / 1000));
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
 
-  timer.textContent=`${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
-  label.textContent = mode==="pre" ? "Presale starts in" : "Presale ends in";
+  timer.textContent = `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
+  label.textContent = mode === "pre" ? "Presale starts in" : "Presale ends in";
 }
 
-/* Copy Wallet */
-function copyWallet(){
-  const text = document.getElementById("walletBox").textContent.trim();
-  navigator.clipboard.writeText(text).then(()=>alert("Wallet copied."));
+/* Fetch SOL price */
+async function getSolPrice(){
+  try {
+    if (SOL_PRICE_OVERRIDE !== null) return SOL_PRICE_OVERRIDE;
+
+    const res = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+    );
+    const data = await res.json();
+    return data.solana.usd;
+
+  } catch (e) {
+    console.warn("SOL price fetch failed — using fallback override.");
+    return SOL_PRICE_OVERRIDE || 0; 
+  }
 }
 
-/* Calculator — Live SOL Price */
+/* Calculator */
 async function updateCalc(){
   const sol = parseFloat(document.getElementById("solInput").value);
   const resultEl = document.getElementById("calcResult");
 
   if(!sol){
-    resultEl.textContent="Enter SOL to calculate.";
+    resultEl.textContent = "Enter SOL to calculate.";
     return;
   }
-
   if(sol < 0.1){
-    resultEl.textContent="Minimum buy is 0.1 SOL.";
+    resultEl.textContent = "Minimum buy is 0.1 SOL 🚫";
     return;
   }
 
-  try{
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-    const data = await res.json();
-    const solPrice = data.solana.usd;
-
-    const usdValue = sol * solPrice;
-    const blojobTokens = usdValue / 0.000001; // price per token
-
-    resultEl.textContent =
-      `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
-  } catch (e) {
-    resultEl.textContent = "Error fetching SOL price.";
+  const price = await getSolPrice();
+  if(price <= 0){
+    resultEl.textContent = "Live SOL pricing unavailable.";
+    return;
   }
+
+  const usd = sol * price;
+  const tokens = usd / TOKEN_PRICE;
+
+  resultEl.textContent = 
+    `${sol} SOL ≈ $${usd.toFixed(2)} → ${tokens.toLocaleString()} BLOJOB`;
 }
 
-/* Progress (manual update during presale)
-   Set currentRaisedUSD = total USD value raised so far,
-   then call updateProgress() in console or by editing the value + refreshing. */
-let currentRaisedUSD = 0;
+/* Progress bar + USD calculations */
+async function updateProgress(){
+  const solPrice = await getSolPrice();
+  let usdRaised = TOTAL_SOL * solPrice;
 
-function updateProgress(){
-  const hardCapUSD = 9600;
-  const softCapUSD = 6900;
-  const percent = Math.min(currentRaisedUSD/hardCapUSD,1)*100;
-  document.getElementById("progress-fill").style.width = percent+"%";
+  if(solPrice <= 0){
+    document.getElementById("progress-amounts").textContent =
+      `Raised: Unable to fetch SOL price (fallback mode).`;
+    return;
+  }
 
+  const percent = Math.min(usdRaised / HARD_CAP_USD, 1) * 100;
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "✅ Soft cap reached" : "⏳ Soft cap not reached";
+    usdRaised >= SOFT_CAP_USD ? "✅ Soft cap reached" : "⏳ Soft cap not reached";
+
+  document.getElementById("progress-fill").style.width = percent + "%";
 
   document.getElementById("progress-amounts").textContent =
-    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus} • Hard cap: $9,600`;
+    `Raised: $${usdRaised.toLocaleString(undefined,{maximumFractionDigits:2})} `
+    + `/ $${SOFT_CAP_USD.toLocaleString()} (soft cap) • ${softCapStatus}`;
+}
+
+/* Wallet copy */
+function copyWallet(){
+  const text = document.getElementById("walletBox").textContent.trim();
+  navigator.clipboard.writeText(text).then(()=>alert("Wallet copied! 🫦"));
 }
 
 /* Listeners */
 document.getElementById("solInput").addEventListener("input", updateCalc);
 
-/* Init */
+/* Init + update loops */
 updateCountdown();
+setInterval(updateCountdown, 1000);
+
 updateProgress();
-setInterval(updateCountdown,1000);
+setInterval(updateProgress, 15000); // auto-refresh every 15s
 </script>
 
-</body>
-</html>
