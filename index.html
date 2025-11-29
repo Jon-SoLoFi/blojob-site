@@ -187,7 +187,6 @@
     color: #ff93e6;
   }
 
-  /* TX Instructions */
   .howto-list {
     margin-top: 12px;
     padding-left: 20px;
@@ -204,32 +203,6 @@
     border: 1px solid #444;
     margin-left: 6px;
     vertical-align: middle;
-  }
-
-  /* Leaderboard */
-  .leaderboard {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 16px;
-    font-size: 0.95rem;
-  }
-  .leaderboard th,
-  .leaderboard td {
-    padding: 10px 8px;
-    border-bottom: 1px solid #333;
-    text-align: left;
-  }
-  .leaderboard th {
-    background: #141414;
-    font-weight: 600;
-  }
-  .tier-pill {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    background: #1b1b1b;
-    border: 1px solid #ff6bd9;
   }
 </style>
 </head>
@@ -267,23 +240,26 @@
 
 <div class="section">
   <p class="nsfw-line">
-    You came here curious… now let Daddy $BLOJOB show you exactly what you're getting. 😈💋
+    You came here curious… now let Daddy show you exactly what you're getting.
   </p>
 
-  <p>No utility. No promises. Just pure, raw, dripping degen pump energy. 🍑💦</p>
+  <p>
+    No utility. No promises. No corporate foreplay.<br>
+    Just pure, focused <strong>degen momentum</strong> built to pump hard if the CumUnity shows up.
+  </p>
 
   <div class="callout">
-    <strong>Presale is simple:</strong><br>
+    <strong>Presale flow:</strong><br>
     • Send SOL to the presale wallet during the 36h window.<br>
-    • After TGE, tokens distributed proportionally to your total $ contribution.<br>
-    • No bullshit. No slow rug. Only pump.
+    • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
+    • Everything is based on on-chain data — verifiable, transparent, no “trust me bro” math.
   </div>
 </div>
 
 <!-- Presale Wallet -->
 <div class="section">
-  <h2>💋 Presale Wallet — Come Get Filled</h2>
-  <p>Send SOL — get $BLOJOB at TGE.</p>
+  <h2>💳 Presale Wallet</h2>
+  <p>Send SOL only — you’ll receive $BLOJOB to the same wallet after TGE.</p>
 
   <div class="wallet-box" id="walletBox">
     7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
@@ -295,10 +271,10 @@
 <div class="section">
   <h2>💵 Presale Price</h2>
 
-  <p><strong>1 BLOJOB = $0.000001</strong> (fixed)</p>
-  <p><strong>Minimum buy: 0.1 SOL</strong> • No max (whales welcome 🐋)</p>
+  <p><strong>1 BLOJOB = $0.000001</strong></p>
+  <p><strong>Minimum: 0.1 SOL</strong> • <strong>No Hard Max</strong></p>
 
-  <h3>📌 What You Get (Examples)</h3>
+  <h3>Examples</h3>
   <ul>
     <li>$10 → <strong>10,000,000 BLOJOB</strong></li>
     <li>$25 → <strong>25,000,000 BLOJOB</strong></li>
@@ -308,80 +284,35 @@
 
   <!-- CALCULATOR -->
   <div class="calc-box">
-    <h3>🔢 Live SOL → BLOJOB Calculator</h3>
+    <h3>SOL → BLOJOB Calculator</h3>
     <input id="solInput" class="calc-input" type="number" step="0.01" placeholder="Enter SOL amount">
-    <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
+    <div id="calcResult" class="calc-result">Enter SOL to calculate based on live SOL price.</div>
   </div>
 </div>
 
 <!-- HOW TO BUY + WHALE-SAFE -->
 <div class="section">
-  <h2>🧾 How To Ape Into Presale (Step-by-Step)</h2>
+  <h2>🧾 How To Join The Presale</h2>
 
   <div class="callout">
-    <strong>1️⃣ Use a non-custodial Solana wallet</strong><br>
-    Phantom, Solflare, Backpack, XDEFI, etc.<br>
-    <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
+    <strong>Use a non-custodial Solana wallet:</strong><br>
+    Phantom, Solflare, Backpack, XDEFI, etc.
+    <span class="badge">No CEX deposits (Binance, Coinbase, etc.)</span>
   </div>
 
   <ul class="howto-list">
-    <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
-    <li><strong>Step 2:</strong> Copy the presale wallet and send your SOL during the 36h window.</li>
-    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet.</li>
-    <li><strong>Step 4 (Public route):</strong> Drop your TX link in the Telegram group with:
-      <br>— Amount of SOL sent<br>— Wallet tag (optional nickname)
+    <li><strong>Step 1:</strong> Load your wallet with SOL for your allocation + gas.</li>
+    <li><strong>Step 2:</strong> Copy the presale wallet address and send your SOL during the presale window.</li>
+    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet or Solscan.</li>
+    <li><strong>Step 4 (default):</strong> Post your TX link in the Telegram group with your SOL amount and (optional) nickname so it can be logged.</li>
+    <li><strong>Step 5 (whale-safe):</strong> If you prefer privacy at higher sizes, you can send your TX link privately to the dev/mods instead of posting size publicly.
+      <span class="badge">Whale-friendly</span>
     </li>
-    <li><strong>Step 5 (Whale-safe route):</strong> If you're sending <strong>≥ 1 SOL</strong>, you can DM the dev/mods your TX link instead of posting size in public chat.
-      <br><span class="badge">🐳 Whale-friendly</span> <span class="badge">🛡 Privacy-respect</span>
-    </li>
-    <li><strong>Step 6:</strong> After presale closes & numbers are locked, $BLOJOB will be distributed to the same wallet that sent the SOL.</li>
+    <li><strong>Step 6:</strong> After presale close and final accounting, $BLOJOB is distributed to the same wallet that sent the SOL.</li>
   </ul>
 
   <p>
-    Every contribution is tracked from on-chain data + your TX links.<br>
-    <strong>No manual “trust me bro” balances. Everything is verifiable.</strong>
-  </p>
-</div>
-
-<!-- LEADERBOARD -->
-<div class="section">
-  <h2>🏆 Live CumUnity Leaderboard (Manual)</h2>
-
-  <p>
-    During presale, the dev updates this table so everyone can see who’s aped in and what tier they’re in.
-    Final allocations are always based on <strong>on-chain totals at close</strong>.
-  </p>
-
-  <p><strong>Tiers:</strong></p>
-  <ul class="howto-list">
-    <li>🦐 <strong>Shrimp Degen</strong> — &lt; 1 SOL</li>
-    <li>🐳 <strong>Sperm Whale</strong> — 1 → 9 SOL</li>
-    <li>🐋 <strong>Mo’ B DICK</strong> — ≥ 10 SOL</li>
-    <li>🐙 <strong>Goon Lord</strong> — ≥ 20 SOL</li>
-  </ul>
-
-  <table class="leaderboard">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Wallet / Name</th>
-        <th>SOL Committed</th>
-        <th>Tier</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Update these rows manually during presale -->
-      <tr>
-        <td>1</td>
-        <td>Coming soon…</td>
-        <td>—</td>
-        <td><span class="tier-pill">🤍 Waiting for first ape</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p style="font-size:0.9rem; opacity:0.8; margin-top:10px;">
-    Leaderboard is for hype & flex only — final distribution = on-chain math at presale close.
+    Final allocations are always based on <strong>on-chain totals at presale close</strong> — manual logs and the progress bar are just for tracking & hype.
   </p>
 </div>
 
@@ -390,37 +321,37 @@
   <h2>🪙 Tokenomics (69B Supply)</h2>
 
   <p>
-    <strong>SpankBank (Vault):</strong> 69% — long-term CumUnity reserves 🛡<br>
-    <strong>PreLoad (Presale):</strong> 10% (6.9B) 💰<br>
-    <strong>MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% 🫦<br>
-    <strong>StickyLiquidity (LP):</strong> 4.1% — locked 6 months 🔒<br>
-    <strong>DaddyBags (Founder):</strong> 10% — vested 69 days 🔐<br>
+    <strong>SpankBank (Vault):</strong> 69% — Long-term CumUnity reserves<br>
+    <strong>PreLoad (Presale):</strong> 10% — This presale allocation<br>
+    <strong>MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Marketing, incentives, boosts<br>
+    <strong>StickyLiquidity (LP):</strong> 4.1% — Locked 6 months<br>
+    <strong>DaddyBags (Founder):</strong> 10% — Vested 69 days<br>
   </p>
 </div>
 
 <!-- Socials -->
 <div class="section">
-  <h2>💦 Socials</h2>
+  <h2>🌐 Links</h2>
   <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank">Telegram</a>
   <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank">𝕏 (Twitter)</a>
   <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank">Solscan</a>
 
   <p class="nsfw-line" style="margin-top:30px;">
-    Join the CumUnity and let’s make this chart rise together… Daddy’s watching 😈🍑💦
+    Join the CumUnity, watch the chart, and decide how hard you want to ride it.
   </p>
 </div>
 
 <footer>
-  $BLOJOB is a meme token. 18+ vibes only. Not financial advice.
-  Stay degen. Stay wet. Stay winning.
+  $BLOJOB is a meme token. 18+ only. Not financial advice.
+  Pump... Harder. Faster. Longer.
 </footer>
 
 <script>
 /* =========================
-   Presale timing
+   Presale timing (EDIT IF NEEDED)
    ========================= */
-const presaleStart = new Date("2025-11-29T20:00:00-05:00");
-const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
+const presaleStart = new Date("2025-11-29T20:00:00-05:00"); // 8 PM EST
+const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000); // 36 hours
 
 /* Countdown */
 function pad(n){return n.toString().padStart(2,'0')}
@@ -455,7 +386,7 @@ function updateCountdown(){
 /* Copy Wallet */
 function copyWallet(){
   const text = document.getElementById("walletBox").textContent.trim();
-  navigator.clipboard.writeText(text).then(()=>alert("Wallet copied! 🫦"));
+  navigator.clipboard.writeText(text).then(()=>alert("Wallet copied."));
 }
 
 /* Calculator — Live SOL Price */
@@ -469,7 +400,7 @@ async function updateCalc(){
   }
 
   if(sol < 0.1){
-    resultEl.textContent="Minimum buy is 0.1 SOL 🚫";
+    resultEl.textContent="Minimum buy is 0.1 SOL.";
     return;
   }
 
@@ -483,15 +414,16 @@ async function updateCalc(){
 
     resultEl.textContent =
       `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
-  } catch {
+  } catch (e) {
     resultEl.textContent = "Error fetching SOL price.";
   }
 }
 
 /* Progress (manual update during presale)
    Set currentRaisedUSD = total USD value raised so far,
-   the bar + text will update automatically. */
+   then call updateProgress() in console or by editing the value + refreshing. */
 let currentRaisedUSD = 0;
+
 function updateProgress(){
   const hardCapUSD = 9600;
   const softCapUSD = 6900;
@@ -502,7 +434,7 @@ function updateProgress(){
     currentRaisedUSD >= softCapUSD ? "✅ Soft cap reached" : "⏳ Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
-    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
+    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus} • Hard cap: $9,600`;
 }
 
 /* Listeners */
