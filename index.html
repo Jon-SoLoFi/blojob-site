@@ -5,6 +5,7 @@
 <title>$BLOJOB — Come Get This Pump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
   body {
     margin: 0;
@@ -135,6 +136,25 @@
     font-size: 1.1rem;
     word-break: break-all;
     margin-top: 15px;
+    position: relative;
+  }
+
+  .copy-btn {
+    margin-top: 14px;
+    background: #ff6bd9;
+    color: #000;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.2s;
+    font-size: 0.95rem;
+    border: none;
+  }
+  .copy-btn:hover {
+    transform: scale(1.05);
+    background: #ff9dea;
   }
 
   .btn {
@@ -162,6 +182,7 @@
   }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -179,7 +200,7 @@
     <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
     <p class="countdown-sub">
-      Presale starts at <strong>8:00 PM EST</strong> and runs for <strong>36 hours</strong>.  
+      Presale starts at <strong>8:00 PM EST</strong> and runs for <strong>36 hours</strong>.<br>
       SOL only. No refunds. No mercy.
     </p>
   </div>
@@ -198,13 +219,12 @@
 
 <div class="section">
   <p class="nsfw-line">
-    You came here curious…  
-    Now let Daddy $BLOJOB give you something to really look at. 😈💋
+    You came here curious… Now let Daddy $BLOJOB give you something to really look at. 😈💋
   </p>
 
   <p>
     No utility. No promises. No corporate foreplay.<br>
-    Just raw, dripping, <strong>pure degen momentum</strong> built to pump hard, fast,  
+    Just raw, dripping, <strong>pure degen momentum</strong> built to pump hard, fast,
     and as long as the CumUnity can handle. 🍑💦
   </p>
 
@@ -212,7 +232,7 @@
     <strong>Presale is degen-simple:</strong><br>
     • Send SOL to the presale wallet during the window.<br>
     • After TGE, your $BLOJOB gets distributed based on your share.<br>
-    • No bullshit, no slow rug — just pure pump potential.
+    • No bullshit. No slow rug. Just pure pump potential.
   </div>
 </div>
 
@@ -220,127 +240,104 @@
   <h2>💋 Presale Wallet — Come Get Filled</h2>
   <p>Send SOL — get your $BLOJOB at TGE. No fluff. No teasing.</p>
 
-  <div class="wallet-box">
+  <div class="wallet-box" id="walletBox">
     7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
   </div>
+
+  <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
 </div>
 
 <div class="section">
   <h2>🍑 Tokenomics (69B Supply)</h2>
   <p>
     <strong>SpankBank (Vault):</strong> 69% — long-term CumUnity reserves<br>
-    <strong>PreLoad (Presale):</strong> 10% (6.9B) — this presale allocation<br>
+    <strong>PreLoad (Presale):</strong> 10% (6.9B)<br>
     <strong>MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — marketing, incentives, foreplay<br>
-    <strong>StickyLiquidity (LP):</strong> 14.1% — locked to keep things nice and tight 💦<br>
+    <strong>StickyLiquidity (LP):</strong> 4.1% — locked 6 months 💦<br>
+    <strong>DaddyBags (Founder):</strong> 10% — vested 69 days<br>
   </p>
 </div>
 
 <div class="section">
   <h2>💦 Socials</h2>
-  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
-  <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
-  <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
+  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank">Telegram</a>
+  <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank">𝕏 (Twitter)</a>
+  <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank">Solscan</a>
 
-  <p class="nsfw-line" style="margin-top: 30px;">
-    Join the CumUnity and let’s make this chart rise together…  
-    Daddy’s watching. 😈🍑💦
+  <p class="nsfw-line" style="margin-top:30px;">
+    Join the CumUnity and let’s make this chart rise together… Daddy’s watching. 😈🍑💦
   </p>
 </div>
 
 <footer>
-  $BLOJOB is a meme token. 18+ vibes only. Not financial advice.  
+  $BLOJOB is a meme token. 18+ vibes only. Not financial advice.
   Stay degen. Stay wet. Stay winning.
 </footer>
 
 <script>
-  /* =========================
-     CONFIG — EDIT THESE LINES
-     ========================= */
+/* Config */
+const presaleStart = new Date('2025-11-29T20:00:00-05:00');
+const presaleDurationHours = 36;
+const presaleEnd = new Date(presaleStart.getTime() + presaleDurationHours * 3600 * 1000);
 
-  // 1) Presale timing
-  // Set this to the exact presale start in YOUR local time or UTC.
-  // Example below: Sat Nov 29 2025, 8 PM EST (UTC-5)
-  const presaleStart = new Date('2025-11-29T20:00:00-05:00');
+const softCapUSD = 6900;
+const hardCapUSD = 9600;
+let currentRaisedUSD = 0;
 
-  // Presale duration in hours
-  const presaleDurationHours = 36;
-  const presaleEnd = new Date(presaleStart.getTime() + presaleDurationHours * 60 * 60 * 1000);
+/* Countdown */
+function pad(n){return n.toString().padStart(2,'0')}
+function updateCountdown(){
+  const now = new Date();
+  let mode, target;
 
-  // 2) Presale progress (manual)
-  // Update this number as USD raised increases.
-  const softCapUSD = 6900;
-  const hardCapUSD = 9600;
-  let currentRaisedUSD = 0; // <<--- UPDATE THIS DURING PRESALE
+  if(now < presaleStart){ mode = 'pre'; target = presaleStart; }
+  else if(now >= presaleStart && now <= presaleEnd){ mode = 'live'; target = presaleEnd; }
+  else { mode = 'ended'; }
 
-  /* =========================
-     Countdown logic
-     ========================= */
-  const countdownLabelEl = document.getElementById('countdown-label');
-  const countdownTimerEl = document.getElementById('countdown-timer');
+  const label = document.getElementById('countdown-label');
+  const timer = document.getElementById('countdown-timer');
 
-  function formatTimePart(v) {
-    return v.toString().padStart(2, '0');
+  if(mode === 'ended'){
+    label.textContent = 'Presale ended';
+    timer.textContent = '--:--:--';
+    return;
   }
 
-  function updateCountdown() {
-    const now = new Date();
+  const diff = target - now;
+  const s = Math.max(0, Math.floor(diff / 1000));
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
 
-    let target;
-    let mode; // 'pre', 'live', 'ended'
+  timer.textContent = `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
+  label.textContent = mode === 'pre' ? 'Presale starts in' : 'Presale ends in';
+}
 
-    if (now < presaleStart) {
-      target = presaleStart;
-      mode = 'pre';
-    } else if (now >= presaleStart && now <= presaleEnd) {
-      target = presaleEnd;
-      mode = 'live';
-    } else {
-      mode = 'ended';
-    }
+/* Progress */
+function updateProgress(){
+  const percent = Math.min(currentRaisedUSD / hardCapUSD, 1) * 100;
+  document.getElementById('progress-fill').style.width = percent + '%';
 
-    if (mode === 'ended') {
-      countdownLabelEl.textContent = 'Presale ended';
-      countdownTimerEl.textContent = '--:--:--';
-      return;
-    }
+  const softCapStatus =
+    currentRaisedUSD >= softCapUSD ? '✅ Soft cap reached' : '⏳ Soft cap not reached';
 
-    const diff = target.getTime() - now.getTime();
-    const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+  document.getElementById('progress-amounts').textContent =
+    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
+}
 
-    const days = Math.floor(totalSeconds / (24 * 3600));
-    const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+/* Copy Wallet */
+function copyWallet(){
+  const text = document.getElementById('walletBox').textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Wallet address copied! 💦");
+  });
+}
 
-    const timerText = `${formatTimePart(days)}d ${formatTimePart(hours)}h ${formatTimePart(minutes)}m ${formatTimePart(seconds)}s`;
-    countdownTimerEl.textContent = timerText;
-
-    if (mode === 'pre') {
-      countdownLabelEl.textContent = 'Presale starts in';
-    } else if (mode === 'live') {
-      countdownLabelEl.textContent = 'Presale ends in';
-    }
-  }
-
-  /* =========================
-     Progress bar logic
-     ========================= */
-  const progressFillEl = document.getElementById('progress-fill');
-  const progressAmountsEl = document.getElementById('progress-amounts');
-
-  function updateProgress() {
-    const percentOfHardCap = Math.min(currentRaisedUSD / hardCapUSD, 1) * 100;
-    progressFillEl.style.width = percentOfHardCap + '%';
-
-    const softCapStatus = currentRaisedUSD >= softCapUSD ? '✅ Soft cap reached' : '⏳ Soft cap not reached';
-    progressAmountsEl.textContent =
-      `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
-  }
-
-  // Init
-  updateCountdown();
-  updateProgress();
-  setInterval(updateCountdown, 1000);
+/* Init */
+updateCountdown();
+updateProgress();
+setInterval(updateCountdown, 1000);
 </script>
 
 </body>
