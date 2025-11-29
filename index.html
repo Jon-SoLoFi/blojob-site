@@ -3,269 +3,244 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>$BLOJOB — CumUnity’s Most Seductive Solana Token</title>
+<title>BLOJOB — Presale LIVE 💦</title>
+
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="blojob-favicon.png">
+
+<!-- MOBILE ICON -->
+<link rel="apple-touch-icon" href="blojob-mobile.png" />
+
+<!-- META -->
+<meta property="og:title" content="BLOJOB Presale — Live Now 💦" />
+<meta property="og:description" content="The token that blows past the competition. Join the CumUnity and get in early." />
+<meta property="og:image" content="blojob-logo.png" />
+<meta property="og:type" content="website" />
 
 <style>
-  body {
-    margin: 0;
-    background: #000;
-    font-family: 'Inter', sans-serif;
-    color: #fff;
-    line-height: 1.6;
-  }
-
-  /* HEADER */
-  .hero {
-    padding: 80px 20px;
-    text-align: center;
-    background: linear-gradient(135deg,#ff2bc8,#8923ff,#4c00ff);
-    animation: glow 6s ease-in-out infinite;
-  }
-
-  @keyframes glow {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(1.15); }
-    100% { filter: brightness(1); }
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 3.2rem;
-    font-weight: 800;
-  }
-
-  .sub {
-    font-size: 1.4rem;
-    margin-top: 10px;
-    opacity: .9;
-  }
-
-  /* CONTENT */
-  .section {
-    padding: 40px 20px;
-    max-width: 900px;
-    margin: auto;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-  }
-
-  .card {
-    background: #111;
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 4px solid #ff2bc8;
-    margin-bottom: 30px;
-  }
-
-  /* BUTTONS */
-  .btn {
-    display: inline-block;
-    background: #ff2bc8;
-    padding: 14px 22px;
-    font-weight: 600;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    transition: .2s;
-  }
-
-  .btn:hover {
-    background: #ff41d4;
-    transform: scale(1.05);
-  }
-
-  /* COPY BUTTON */
-  #copyBtn {
-    margin-top: 12px;
-    background: #444;
-  }
-
-  #copyBtn:hover {
-    background: #666;
-  }
-
-  /* STICKY BUY BUTTON */
-  .sticky-buy {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #ff2bc8;
-    color: #fff;
-    padding: 18px;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    z-index: 999;
-  }
-
-  /* SOCIAL BUTTONS */
-  .socials {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-
-  .socials a {
-    flex: 1;
-    min-width: 110px;
-    text-align: center;
-    background: #ff2bc8;
-    padding: 14px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 15px;
-    text-align: center;
-    font-size: 0.85rem;
-    opacity: .6;
-    margin-bottom: 60px;
-  }
-</style>
-</head>
-
-<body>
-
-<!-- STICKY BUY -->
-<div class="sticky-buy" onclick="copyAddress()">
-  🚀 BUY PRESALE — COPY ADDRESS
-</div>
-
-<!-- HERO -->
-<div class="hero">
-  <h1>$BLOJOB</h1>
-  <div class="sub">Solana’s Most Seductive Degenerate Token 💦🔥</div>
-</div>
-
-<div class="section">
-
-  <!-- INTRO -->
-  <p style="font-size:1.2rem;">
-    You came here curious…  
-    Now let Daddy $BLOJOB show you something worth staring at. 😈💋  
-    No utility. No promises. No corporate foreplay.  
-    Just dripping, ruthless **pure degen momentum** designed to pump so hard it breaks charts —  
-    and backs. 🍑💦
-  </p>
-
-  <!-- COUNTDOWN -->
-  <div class="card">
-    <h2>⏳ Presale Countdown</h2>
-    <p>Daddy finishes loading in…</p>
-    <h2 id="timer" style="color:#ff77e7; font-size:2rem; font-weight:800;">Loading…</h2>
-  </div>
-
-  <!-- PRESALE WALLET -->
-  <div class="card">
-    <h2>💋 Presale Wallet — Come Get Filled</h2>
-    <p>Send SOL → claim your $BLOJOB at TGE.  
-    No fluff. No teasing. Just send it.</p>
-
-    <div id="walletAddress" style="font-size:1.1rem; word-break:break-all; margin-top:10px;">
-      YOUR-PRELOAD-WALLET-HERE
-    </div>
-
-    <button id="copyBtn" class="btn" onclick="copyAddress()">Copy Wallet</button>
-    <div id="copiedMsg" style="margin-top:10px; color:#55ffcb; display:none;">
-      Copied. Daddy appreciates your enthusiasm 😈💦
-    </div>
-  </div>
-
-  <!-- HOW TO BUY -->
-  <div class="card">
-    <h2>🔥 How to Buy (Presale)</h2>
-
-    <p>1️⃣ Copy the presale wallet (Daddy made you a button).<br>
-       2️⃣ Send any amount of SOL you’re comfortable pumping.<br>
-       3️⃣ Screenshot TX and drop it in the CumUnity TG.<br>
-       4️⃣ Tokens delivered at TGE — Daddy never leaves you waiting. 😘</p>
-  </div>
-
-  <!-- TOKENOMICS -->
-  <div class="card">
-    <h2>🍑 Tokenomics (69B Supply)</h2>
-
-    <p><b>Presale:</b> 10% (6.9B)<br>
-       <b>LP:</b> 14.1% locked at launch<br>
-       <b>MILF Fund:</b> 6.9% (marketing, incentives, foreplay)<br>
-       <b>Team:</b> 6.9% vested — Daddy’s cut, unlocked slowly 😉</p>
-  </div>
-
-  <!-- ROADMAP -->
-  <div class="card">
-    <h2>😈 Lewd-Map (Roadmap)</h2>
-
-    <p><b>PHASE 1 — First Taste</b><br>
-      Presale, CumUnity growth, teasing CT, building pressure… 💦</p>
-
-    <p><b>PHASE 2 — Blow Up</b><br>
-      TGE, locked LP, Raydium listing, chart goes vertical,  
-      influencers begging for a hit.</p>
-
-    <p><b>PHASE 3 — Happy Ending</b><br>
-      $BLOJOB becomes the number-one 18+ meme token on Solana.  
-      Degens rejoice. Charts explode. Daddy smiles. 😈🔥💋</p>
-  </div>
-
-  <!-- SOCIALS -->
-  <h2>💦 Socials</h2>
-  <div class="socials">
-    <a href="YOUR-TG-LINK">Telegram</a>
-    <a href="YOUR-X-LINK">𝕏 (Twitter)</a>
-    <a href="YOUR-SOLSCAN-LINK">Solscan</a>
-  </div>
-
-  <p style="margin-top:40px; text-align:center; font-size:1.2rem;">
-    Join the CumUnity and rise with Daddy… he’s watching your moves. 😈🍑💦
-  </p>
-
-</div>
-
-<footer>
-  $BLOJOB is a meme token. 18+ vibes only. Not financial advice.  
-  Stay degen. Stay wet. Stay winning.
-</footer>
-
-<!-- JAVASCRIPT -->
-<script>
-  function copyAddress() {
-    const addr = document.getElementById("walletAddress").innerText;
-    navigator.clipboard.writeText(addr);
-    document.getElementById("copiedMsg").style.display = "block";
-    setTimeout(() => {
-      document.getElementById("copiedMsg").style.display = "none";
-    }, 2500);
-  }
-
-  // COUNTDOWN
-  const targetTime = new Date("2025-11-30T20:00:00").getTime(); // <-- set exact presale time here (PHT)
-  setInterval(() => {
-    const now = new Date().getTime();
-    const diff = targetTime - now;
-
-    if (diff <= 0) {
-      document.getElementById("timer").innerHTML = "Presale LIVE — Fill Daddy 😈🔥";
-      return;
+    body {
+        background: #0a0a0c;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        color: #f2f2f2;
+        text-align: center;
     }
 
-    const h = Math.floor(diff / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    .container {
+        max-width: 850px;
+        margin: auto;
+        padding: 20px;
+    }
 
-    document.getElementById("timer").innerHTML = `${h}h ${m}m ${s}s`;
-  }, 1000);
-</script>
+    h1 {
+        color: #ffd68a;
+        font-size: 3.2rem;
+        margin-top: 10px;
+        text-shadow: 0 0 18px #ffad5c;
+    }
 
+    .tagline {
+        font-size: 1.3rem;
+        color: #ffddb3;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        width: 250px;
+        margin-top: 20px;
+        border-radius: 50%;
+        box-shadow: 0 0 25px #ffb36eaa;
+    }
+
+    .section {
+        background: #141417;
+        padding: 25px;
+        margin: 25px 0;
+        border-radius: 16px;
+        box-shadow: 0 0 15px #000;
+    }
+
+    .wallet-box {
+        background: #000;
+        padding: 15px;
+        font-family: monospace;
+        word-break: break-all;
+        border: 1px solid #ffb56a;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: #ffdcb0;
+    }
+
+    button {
+        background: linear-gradient(45deg, #ff9a3c, #ffcc7f);
+        border: none;
+        padding: 12px 25px;
+        margin-top: 15px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.15s;
+    }
+
+    button:hover {
+        opacity: 0.9;
+        transform: scale(1.03);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+        background: #222;
+        border-radius: 12px;
+        height: 28px;
+        margin: 15px 0;
+        overflow: hidden;
+        border: 1px solid #ffb56a;
+    }
+
+    .progress-fill {
+        background: linear-gradient(90deg, #ffad5c, #ffd68a);
+        height: 100%;
+        width: 0%;
+        text-align: center;
+        font-weight: bold;
+        color: #000;
+        line-height: 28px;
+        transition: width 0.4s ease;
+    }
+
+    /* Countdown */
+    #countdown {
+        font-size: 1.5rem;
+        margin-top: 10px;
+        color: #ffdcb0;
+    }
+
+    .footer {
+        margin-top: 30px;
+        color: #777;
+        font-size: 0.9rem;
+        padding-bottom: 40px;
+    }
+
+    a { text-decoration: none; }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <img src="blojob-logo.png" class="logo" alt="BLOJOB Logo">
+
+    <h1>BLOJOB</h1>
+    <div class="tagline">The token that blows past the competition 💦</div>
+
+    <!-- COUNTDOWN -->
+    <div class="section">
+        <h2>⏳ Presale Countdown</h2>
+        <div id="countdown">Loading...</div>
+
+        <script>
+            const target = new Date("2025-11-30T21:00:00Z").getTime();
+            setInterval(() => {
+                const now = Date.now();
+                const diff = target - now;
+                if (diff <= 0) {
+                    document.getElementById("countdown").innerText = "Presale LIVE!";
+                    return;
+                }
+                const hours = Math.floor(diff / (1000*60*60));
+                const mins = Math.floor((diff%(1000*60*60))/(1000*60));
+                const sec = Math.floor((diff%(1000*60))/1000);
+                document.getElementById("countdown").innerText =
+                    `${hours}h ${mins}m ${sec}s`;
+            }, 1000);
+        </script>
+    </div>
+
+    <!-- PRESALE -->
+    <div class="section">
+        <h2>🔥 PRESALE LIVE 🔥</h2>
+
+        <p>Send SOL to the official presale wallet:</p>
+
+        <div class="wallet-box" id="wallet">
+            7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
+        </div>
+
+        <button onclick="copyWallet()">Copy Wallet</button>
+
+        <script>
+            function copyWallet() {
+                navigator.clipboard.writeText(
+                    document.getElementById("wallet").innerText
+                );
+                alert("Wallet copied! 🚀");
+            }
+        </script>
+
+        <br><br>
+        <h3>💰 Presale Progress</h3>
+
+        <div class="progress-container">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <script>
+            // You manually update this in the code when SOL increases
+            const currentRaised = 0;   // UPDATE THIS
+            const hardCap = 9600;
+
+            const percentage = Math.min((currentRaised / hardCap) * 100, 100);
+            document.getElementById("progressBar").style.width = percentage + "%";
+            document.getElementById("progressBar").innerText = percentage.toFixed(1) + "%";
+        </script>
+
+        <p style="color:#ffddb1;font-size:0.9rem;">
+            Post your TX link in the Telegram after sending SOL.  
+            Whales may DM privately 🐳💦
+        </p>
+
+        <a href="https://t.me/BLOJOBCumUnity" target="_blank">
+            <button style="background:#ff5fa3;color:#fff;">Join Telegram</button>
+        </a>
+        <a href="https://x.com/BLOJOB_Daddy?s=09" target="_blank">
+            <button style="margin-left:10px;background:#1da1f2;color:#fff;">Follow on 𝕏</button>
+        </a>
+
+    </div>
+
+    <!-- TOKENOMICS -->
+    <div class="section">
+        <h2>Tokenomics</h2>
+
+        <p><b>SpankBank (Vault): 69%</b></p>
+        <p><b>PreLoad (Presale): 10%</b></p>
+        <p><b>MILF (Marketing Initiative Liquidity Fund): 6.9%</b></p>
+        <p><b>StickyLiquidity (LP): 4.1% — Locked 6 Months</b></p>
+        <p><b>DaddyBag (Founder): 10% — Vested 69 Days</b></p>
+
+        <a href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank">
+            <button>View on Solscan</button>
+        </a>
+    </div>
+
+    <!-- WHY -->
+    <div class="section">
+        <h2>Why BLOJOB?</h2>
+        <p>Meme culture + legit structure.</p>
+        <p>We go hard every cycle — and we go together.</p>
+        <p>No rugs. No bullshit. Clean presale → clean launch → locked LP.</p>
+    </div>
+
+    <div class="footer">
+        © 2025 BLOJOB — Built for the Culture 💦  
+        Meme token. Entertainment only. Not financial advice.
+    </div>
+
+</div>
 </body>
 </html>
