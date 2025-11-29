@@ -203,7 +203,7 @@
     border: 1px solid #444;
     margin-left: 6px;
     vertical-align: middle;
-    /* Section D: Pink Bar Bullet Style */
+    /* Strong Pink Bar Bullet Style */
 .pinkbar-list {
   list-style: none;
   padding-left: 0;
@@ -211,31 +211,26 @@
 }
 
 .pinkbar-list li {
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  position: relative;
+  padding: 12px 16px 12px 22px; /* space so bar doesn’t overlap text */
+  margin-bottom: 12px;
   background: #111;
-  border-left: 4px solid #ff6bd9;
   border-radius: 6px;
-  line-height: 1.5;
+  line-height: 1.55;
+  overflow: hidden;
 }
 
-/* Tokenomics emoji bullets */
-.token-list {
-  list-style: none;
-  padding-left: 0;
+.pinkbar-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;               /* thickness of pink bar */
+  height: 100%;
+  background: #ff6bd9;      /* pink bar color */
+  border-radius: 4px 0 0 4px;
 }
 
-.token-list li {
-  margin-bottom: 10px;
-  font-size: 1.05rem;
-  display: flex;
-  align-items: center;
-}
-
-.token-emoji {
-  font-size: 1.3rem;
-  margin-right: 10px;
-}
     
 </style>
 </head>
