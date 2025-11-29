@@ -2,48 +2,281 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>$BLOJOB — Solana’s Most Seductive Presale</title>
+<title>$BLOJOB — Come Get This Pump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-  body { margin:0;background:#070007;color:#fff;font-family:'Poppins',sans-serif; }
-  header { text-align:center;padding:50px 20px;background:radial-gradient(circle at top,#b300ff,#35004d 70%); }
+  :root {
+    --purple-main: #b026ff;
+    --purple-soft: #7b2cff;
+    --purple-neon: #d896ff;
+    --bg-dark: #070712;
+    --bg-card: #11111f;
+    --border-subtle: #262640;
+  }
 
-  /* LOGO */
-  .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
-  .logo-wrap img{width:160px;height:160px;border-radius:50%;box-shadow:0 0 40px #b300ff;}
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top, #17172a 0, #070712 55%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+  }
 
-  h1{font-size:3rem;font-weight:800;margin:0;text-shadow:0 0 15px #ff6bff;}
-  h2{font-size:1.2rem;opacity:.9;margin-top:6px;text-shadow:0 0 10px #d44cff;}
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: radial-gradient(circle at top, var(--purple-main), #1b082f 55%, #070712 100%);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
 
-  /* GENERAL CARD */
-  .section{max-width:880px;margin:auto;padding:40px 20px;line-height:1.65;}
+  .logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-wrap img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 32px rgba(0,0,0,0.6);
+    border: 2px solid rgba(255,255,255,0.18);
+  }
+
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 16px rgba(0,0,0,0.8);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    opacity: 0.9;
+    margin-top: 6px;
+  }
+
+  .section {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+    line-height: 1.7;
+  }
+
+  .nsfw-line {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--purple-neon);
+  }
+
+  .callout {
+    background: linear-gradient(135deg, rgba(176,38,255,0.12), rgba(13,13,40,0.96));
+    border-left: 3px solid var(--purple-main);
+    padding: 18px 18px 18px;
+    margin-top: 20px;
+    font-size: 1.02rem;
+    border-radius: 10px;
+  }
+
+  .callout strong {
+    color: var(--purple-neon);
+  }
 
   /* Countdown + Progress */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+  .countdown-progress {
+    max-width: 900px;
+    margin: -20px auto 10px;
+    padding: 0 20px 10px;
+    display: grid;
+    grid-template-columns: 1.1fr 1.1fr;
+    gap: 16px;
+  }
 
-  .card{background:#110011;padding:24px;border-radius:14px;border:1px solid #51006e;box-shadow:0 0 20px #2a0040 inset;}
+  @media (max-width: 768px) {
+    .countdown-progress {
+      grid-template-columns: 1fr;
+      margin-top: 8px;
+    }
+  }
 
-  .card-title{font-weight:600;color:#e273ff;margin-bottom:10px;text-shadow:0 0 8px #a644d9;}
+  .card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-subtle);
+    padding: 18px 18px 22px;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.5);
+  }
 
-  #countdown-timer{font-size:1.8rem;font-weight:700;color:#ffb8ff;text-shadow:0 0 12px #d44cff;}
+  .card-title {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
 
-  .progress-bar{width:100%;height:16px;background:#1c0125;border-radius:999px;border:1px solid #680099;overflow:hidden;}
-  #progress-fill{width:0%;height:100%;background:linear-gradient(90deg,#ff6bff,#ffd6ff);box-shadow:0 0 18px #ff6bff;}
+  #countdown-label {
+    font-size: 0.92rem;
+    opacity: 0.8;
+  }
 
-  .wallet-box{background:#140014;padding:20px;border-radius:12px;border:1px solid #61008b;word-break:break-all;font-size:1.05rem;box-shadow:0 0 18px #3b0052 inset;}
-  .copy-btn{background:#ff6bff;color:#000;margin-top:12px;padding:12px 18px;font-weight:700;border:none;border-radius:10px;cursor:pointer;}
+  #countdown-timer {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 6px;
+    color: var(--purple-neon);
+    text-shadow: 0 0 14px rgba(216,150,255,0.55);
+  }
+
+  .countdown-sub {
+    font-size: 0.9rem;
+    opacity: 0.78;
+    margin-top: 6px;
+  }
+
+  .highlight {
+    color: var(--purple-neon);
+    font-weight: 600;
+  }
+
+  .progress-title {
+    font-size: 0.94rem;
+    opacity: 0.9;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #19192a;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 10px 0 6px;
+    border: 1px solid #2e2e4c;
+  }
+
+  #progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #f4b3ff, var(--purple-main), var(--purple-soft));
+    box-shadow: 0 0 16px rgba(176,38,255,0.9);
+    transition: width 0.4s ease-out;
+  }
+
+  .progress-amounts {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  /* Wallet + Copy */
+  .wallet-box {
+    background: radial-gradient(circle at left top, rgba(176,38,255,0.14), #101020);
+    border: 1px solid #2e2e4c;
+    border-radius: 12px;
+    padding: 22px;
+    font-size: 1.05rem;
+    word-break: break-all;
+    margin-top: 15px;
+  }
+
+  .copy-btn {
+    margin-top: 14px;
+    background: var(--purple-main);
+    color: #000;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.18s;
+    font-size: 0.94rem;
+    border: none;
+  }
+
+  .copy-btn:hover {
+    transform: translateY(-1px) scale(1.04);
+    background: var(--purple-neon);
+    box-shadow: 0 0 14px rgba(176,38,255,0.75);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--purple-main);
+    color: #000;
+    padding: 14px 24px;
+    margin: 10px 10px 0 0;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.18s;
+    font-size: 0.95rem;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px) scale(1.04);
+    background: var(--purple-neon);
+    box-shadow: 0 0 16px rgba(176,38,255,0.8);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 16px 60px;
+    font-size: 0.9rem;
+    opacity: 0.65;
+  }
 
   /* Calculator */
-  .calc-box{background:#110011;padding:20px;border:1px solid #51006e;border-radius:12px;box-shadow:0 0 20px #2b0040 inset; }
-  .calc-input{width:100%;padding:12px;border-radius:10px;border:none;margin-top:10px;}
-  .calc-result{margin-top:12px;font-size:1.1rem;font-weight:600;color:#ffb8ff;text-shadow:0 0 10px #ff6bff;}
+  .calc-box {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    margin-top: 20px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+  }
 
-  .btn{display:inline-block;background:#ff6bff;color:#000;padding:14px 20px;margin:8px 10px 0 0;border-radius:10px;font-weight:700;text-decoration:none;}
+  .calc-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    margin-top: 10px;
+    background: #16162a;
+    color: #fff;
+  }
 
-  footer{text-align:center;opacity:.6;padding:40px 16px 60px;}
+  .calc-result {
+    margin-top: 14px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--purple-neon);
+  }
+
+  /* How-to + badges */
+  .howto-list {
+    margin-top: 12px;
+    padding-left: 20px;
+  }
+
+  .howto-list li {
+    margin-bottom: 6px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    background: #16162a;
+    border: 1px solid #41416a;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
 </style>
 </head>
 
@@ -51,146 +284,269 @@
 
 <header>
   <div class="logo-wrap">
-    <img src="blojob.png" alt="BLOJOB Token Logo">
+    <img src="blojob.png" alt="$BLOJOB logo">
     <h1>$BLOJOB</h1>
-    <h2>The token built to pump, explode & satisfy the Solana ecosystem 💦🔥</h2>
+    <h2>Solana’s Most Seductive Degenerate Token 💦🔥</h2>
   </div>
 </header>
 
-<div class="section grid">
-  <!-- Countdown -->
+<!-- Countdown + Progress -->
+<div class="countdown-progress">
   <div class="card">
-    <div class="card-title">⏳ Presale Countdown</div>
-    <p id="countdown-label">Starts in:</p>
+    <div class="card-title">⏳ Presale Timing</div>
+    <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
+    <p class="countdown-sub">
+      Presale starts at <span class="highlight">8:00 PM EST</span> and runs for
+      <span class="highlight">36 hours</span>.<br>
+      SOL only. Minimum buy <span class="highlight">0.1 SOL</span>. No refunds.
+    </p>
   </div>
 
-  <!-- Progress -->
   <div class="card">
     <div class="card-title">📊 Presale Progress</div>
+    <p class="progress-title">Soft cap: $6,900 • Hard cap: $9,600</p>
     <div class="progress-bar"><div id="progress-fill"></div></div>
-    <p id="progress-amounts">Raised: $0 / $6,900</p>
+    <p id="progress-amounts" class="progress-amounts">
+      Raised: $0 / $6,900 (soft cap) • ⏳ Soft cap not reached
+    </p>
   </div>
 </div>
 
 <div class="section">
-  <p style="font-size:1.25rem;font-weight:600;color:#ff8aff;text-shadow:0 0 14px #ff59ff;">
-    A clean presale. No drama. No rug BS.  
-    Just pure degen bliss designed to go **vertical** on launch. 💦🚀
+  <p class="nsfw-line">
+    You came here curious… now let Daddy $BLOJOB show you exactly what you’re getting. 😈
   </p>
+
+  <p>
+    No utility. No promises. No corporate foreplay.<br>
+    Just raw, dripping, <strong>pure degen momentum</strong> built to pump hard, fast,
+    and as long as the CumUnity can handle.
+  </p>
+
+  <div class="callout">
+    <strong>Presale is simple:</strong><br>
+    • Send SOL to the presale wallet during the 36h window.<br>
+    • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
+    • Everything is matched to on-chain data. No “trust-me-bro” balances.
+  </div>
 </div>
 
-<!-- Wallet -->
+<!-- Presale Wallet -->
 <div class="section">
-  <h2>💋 Presale Wallet</h2>
+  <h2>💋 Presale Wallet — Come Get Filled</h2>
+  <p>Send SOL — get $BLOJOB at TGE in the same wallet you used to send.</p>
+
   <div class="wallet-box" id="walletBox">
     7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
   </div>
   <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
 </div>
 
-<!-- Price & Calculator -->
+<!-- PRICE SECTION -->
 <div class="section">
-  <h2>💵 Pricing</h2>
-  <p><strong>1 BLOJOB = $0.000001</strong> (Fixed Presale Rate)</p>
+  <h2>💵 Presale Price</h2>
+
+  <p><strong>1 BLOJOB = $0.000001</strong> (fixed for presale)</p>
+
+  <p><strong>Minimum buy: 0.1 SOL</strong> • No hard max (whales welcome — but we keep it fair)</p>
+
+  <h3>📌 What You Get (Examples)</h3>
+  <ul>
+    <li>$10 → <strong>10,000,000 BLOJOB</strong></li>
+    <li>$25 → <strong>25,000,000 BLOJOB</strong></li>
+    <li>$50 → <strong>50,000,000 BLOJOB</strong></li>
+    <li>$100 → <strong>100,000,000 BLOJOB</strong></li>
+  </ul>
 
   <div class="calc-box">
-    <h3>🔢 SOL → BLOJOB Calculator</h3>
+    <h3>🔢 Live SOL → BLOJOB Calculator</h3>
     <input id="solInput" class="calc-input" type="number" step="0.01" placeholder="Enter SOL amount">
     <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
   </div>
 </div>
 
-<!-- How To Buy -->
+<!-- HOW TO BUY + WHALE-SAFE -->
 <div class="section">
-  <h2>🙌 How to Join</h2>
-  <ul>
-    <li>💦 Use a Solana wallet (Phantom, Solflare, Backpack)</li>
-    <li>💦 <strong>No CEX deposits</strong> (Binance/Coinbase → FAIL)</li>
-    <li>💦 Send SOL → the presale wallet above</li>
-    <li>💦 Copy your TX link</li>
-    <li>💦 Small buys: post TX in Telegram (public)</li>
-    <li>🐳 Whale buys (≥ 1 SOL): DM TX privately for safety</li>
-    <li>💦 Airdrop after presale ends → same wallet you bought from</li>
+  <h2>🧾 How To Join The Presale</h2>
+
+  <div class="callout">
+    <strong>1️⃣ Use a non-custodial Solana wallet</strong><br>
+    Phantom, Solflare, Backpack, XDEFI, etc.
+    <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
+  </div>
+
+  <ul class="howto-list">
+    <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
+    <li><strong>Step 2:</strong> Copy the presale wallet above and send your SOL during the 36h window.</li>
+    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet (Solscan link).</li>
+    <li><strong>Step 4 — Public route:</strong> Post your TX link in the Telegram group with
+      your SOL amount and (optional) nickname so the CumUnity can see who’s aping.
+    </li>
+    <li><strong>Step 5 — Whale-safe route:</strong>
+      If you’re sending <strong>≥ 1 SOL</strong> and don’t want to flex size in public chat,
+      you can DM the dev/mods your TX link instead.
+      <span class="badge">🐳 Whale-friendly</span>
+      <span class="badge">🛡 Privacy-respect</span>
+    </li>
+    <li><strong>Step 6:</strong> After presale closes and totals are locked,
+      $BLOJOB is distributed to the same wallet that sent the SOL.
+    </li>
   </ul>
+
+  <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
+    Final allocations are always based on <strong>on-chain totals at presale close</strong>.
+    The Telegram receipts + leaderboard (if used) are for transparency and hype, not for calculus.
+  </p>
 </div>
 
 <!-- Tokenomics -->
 <div class="section">
-  <h2>🪙 Tokenomics — 69 Billion Supply</h2>
-  <ul>
-    <li>🍑 <strong>SpankBank (Vault):</strong> 69%</li>
-    <li>💦 <strong>PreLoad (Presale):</strong> 10%</li>
-    <li>🫦 <strong>MILF (Marketing):</strong> 6.9%</li>
-    <li>🫟 <strong>StickyLiquidity (LP):</strong> 14.1% (Locked)</li>
-  </ul>
+  <h2>🪙 Tokenomics (69B Supply)</h2>
+
+  <p>
+    <strong>🍑 SpankBank (Vault):</strong> 69% — long-term CumUnity reserves, listings, ecosystem boosts & vested dev share.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% (6.9B) — this presale allocation only.<br>
+    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — marketing pushes, raids, incentives, community foreplay.<br>
+    <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — liquidity pool at launch, locked for stability.<br>
+  </p>
+
+  <p style="font-size:0.9rem; opacity:0.8; margin-top:8px;">
+    Dev allocation sits inside the <strong>SpankBank Vault</strong>, not in a separate
+    “mystery dev” wallet — aligned with the CumUnity and unlocked over time.
+  </p>
 </div>
 
 <!-- Socials -->
 <div class="section">
-  <h2>💜 Join the Fam</h2>
-  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank">Telegram</a>
-  <a class="btn" href="https://x.com/BLOJOB_Daddy" target="_blank">𝕏 / Twitter</a>
-  <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank">Solscan</a>
+  <h2>💦 Socials</h2>
+  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
+  <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
+  <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
+
+  <p class="nsfw-line" style="margin-top:30px;">
+    Join the CumUnity and let’s make this chart rise together… Daddy’s watching. 😈
+  </p>
 </div>
 
 <footer>
-  $BLOJOB is a meme token. Stay degen. Stay hydrated. 💦  
+  $BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br>
+  Stay degen. Stay wet. Stay winning.
 </footer>
 
 <script>
-/* TIMER */
-const presaleStart=new Date("2025-11-29T20:00:00-05:00");
-const presaleEnd=new Date(presaleStart.getTime()+36*3600*1000);
+/* =========================
+   PRESALE TIMING
+   ========================= */
+/* TODO: set this to your real presale start time */
+const presaleStart = new Date("2025-11-29T20:00:00-05:00");
+/* 36 hours duration */
+const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
 
-function pad(n){return n.toString().padStart(2,'0');}
+function pad(n){return n.toString().padStart(2,'0')}
+
 function updateCountdown(){
-  const now=new Date(); let target;
-  if(now<presaleStart){ target=presaleStart; document.getElementById("countdown-label").textContent="Starts in:"; }
-  else if(now<=presaleEnd){ target=presaleEnd; document.getElementById("countdown-label").textContent="Ends in:"; }
-  else{ document.getElementById("countdown-label").textContent="Presale Ended"; return; }
+  const now = new Date();
+  let mode, target;
 
-  const diff=target-now; const s=Math.max(0,Math.floor(diff/1000));
-  const d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60;
-  document.getElementById("countdown-timer").textContent=`${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
+  if(now < presaleStart){ mode="pre"; target=presaleStart; }
+  else if(now >= presaleStart && now <= presaleEnd){ mode="live"; target=presaleEnd; }
+  else { mode="ended"; }
+
+  const label = document.getElementById("countdown-label");
+  const timer = document.getElementById("countdown-timer");
+
+  if(mode === "ended"){
+    label.textContent = "Presale ended";
+    timer.textContent = "--:--:--";
+    return;
+  }
+
+  const diff = target - now;
+  const s = Math.max(0, Math.floor(diff/1000));
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+
+  timer.textContent = `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
+  label.textContent = (mode === "pre") ? "Presale starts in" : "Presale ends in";
 }
 
-/* WALLET COPY */
+/* =========================
+   COPY WALLET
+   ========================= */
 function copyWallet(){
-  const txt=document.getElementById("walletBox").textContent.trim();
-  navigator.clipboard.writeText(txt).then(()=>alert("Wallet copied!"));
+  const text = document.getElementById("walletBox").textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Presale wallet address copied. 🫦");
+  });
 }
 
-/* CALCULATOR */
+/* =========================
+   CALCULATOR — SOL → BLOJOB
+   ========================= */
 async function updateCalc(){
-  const sol=parseFloat(document.getElementById("solInput").value);
-  const el=document.getElementById("calcResult");
-  if(!sol){ el.textContent="Enter SOL to calculate."; return; }
-  if(sol<0.1){ el.textContent="Minimum buy: 0.1 SOL"; return; }
+  const sol = parseFloat(document.getElementById("solInput").value);
+  const resultEl = document.getElementById("calcResult");
+
+  if(!sol){
+    resultEl.textContent = "Enter SOL to calculate.";
+    return;
+  }
+
+  if(sol < 0.1){
+    resultEl.textContent = "Minimum buy is 0.1 SOL 🚫";
+    return;
+  }
 
   try{
-    const r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-    const usd=r.ok?(await r.json()).solana.usd:null;
-    if(!usd){ el.textContent="Price fetch error."; return; }
-    const total=sol*usd;
-    const tokens=total/0.000001;
-    el.textContent=`${sol} SOL ≈ $${total.toFixed(2)} → ${tokens.toLocaleString()} BLOJOB`;
-  }catch{ el.textContent="Error fetching SOL price."; }
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+    const data = await res.json();
+    const solPrice = data.solana.usd;
+
+    const usdValue = sol * solPrice;
+    const blojobTokens = usdValue / 0.000001; // $0.000001 per token
+
+    resultEl.textContent =
+      `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
+  } catch {
+    resultEl.textContent = "Error fetching SOL price. Try again in a bit.";
+  }
 }
 
-document.getElementById("solInput").addEventListener("input",updateCalc);
+/* =========================
+   PROGRESS (MANUAL UPDATE)
+   ========================= */
+/*
+  During presale, update this number as USD raised increases.
+  Example:
+    currentRaisedUSD = 420;
+    updateProgress();
+*/
+let currentRaisedUSD = 0;
 
-/* PROGRESS (manual override) */
-let currentRaisedUSD=0;
 function updateProgress(){
-  const pct=Math.min(currentRaisedUSD/6900,1)*100;
-  document.getElementById("progress-fill").style.width=pct+"%";
-  document.getElementById("progress-amounts").textContent=`Raised: $${currentRaisedUSD.toLocaleString()} / $6,900`;
+  const hardCapUSD = 9600;
+  const softCapUSD = 6900;
+
+  const percent = Math.min(currentRaisedUSD / hardCapUSD, 1) * 100;
+  document.getElementById("progress-fill").style.width = percent + "%";
+
+  const softCapStatus =
+    currentRaisedUSD >= softCapUSD ? "✅ Soft cap reached" : "⏳ Soft cap not reached";
+
+  document.getElementById("progress-amounts").textContent =
+    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
 }
 
-setInterval(updateCountdown,1000);
+/* Listeners */
+document.getElementById("solInput").addEventListener("input", updateCalc);
+
+/* Init */
 updateCountdown();
 updateProgress();
+setInterval(updateCountdown, 1000);
 </script>
 
 </body>
