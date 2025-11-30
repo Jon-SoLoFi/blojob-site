@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -154,6 +154,7 @@
     border-radius: 999px;
     overflow: hidden;
     margin: 10px 0 6px;
+    border: 1px sealed #2e2e4c;
     border: 1px solid #2e2e4c;
   }
 
@@ -403,31 +404,14 @@
 
   <div class="callout">
     <strong>Presale is simple:</strong><br>
+    • Enter how much SOL you want to send in the calculator.<br>
     • Connect your wallet & send SOL via the Buy button.<br>
     • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
     • Everything is matched to on-chain data. No “trust-me-bro” balances.
   </div>
 </div>
 
-<!-- Presale Wallet + CONNECT & BUY -->
-<div class="section">
-  <h2>💋 Presale Wallet — Come Get Filled</h2>
-  <p>
-    Connect your wallet, choose how hard you ape, and confirm the transaction.<br>
-    $BLOJOB will be airdropped to the same wallet after presale ends.
-  </p>
-
-  <div class="wallet-box" id="walletBox">
-    7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
-  </div>
-
-  <button class="primary-buy-btn" onclick="handleBuyClick()">Connect Wallet & Buy</button>
-  <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
-
-  <div id="buyStatus" class="buy-status"></div>
-</div>
-
-<!-- PRICE SECTION -->
+<!-- PRICE SECTION (now ABOVE wallet section) -->
 <div class="section">
   <h2>💵 Presale Price</h2>
 
@@ -450,6 +434,24 @@
   </div>
 </div>
 
+<!-- Presale Wallet + CONNECT & BUY (now BELOW calculator section) -->
+<div class="section">
+  <h2>💋 Presale Wallet — Come Get Filled</h2>
+  <p>
+    After you’ve decided how hard you want to ape, connect your wallet and confirm the transaction.<br>
+    $BLOJOB will be airdropped to the same wallet after presale ends.
+  </p>
+
+  <div class="wallet-box" id="walletBox">
+    7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
+  </div>
+
+  <button class="primary-buy-btn" onclick="handleBuyClick()">Connect Wallet & Buy</button>
+  <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
+
+  <div id="buyStatus" class="buy-status"></div>
+</div>
+
 <!-- HOW TO BUY + WHALE-SAFE -->
 <div class="section">
   <h2>🧾 How To Join The Presale</h2>
@@ -461,9 +463,9 @@
   </div>
 
   <ul class="howto-list">
-    <li><strong>Step 1:</strong> Click <strong>Connect Wallet & Buy</strong> and pick which wallet you want to use.</li>
-    <li><strong>Step 2:</strong> Enter how much SOL you want to send in the calculator box.</li>
-    <li><strong>Step 3:</strong> Click <strong>Connect Wallet & Buy</strong> again to confirm the on-chain transaction.</li>
+    <li><strong>Step 1:</strong> Enter how much SOL you want to send in the calculator box.</li>
+    <li><strong>Step 2:</strong> Click <strong>Connect Wallet & Buy</strong> and pick which wallet you want to use.</li>
+    <li><strong>Step 3:</strong> Approve the transaction in your wallet when prompted.</li>
     <li><strong>Step 4:</strong> Your SOL goes directly to the presale wallet. On-chain, verifiable, no middleman.</li>
     <li><strong>Step 5:</strong> After presale closes & totals are locked, your $BLOJOB is airdropped to the same wallet.</li>
   </ul>
@@ -515,7 +517,7 @@
 </div>
 
 <!-- Solana web3.js from CDN -->
-<script src="https://unpkg.com/@solana/web3.js@1.95.2/lib/index.iife.js"></script>
+<script src="https://unpkg.com/@solana/web3.js@1.95.2/lib/index.iife.js" defer></script>
 <script>
 /* =========================
    CONFIG
@@ -571,7 +573,24 @@ function copyWallet(){
 
 /* =========================
    CALCULATOR — SOL → BLOJOB
+   (with simple price caching)
    ========================= */
+let lastSolPrice = null;
+let lastSolPriceTs = 0;
+const PRICE_TTL_MS = 60 * 1000; // 60 seconds cache
+
+async function getSolPrice() {
+  const now = Date.now();
+  if (lastSolPrice && (now - lastSolPriceTs) < PRICE_TTL_MS) {
+    return lastSolPrice;
+  }
+  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+  const data = await res.json();
+  lastSolPrice = data.solana.usd;
+  lastSolPriceTs = now;
+  return lastSolPrice;
+}
+
 async function updateCalc(){
   const sol = parseFloat(document.getElementById("solInput").value);
   const resultEl = document.getElementById("calcResult");
@@ -587,10 +606,7 @@ async function updateCalc(){
   }
 
   try{
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-    const data = await res.json();
-    const solPrice = data.solana.usd;
-
+    const solPrice = await getSolPrice();
     const usdValue = sol * solPrice;
     const blojobTokens = usdValue / 0.000001; // $0.000001 per token
 
@@ -621,6 +637,7 @@ function updateProgress(){
 
 /* =========================
    WALLET DETECTION & PICKER
+   (improved for mobile + late injection)
    ========================= */
 let connection;
 let walletPublicKey = null;
@@ -634,36 +651,9 @@ function getStatusEl(){
 function detectWallets(){
   availableWallets = [];
 
-  // Phantom (window.phantom.solana)
-  if (window.phantom && window.phantom.solana) {
-    availableWallets.push({
-      id: "phantom",
-      name: "Phantom",
-      provider: window.phantom.solana
-    });
-  }
-
-  // Solflare (window.solflare)
-  if (window.solflare && window.solflare.isSolflare) {
-    availableWallets.push({
-      id: "solflare",
-      name: "Solflare",
-      provider: window.solflare
-    });
-  }
-
-  // Rabby (guess)
-  if (window.rabby && window.rabby.solana) {
-    availableWallets.push({
-      id: "rabby",
-      name: "Rabby (Solana)",
-      provider: window.rabby.solana
-    });
-  }
-
-  // Generic window.solana (if not already included)
-  if (window.solana && !availableWallets.some(w => w.provider === window.solana)) {
-    const label = window.solana.isPhantom ? "Phantom (default)" : "Solana Wallet";
+  // Generic provider (most mobile wallets inject this)
+  if (window.solana && typeof window.solana === "object") {
+    const label = window.solana.isPhantom ? "Phantom" : (window.solana.isBackpack ? "Backpack" : "Solana Wallet");
     availableWallets.push({
       id: "solana",
       name: label,
@@ -671,20 +661,50 @@ function detectWallets(){
     });
   }
 
+  // Phantom (desktop extension pattern)
+  if (window.phantom && window.phantom.solana) {
+    // avoid double-adding same provider
+    if (!availableWallets.some(w => w.provider === window.phantom.solana)) {
+      availableWallets.push({
+        id: "phantom",
+        name: "Phantom (Extension)",
+        provider: window.phantom.solana
+      });
+    }
+  }
+
+  // Solflare
+  if (window.solflare && window.solflare.isSolflare) {
+    if (!availableWallets.some(w => w.provider === window.solflare)) {
+      availableWallets.push({
+        id: "solflare",
+        name: "Solflare",
+        provider: window.solflare
+      });
+    }
+  }
+
+  // Rabby (Solana)
+  if (window.rabby && window.rabby.solana) {
+    if (!availableWallets.some(w => w.provider === window.rabby.solana)) {
+      availableWallets.push({
+        id: "rabby",
+        name: "Rabby (Solana)",
+        provider: window.rabby.solana
+      });
+    }
+  }
+
   const status = getStatusEl();
-  if (availableWallets.length === 1) {
+  if (!status) return;
+
+  if (availableWallets.length === 0) {
+    status.textContent = "No Solana wallet detected. Use Phantom, Solflare, Rabby, Backpack, etc. (or open this page inside your wallet's dApp browser).";
+  } else if (availableWallets.length === 1) {
     selectedWallet = availableWallets[0];
-    if (status) {
-      status.textContent = `Detected: ${selectedWallet.name}. Click "Connect Wallet & Buy" to continue.`;
-    }
-  } else if (availableWallets.length === 0) {
-    if (status) {
-      status.textContent = "No Solana wallet detected. Install Phantom, Solflare, Rabby (Solana), etc.";
-    }
+    status.textContent = `Detected: ${selectedWallet.name}. Click "Connect Wallet & Buy" to continue.`;
   } else {
-    if (status) {
-      status.textContent = "Multiple wallets detected. Click \"Connect Wallet & Buy\" to choose.";
-    }
+    status.textContent = "Multiple wallets detected. Click \"Connect Wallet & Buy\" to choose.";
   }
 }
 
@@ -727,7 +747,7 @@ function closeWalletModal(){
 }
 
 async function ensureConnection(){
-  if(!connection){
+  if(!connection && window.solanaWeb3){
     // mainnet endpoint
     connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
   }
@@ -787,30 +807,31 @@ async function connectWallet(){
    ========================= */
 async function handleBuyClick(){
   const status = getStatusEl();
+  if (!status) return;
+
   status.textContent = "";
 
-  // Make sure connection exists
   await ensureConnection();
+  if (!connection) {
+    status.textContent = "Unable to initialize Solana connection. Try refreshing the page.";
+    return;
+  }
 
-  // If nothing detected yet, detect now
   if (!availableWallets.length) {
     detectWallets();
   }
 
-  // If no selected wallet yet and more than one, open modal
   if (!selectedWallet && availableWallets.length > 1) {
     openWalletModal();
     return;
   }
 
-  // Connect if not already
   if(!walletPublicKey){
-    if (status) status.textContent = "Connecting wallet...";
+    status.textContent = "Connecting wallet...";
     const pk = await connectWallet();
     if(!pk) return;
   }
 
-  // Read SOL amount
   const solAmount = parseFloat(document.getElementById("solInput").value);
   if(!solAmount || solAmount <= 0){
     status.textContent = "Enter how much SOL you want to send.";
@@ -851,7 +872,7 @@ async function handleBuyClick(){
     }
 
     const sendResult = await provider.signAndSendTransaction(tx);
-    const signature = sendResult.signature || sendResult; // some wallets return string, some {signature}
+    const signature = sendResult.signature || sendResult;
 
     const solscanUrl = `https://solscan.io/tx/${signature}`;
     status.innerHTML = `Sent! <a href="${solscanUrl}" target="_blank" rel="noopener noreferrer">View transaction on Solscan</a>`;
@@ -866,15 +887,31 @@ async function handleBuyClick(){
 }
 
 /* =========================
-   LISTENERS & INIT
+   INIT
    ========================= */
-document.getElementById("solInput").addEventListener("input", updateCalc);
+function initPresaleUI() {
+  const solInput = document.getElementById("solInput");
+  if (solInput) {
+    solInput.addEventListener("input", updateCalc);
+  }
 
-detectWallets();
-updateCountdown();
-updateProgress();
-setInterval(updateCountdown, 1000);
+  detectWallets();
+  updateCountdown();
+  updateProgress();
+
+  setInterval(updateCountdown, 1000);
+
+  // If Phantom initializes late (mobile), detect again
+  window.addEventListener("solana#initialized", detectWallets, { once: true });
+}
+
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  initPresaleUI();
+} else {
+  document.addEventListener("DOMContentLoaded", initPresaleUI);
+}
 </script>
 
 </body>
 </html>
+
