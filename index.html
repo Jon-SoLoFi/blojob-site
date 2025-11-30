@@ -4,19 +4,12 @@
 <meta charset="UTF-8">
 <title>$BLOJOB — Come Get This Pump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="icon" href="blojob.png" sizes="16x16" type="image/png">
-<link rel="icon" href="blojob.png" sizes="32x32" type="image/png">
-<link rel="icon" href="blojob.png" sizes="48x48" type="image/png">
-<link rel="icon" href="blojob.png" sizes="96x96" type="image/png">
-<link rel="apple-touch-icon" href="blojob.png">
-<link rel="manifest" href="site.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
     --purple-main: #b026ff;
-    --purple-purple: #7b2cff;
+    --purple-soft: #7b2cff;
     --purple-neon: #d896ff;
     --bg-dark: #070712;
     --bg-card: #11111f;
@@ -24,13 +17,19 @@
     --text-soft: #c7c7ff;
   }
 
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+  }
 
   body {
     margin: 0;
     background: radial-gradient(circle at top, #17172a 0, #070712 55%);
     color: #fff;
     font-family: 'Poppins', sans-serif;
+  }
+
+  a {
+    color: inherit;
   }
 
   header {
@@ -57,8 +56,19 @@
     border: 2px solid rgba(255,255,255,0.18);
   }
 
-  h1 { font-size: 3.2rem; font-weight: 800; margin: 0; }
-  h2 { font-size: 1.4rem; opacity: 0.9; margin-top: 6px; }
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 16px rgba(0,0,0,0.8);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    opacity: 0.9;
+    margin-top: 6px;
+  }
 
   .section {
     max-width: 900px;
@@ -82,9 +92,11 @@
     border-radius: 10px;
   }
 
-  /* countdown & progress */
+  .callout strong {
+    color: var(--purple-neon);
+  }
 
-
+  /* Countdown + Progress */
   .countdown-progress {
     max-width: 900px;
     margin: -20px auto 10px;
@@ -95,7 +107,10 @@
   }
 
   @media (max-width: 768px) {
-    .countdown-progress { grid-template-columns: 1fr; }
+    .countdown-progress {
+      grid-template-columns: 1fr;
+      margin-top: 8px;
+    }
   }
 
   .card {
@@ -106,15 +121,44 @@
     box-shadow: 0 8px 26px rgba(0,0,0,0.5);
   }
 
+  .card-title {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  #countdown-label {
+    font-size: 0.92rem;
+    opacity: 0.8;
+  }
+
   #countdown-timer {
     font-size: 1.6rem;
     font-weight: 700;
     margin-top: 6px;
     color: var(--purple-neon);
+    text-shadow: 0 0 14px rgba(216,150,255,0.55);
+  }
+
+  .countdown-sub {
+    font-size: 0.9rem;
+    opacity: 0.78;
+    margin-top: 6px;
+  }
+
+  .highlight {
+    color: var(--purple-neon);
+    font-weight: 600;
+  }
+
+  .progress-title {
+    font-size: 0.94rem;
+    opacity: 0.9;
   }
 
   .progress-bar {
-    width: 100%; height: 14px;
+    width: 100%;
+    height: 14px;
     background: #19192a;
     border-radius: 999px;
     overflow: hidden;
@@ -125,12 +169,66 @@
   #progress-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #f4b3ff, var(--purple-main));
+    background: linear-gradient(90deg, #f4b3ff, var(--purple-main), var(--purple-soft));
+    box-shadow: 0 0 16px rgba(176,38,255,0.9);
     transition: width 0.4s ease-out;
   }
 
-  /* Buy Card */
+  .progress-amounts {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
 
+  .token-tracker {
+    font-size: 0.88rem;
+    opacity: 0.86;
+    margin-top: 8px;
+  }
+
+  .token-tracker strong {
+    color: var(--purple-neon);
+  }
+
+  .token-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #141428;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 8px;
+    border: 1px solid #313159;
+  }
+
+  #token-progress-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
+    box-shadow: 0 0 12px rgba(216,150,255,0.8);
+    transition: width 0.4s ease-out;
+  }
+
+  /* How-to + badges */
+  .howto-list {
+    margin-top: 12px;
+    padding-left: 20px;
+  }
+
+  .howto-list li {
+    margin-bottom: 6px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    background: #16162a;
+    border: 1px solid #41416a;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* BUY CARD (vertical pump.fun style) */
   .buy-card {
     max-width: 900px;
     margin: 0 auto 40px;
@@ -138,36 +236,119 @@
     background: radial-gradient(circle at top left, rgba(176,38,255,0.14), #101020);
     border-radius: 16px;
     border: 1px solid #2e2e4c;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.6);
+  }
+
+  .buy-card h2 {
+    margin-top: 0;
   }
 
   .wallet-address-row {
     margin-top: 10px;
     background: rgba(5,5,20,0.9);
     border-radius: 12px;
+    border: 1px solid #3b3b63;
     padding: 10px 12px;
     display: flex;
+    align-items: center;
     gap: 10px;
     cursor: pointer;
+    user-select: none;
+    transition: 0.15s;
   }
 
-  .calc-row { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .wallet-address-row:hover {
+    border-color: var(--purple-main);
+    box-shadow: 0 0 14px rgba(176,38,255,0.5);
+  }
+
+  .wallet-address-text {
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    word-break: break-all;
+    flex: 1;
+  }
+
+  .wallet-copy-icon {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+  }
+
+  .wallet-copy-icon::before {
+    content: "📋";
+  }
+
+  .wallet-copy-icon.copied::before {
+    content: "✅";
+  }
+
+  .wallet-subtext {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .calc-row {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .calc-input {
-    width: 100%; padding: 12px; border-radius: 10px;
-    background: #16162a; color: #fff; border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    background: #16162a;
+    color: #fff;
   }
 
-  .quick-row { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .calc-result {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--purple-neon);
+    min-height: 1.2em;
+  }
+
+  .quick-row {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
   .quick-buy-btn {
-    background: #18182b; color: #f7f7ff;
+    background: #18182b;
+    color: #f7f7ff;
     padding: 8px 14px;
     border-radius: 999px;
     font-weight: 600;
+    font-size: 0.85rem;
     border: 1px solid #383868;
     cursor: pointer;
+    transition: 0.15s;
   }
 
-  .cta-row { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .quick-buy-btn:hover {
+    background: var(--purple-main);
+    border-color: var(--purple-main);
+    box-shadow: 0 0 12px rgba(176,38,255,0.7);
+    transform: translateY(-1px);
+  }
+
+  .cta-row {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .primary-btn {
     background: var(--purple-main);
     color: #000;
@@ -175,13 +356,67 @@
     border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+    transition: 0.18s;
     flex: 1 1 150px;
+    text-align: center;
   }
 
-  /* Wallet modal */
+  .primary-btn:hover {
+    background: var(--purple-neon);
+    box-shadow: 0 0 16px rgba(176,38,255,0.85);
+    transform: translateY(-1px) scale(1.02);
+  }
 
+  .wallet-note {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-top: 10px;
+  }
+
+  #buyStatus {
+    font-size: 0.85rem;
+    margin-top: 8px;
+    min-height: 1.2em;
+  }
+
+  #buyStatus a {
+    color: var(--purple-neon);
+    text-decoration: underline;
+  }
+
+  /* General buttons */
+  .btn {
+    display: inline-block;
+    background: var(--purple-main);
+    color: #000;
+    padding: 14px 24px;
+    margin: 10px 10px 0 0;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.18s;
+    font-size: 0.95rem;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px) scale(1.04);
+    background: var(--purple-neon);
+    box-shadow: 0 0 16px rgba(176,38,255,0.8);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 16px 60px;
+    font-size: 0.9rem;
+    opacity: 0.65;
+  }
+
+  /* Wallet chooser modal */
   .wallet-modal-backdrop {
-    position: fixed; inset: 0;
+    position: fixed;
+    inset: 0;
     background: rgba(0,0,0,0.7);
     display: none;
     align-items: center;
@@ -189,6 +424,59 @@
     z-index: 1000;
   }
 
+  .wallet-modal {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-subtle);
+    padding: 18px 20px 16px;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.85);
+  }
+
+  .wallet-modal h3 {
+    margin: 0 0 6px;
+    font-size: 1.08rem;
+  }
+
+  .wallet-modal p {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  .wallet-option {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px solid #3a3a60;
+    background: #16162a;
+    color: #fff;
+    font-size: 0.92rem;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .wallet-option:hover {
+    background: #21213a;
+    border-color: var(--purple-main);
+    box-shadow: 0 0 10px rgba(176,38,255,0.45);
+  }
+
+  .modal-close {
+    margin-top: 8px;
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .modal-close:hover {
+    color: #fff;
+  }
 </style>
 </head>
 
@@ -196,41 +484,112 @@
 
 <header>
   <div class="logo-wrap">
-    <img src="blojob.png" alt="logo">
+    <img src="blojob.png" alt="$BLOJOB logo">
     <h1>BLOJOB</h1>
     <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥</h2>
   </div>
 </header>
 
+<!-- Countdown + Progress -->
 <div class="countdown-progress">
   <div class="card">
-    <div id="countdown-label">Presale starts in</div>
+    <div class="card-title">🕙​ Presale Timing</div>
+    <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
+    <p class="countdown-sub">
+      Presale starts at <span class="highlight">8:00 PM EST</span> and runs for
+      <span class="highlight">36 hours</span>.<br>
+      SOL only.
+    </p>
   </div>
 
   <div class="card">
+    <div class="card-title">📊 Presale Progress</div>
+    <p class="progress-title">Soft cap: $6,900 • Hard cap: $9,600</p>
     <div class="progress-bar"><div id="progress-fill"></div></div>
-    <p id="progress-amounts"></p>
+    <p id="progress-amounts" class="progress-amounts">
+      Raised: $0 / $6,900 (soft cap) • 😪 Soft cap not reached
+    </p>
+
+    <div class="token-tracker">
+      <div><strong>Presale Allocation:</strong> 6,900,000,000 BLOJOB</div>
+      <div id="tokenSoldText">Sold: 0 BLOJOB</div>
+      <div id="tokenRemainingText">Remaining: 6,900,000,000 BLOJOB</div>
+      <div class="token-progress-bar">
+        <div id="token-progress-fill"></div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- Intro -->
 <div class="section">
-  <p class="nsfw-line">You came here curious…</p>
+  <p class="nsfw-line">
+    You came here curious… now let Daddy show you exactly what you’re getting. 😏
+  </p>
+
+  <p>
+    No utility. No promises. No corporate foreplay.<br>
+    Just raw, throbbing, <strong>pure degen momentum</strong> built to pump hard, fast,
+    and as long as the CumUnity can handle.
+  </p>
+
+  <div class="callout">
+    <strong>Presale is simple:</strong><br>
+    • Send SOL to the presale wallet during the 36h window (via quick-buy buttons or custom amount).<br>
+    • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
+    • Everything is matched to on-chain data. No “trust-me-bro” balances.
+  </div>
 </div>
 
+<!-- HOW TO JOIN -->
+<div class="section">
+  <h2>🧾 How To Join The Presale</h2>
+
+  <div class="callout">
+    <strong>⚠️ Use a non-custodial Solana wallet</strong><br>
+    Phantom, Solflare, Backpack, Rabby (Solana), OKX, etc.
+    <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
+  </div>
+
+  <ul class="howto-list">
+    <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
+    <li><strong>Step 2:</strong> Enter how much SOL you want to send or tap a quick-buy button.</li>
+    <li><strong>Step 3:</strong> Connect your wallet and confirm the transaction when it pops up.</li>
+    <li><strong>Step 4:</strong> Keep your transaction link (Solscan) if you want to flex in Telegram or for your own records.</li>
+    <li><strong>Step 5:</strong> After presale closes and totals are locked, $BLOJOB is distributed to the same wallet that sent the SOL.</li>
+  </ul>
+
+  <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
+    Final allocations are always based on <strong>on-chain totals at presale close</strong>.
+  </p>
+</div>
+
+<!-- BUY CARD (pump.fun-style vertical) -->
 <div class="buy-card">
   <h2>💋 BLOJOB Presale</h2>
+  <p style="font-size:0.9rem; opacity:0.85;">
+    Set your amount, see your estimate, connect, and send. Simple degen flow. 🔥
+  </p>
 
+  <!-- Address + copy integrated -->
   <div class="wallet-address-row" onclick="copyWallet()">
-    <div id="walletBox">7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA</div>
-    <div id="copyIcon">📋</div>
+    <div class="wallet-address-text" id="walletBox">
+      7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
+    </div>
+    <div class="wallet-copy-icon" id="copyIcon"></div>
+  </div>
+  <div class="wallet-subtext">
+    Tap or click to copy the presale wallet. All contributions must come from a Solana wallet you control.
   </div>
 
+  <!-- Calculator -->
   <div class="calc-row">
-    <input id="solInput" class="calc-input" type="number" step="0.0001" placeholder="Enter SOL">
-    <div id="calcResult">Enter SOL to calculate estimated BLOJOB.</div>
+    <input id="solInput" class="calc-input" type="number" step="0.0001" placeholder="Enter SOL amount you want to send">
+    <div id="calcResult" class="calc-result">Enter SOL to calculate estimated BLOJOB.</div>
   </div>
 
+  <!-- Quick-buy buttons -->
   <div class="quick-row">
     <button class="quick-buy-btn" onclick="handleQuickBuy(0.1)">0.1 SOL</button>
     <button class="quick-buy-btn" onclick="handleQuickBuy(0.25)">0.25 SOL</button>
@@ -238,29 +597,72 @@
     <button class="quick-buy-btn" onclick="handleQuickBuy(1)">1 SOL</button>
   </div>
 
+  <!-- Connect + Buy -->
   <div class="cta-row">
     <button class="primary-btn" onclick="handleConnectClick()">Connect Wallet</button>
     <button class="primary-btn" onclick="handleBuyClick()">Buy Now</button>
   </div>
 
-  <p id="buyStatus"></p>
+  <p id="buyStatus" class="wallet-note"></p>
+
+  <p class="wallet-note">
+    📱 <strong>Mobile tip:</strong> For best results, open this page inside your wallet’s in-app browser
+    (Phantom, Solflare, Backpack, etc.). If no wallet is detected, we’ll try a Solana deep-link instead.
+  </p>
 </div>
 
-<!-- Wallet Modal -->
+<!-- Tokenomics -->
+<div class="section">
+  <h2>🪙 Tokenomics (69,000,000,000 Supply)</h2>
+
+  <p>
+    <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term reserves, treasury operations, stabilization, staking pools, and CumUnity incentives, micro-liquidity support.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% — Distributed proportionally at TGE based on contribution size, unsold tokens burned.<br>
+    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth, marketing pushes, raids, incentives, CumUnity foreplay.<br>
+    <strong>🫟 StickyLiquidity (Liquidity Pool):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
+  </p>
+</div>
+
+<!-- Socials -->
+<div class="section">
+  <h2>🌐 Socials</h2>
+  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
+  <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
+  <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
+
+  <p class="nsfw-line" style="margin-top:30px;">
+    Join the CumUnity, watch the chart, and decide how hard you want to ride it. 🚀
+  </p>
+</div>
+
+<footer>
+  BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br>
+  Pump... Harder. Faster. Stronger.
+</footer>
+
+<!-- Wallet chooser modal -->
 <div id="walletModalBackdrop" class="wallet-modal-backdrop">
   <div class="wallet-modal">
     <h3>Select a wallet</h3>
+    <p>Pick which Solana wallet you want to use for this presale.</p>
     <div id="walletOptions"></div>
-    <button onclick="closeWalletModal()">Cancel</button>
+    <button class="modal-close" onclick="closeWalletModal()">Cancel</button>
   </div>
 </div>
 
+<!-- Solana web3.js from CDN -->
 <script src="https://unpkg.com/@solana/web3.js@1.95.2/lib/index.iife.js"></script>
 
 <script>
+/* =========================
+   CONFIG
+   ========================= */
 const PRESALE_WALLET = "7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA";
 const MIN_SOL = 0.1;
 
+/* =========================
+   PRESALE TIMING
+   ========================= */
 const presaleStart = new Date("2025-11-29T20:00:00-05:00");
 const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
 
@@ -271,281 +673,420 @@ function updateCountdown(){
   let mode, target;
 
   if(now < presaleStart){ mode="pre"; target=presaleStart; }
-  else if(now <= presaleEnd){ mode="live"; target=presaleEnd; }
+  else if(now >= presaleStart && now <= presaleEnd){ mode="live"; target=presaleEnd; }
   else { mode="ended"; }
 
   const label = document.getElementById("countdown-label");
   const timer = document.getElementById("countdown-timer");
 
-  if(mode==="ended"){
-    timer.textContent="--:--";
-    label.textContent="Presale ended";
+  if(mode === "ended"){
+    label.textContent = "Presale ended";
+    timer.textContent = "--:--:--";
     return;
   }
 
   const diff = target - now;
-  const s = Math.floor(diff/1000);
-  const d = Math.floor(s/86400);
-  const h = Math.floor((s%86400)/3600);
-  const m = Math.floor((s%3600)/60);
-  const sec = s%60;
+  const s = Math.max(0, Math.floor(diff/1000));
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
 
   timer.textContent = `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
+  label.textContent = (mode === "pre") ? "Presale starts in" : "Presale ends in";
 }
 
+/* =========================
+   COPY WALLET (integrated)
+   ========================= */
 function copyWallet(){
   const text = document.getElementById("walletBox").textContent.trim();
-  navigator.clipboard.writeText(text).catch(()=>{});
+  const icon = document.getElementById("copyIcon");
+
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    // fallback
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(temp);
+  } else {
+    navigator.clipboard.writeText(text).catch(() => {});
+  }
+
+  if (icon) {
+    icon.classList.add("copied");
+    setTimeout(() => icon.classList.remove("copied"), 1500);
+  }
+
+  alert("Presale wallet address copied. 🫦");
 }
+
+/* =========================
+   CALCULATOR — SOL → BLOJOB
+   ========================= */
 async function updateCalc(){
   const sol = parseFloat(document.getElementById("solInput").value);
   const resultEl = document.getElementById("calcResult");
 
   if(!sol){
-    resultEl.textContent="Enter SOL to calculate estimated BLOJOB.";
+    resultEl.textContent = "Enter SOL to calculate estimated BLOJOB.";
     return;
   }
 
   try{
-    const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-    const d = await r.json();
-    const solPrice = d.solana.usd;
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+    const data = await res.json();
+    const solPrice = data.solana.usd;
 
     const usdValue = sol * solPrice;
-    const pricePerToken = 0.000001;
-    const tokens = usdValue / pricePerToken;
+    const pricePerToken = 0.000001; // $0.000001 per token
+    const blojobTokens = usdValue / pricePerToken;
 
     resultEl.textContent =
-      `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${tokens.toLocaleString()} BLOJOB`;
+      `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
   } catch {
-    resultEl.textContent="Error fetching SOL price.";
+    resultEl.textContent = "Error fetching SOL price. Try again in a bit.";
   }
 }
 
+/* =========================
+   PROGRESS + TOKEN TRACKER
+   ========================= */
 let currentRaisedUSD = 0;
-const softCapUSD = 6900;
 const hardCapUSD = 9600;
+const softCapUSD = 6900;
 const PRESALE_TOKENS_TOTAL = 6900000000;
 const PRICE_PER_TOKEN = 0.000001;
 
 function updateProgress(){
-  const pct = Math.min(currentRaisedUSD/hardCapUSD,1)*100;
-  document.getElementById("progress-fill").style.width = pct + "%";
+  const percent = Math.min(currentRaisedUSD / hardCapUSD, 1) * 100;
+  document.getElementById("progress-fill").style.width = percent + "%";
 
-  const softText = currentRaisedUSD >= softCapUSD
-    ? "🤤 Soft cap reached"
-    : "😪 Soft cap not reached";
+  const softCapStatus =
+    currentRaisedUSD >= softCapUSD ? "🤤 Soft cap reached" : "😪 Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
-    `Raised: $${currentRaisedUSD} / $${softCapUSD} • ${softText}`;
+    `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
+
+  updateTokenTracker();
+}
+
+function updateTokenTracker(){
+  const tokensSoldRaw = currentRaisedUSD / PRICE_PER_TOKEN;
+  const tokensSold = Math.min(tokensSoldRaw, PRESALE_TOKENS_TOTAL);
+  const tokensRemaining = Math.max(PRESALE_TOKENS_TOTAL - tokensSold, 0);
+
+  const soldEl = document.getElementById("tokenSoldText");
+  const remainingEl = document.getElementById("tokenRemainingText");
+  const bar = document.getElementById("token-progress-fill");
+
+  soldEl.textContent = `Sold: ${Math.floor(tokensSold).toLocaleString()} BLOJOB`;
+  remainingEl.textContent = `Remaining: ${Math.floor(tokensRemaining).toLocaleString()} BLOJOB`;
+
+  const percentRemaining = (tokensRemaining / PRESALE_TOKENS_TOTAL) * 100;
+  bar.style.width = percentRemaining + "%";
 }
 
 window.presaleAdminSetRaised = function(usd){
-  currentRaisedUSD = Number(usd)||0;
+  currentRaisedUSD = Math.max(0, Number(usd) || 0);
   updateProgress();
+  console.log("Updated presale raised to: $" + currentRaisedUSD);
 };
 
-let connection=null;
-let walletPublicKey=null;
-let availableWallets=[];
-let selectedWallet=null;
+/* =========================
+   WALLET DETECTION & PICKER
+   ========================= */
+let connection;
+let walletPublicKey = null;
+let availableWallets = [];
+let selectedWallet = null;
 
 function getStatusEl(){
   return document.getElementById("buyStatus");
 }
 
-function detectWallets(){
-  availableWallets=[];
+function isMobile(){
+  return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+}
 
-  if(window.solana){
+function detectWallets(){
+  availableWallets = [];
+
+  // Generic injected window.solana
+  if (window.solana && typeof window.solana === "object") {
     const label =
       window.solana.isPhantom ? "Phantom" :
       window.solana.isBackpack ? "Backpack" :
       "Solana Wallet";
-
-    availableWallets.push({ id:"solana", name:label, provider:window.solana });
+    availableWallets.push({
+      id: "solana",
+      name: label,
+      provider: window.solana
+    });
   }
 
-  if(window.phantom && window.phantom.solana){
-    if(!availableWallets.some(w=>w.provider===window.phantom.solana)){
-      availableWallets.push({ id:"phantom", name:"Phantom", provider:window.phantom.solana });
+  // Phantom extension
+  if (window.phantom && window.phantom.solana) {
+    if (!availableWallets.some(w => w.provider === window.phantom.solana)) {
+      availableWallets.push({
+        id: "phantom",
+        name: "Phantom (Extension)",
+        provider: window.phantom.solana
+      });
     }
   }
 
-  if(window.solflare && window.solflare.isSolflare){
-    if(!availableWallets.some(w=>w.provider===window.solflare)){
-      availableWallets.push({ id:"solflare", name:"Solflare", provider:window.solflare });
+  // Solflare
+  if (window.solflare && window.solflare.isSolflare) {
+    if (!availableWallets.some(w => w.provider === window.solflare)) {
+      availableWallets.push({
+        id: "solflare",
+        name: "Solflare",
+        provider: window.solflare
+      });
     }
   }
 
-  if(window.rabby && window.rabby.solana){
-    if(!availableWallets.some(w=>w.provider===window.rabby.solana)){
-      availableWallets.push({ id:"rabby", name:"Rabby", provider:window.rabby.solana });
+  // Rabby (Solana)
+  if (window.rabby && window.rabby.solana) {
+    if (!availableWallets.some(w => w.provider === window.rabby.solana)) {
+      availableWallets.push({
+        id: "rabby",
+        name: "Rabby (Solana)",
+        provider: window.rabby.solana
+      });
     }
   }
 
-  const status=getStatusEl();
-  if(availableWallets.length===0){
-    status.textContent="No wallet detected.";
-  } else if(availableWallets.length===1){
-    selectedWallet=availableWallets[0];
-    status.textContent=`Detected: ${selectedWallet.name}`;
+  const status = getStatusEl();
+  if (!status) return;
+
+  if (availableWallets.length === 0) {
+    status.textContent = "No injected Solana wallet detected. On mobile, open this page inside your wallet's in-app browser or we’ll use a Solana deep-link on Buy.";
+  } else if (availableWallets.length === 1) {
+    selectedWallet = availableWallets[0];
+    status.textContent = `Detected: ${selectedWallet.name}. Click Connect or Buy to continue.`;
   } else {
-    status.textContent="Multiple wallets detected. Click Connect.";
+    status.textContent = "Multiple wallets detected. Click Connect Wallet to choose.";
   }
 }
 
 function openWalletModal(){
-  if(!availableWallets.length) detectWallets();
-  if(!availableWallets.length){
-    getStatusEl().textContent="No Solana wallet detected.";
+  const status = getStatusEl();
+
+  if (!availableWallets.length) {
+    detectWallets();
+  }
+  if (!availableWallets.length) {
+    if (status) status.textContent = "No Solana wallet detected. Install/open Phantom, Solflare, Backpack, etc.";
     return;
   }
 
-  const list=document.getElementById("walletOptions");
-  list.innerHTML="";
+  const listEl = document.getElementById("walletOptions");
+  listEl.innerHTML = "";
 
-  availableWallets.forEach(w=>{
-    const btn=document.createElement("button");
-    btn.className="wallet-option";
-    btn.textContent=w.name;
-    btn.onclick=()=>{
-      selectedWallet=w;
+  availableWallets.forEach(w => {
+    const btn = document.createElement("button");
+    btn.className = "wallet-option";
+    btn.textContent = w.name;
+    btn.onclick = () => {
+      selectedWallet = w;
       closeWalletModal();
-      getStatusEl().textContent=`Selected: ${w.name}`;
+      if (status) {
+        status.textContent = `Selected: ${w.name}. Click Buy to continue.`;
+      }
     };
-    list.appendChild(btn);
+    listEl.appendChild(btn);
   });
 
-  document.getElementById("walletModalBackdrop").style.display="flex";
+  document.getElementById("walletModalBackdrop").style.display = "flex";
 }
 
 function closeWalletModal(){
-  document.getElementById("walletModalBackdrop").style.display="none";
+  document.getElementById("walletModalBackdrop").style.display = "none";
 }
 
 async function ensureConnection(){
-  if(!connection && typeof solanaWeb3!=="undefined"){
-    connection = new solanaWeb3.Connection(
-      "https://api.mainnet-beta.solana.com",
-      "confirmed"
-    );
+  if(!connection && window.solanaWeb3){
+    connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
   }
 }
 
+/* =========================
+   CONNECT WALLET
+   ========================= */
 async function connectWallet(){
-  const status=getStatusEl();
+  const status = getStatusEl();
 
-  if(!availableWallets.length) detectWallets();
-  if(!selectedWallet){
-    if(availableWallets.length>1){ openWalletModal(); return null; }
-    if(availableWallets.length===1){ selectedWallet=availableWallets[0]; }
-    else { status.textContent="No wallet."; return null; }
+  if (!availableWallets.length) {
+    detectWallets();
   }
 
-  const p=selectedWallet.provider;
-  if(!p || typeof p.connect!=="function"){
-    status.textContent="Wallet can't connect.";
-    selectedWallet=null;
+  if (!selectedWallet) {
+    if (availableWallets.length > 1) {
+      openWalletModal();
+      return null;
+    } else if (availableWallets.length === 1) {
+      selectedWallet = availableWallets[0];
+    } else {
+      if (status) status.textContent = "No Solana wallet detected. On mobile, we’ll use a Solana deep-link when you press Buy.";
+      return null;
+    }
+  }
+
+  const provider = selectedWallet.provider;
+  if (!provider || typeof provider.connect !== "function") {
+    if (status) status.textContent = "Selected wallet doesn't support connect(). Try another.";
+    selectedWallet = null;
     return null;
   }
 
-  try{
-    const resp=await p.connect();
-    walletPublicKey=resp.publicKey||p.publicKey;
-    if(!walletPublicKey){ status.textContent="No public key."; return null; }
-
-    const k=walletPublicKey.toString();
-    status.textContent=`Connected: ${k.slice(0,4)}...${k.slice(-4)}`;
+  try {
+    const resp = await provider.connect();
+    walletPublicKey = resp.publicKey || provider.publicKey;
+    if (!walletPublicKey) {
+      if (status) status.textContent = "Wallet connected but no public key found.";
+      return null;
+    }
+    const keyStr = walletPublicKey.toString();
+    if (status) {
+      status.textContent = `Connected: ${keyStr.slice(0,4)}...${keyStr.slice(-4)} via ${selectedWallet.name}`;
+    }
     return walletPublicKey;
-  } catch {
-    status.textContent="Wallet cancelled.";
+  } catch(e){
+    if (status) status.textContent = "Wallet connection cancelled.";
     return null;
   }
+}
+
+/* =========================
+   CONNECT + BUY HANDLERS
+   ========================= */
+async function handleConnectClick(){
+  const status = getStatusEl();
+  if (status) status.textContent = "Connecting wallet...";
+  await ensureConnection();
+  await connectWallet();
 }
 
 function buildSolanaDeepLink(amount){
-  const label=encodeURIComponent("BLOJOB Presale");
-  const msg=encodeURIComponent(`Presale contribution ${amount} SOL`);
+  const label = encodeURIComponent("BLOJOB Presale");
+  const msg = encodeURIComponent(`Presale contribution ${amount} SOL`);
   return `solana:${PRESALE_WALLET}?amount=${amount}&label=${label}&message=${msg}`;
 }
 
 async function handleBuyClick(){
-  const status=getStatusEl();
+  const status = getStatusEl();
+  if (!status) return;
 
-  const solAmount=parseFloat(document.getElementById("solInput").value);
-  if(!solAmount){ status.textContent="Enter SOL."; return; }
-  if(solAmount<MIN_SOL){ status.textContent=`Minimum ${MIN_SOL} SOL`; return; }
-
-  await ensureConnection();
-
-  if(!availableWallets.length || !window.solanaWeb3 || !connection){
-    window.location.href=buildSolanaDeepLink(solAmount);
+  const solAmount = parseFloat(document.getElementById("solInput").value);
+  if (!solAmount || solAmount <= 0) {
+    status.textContent = "Enter how much SOL you want to send.";
+    return;
+  }
+  if (solAmount < MIN_SOL) {
+    status.textContent = `Minimum buy is ${MIN_SOL} SOL 🚫`;
     return;
   }
 
-  if(!walletPublicKey){
-    const pk=await connectWallet();
-    if(!pk) return;
+  await ensureConnection();
+
+  // If we have no injected wallets at all, or connection couldn't initialize, use deep-link fallback (mobile or desktop).
+  if (!availableWallets.length) {
+    detectWallets();
+  }
+
+  if (!availableWallets.length || !window.solanaWeb3 || !connection) {
+    // Deep-link fallback (works great on mobile with wallets installed)
+    const uri = buildSolanaDeepLink(solAmount);
+    status.textContent = "Opening your Solana wallet via deep-link… approve the transaction there.";
+    window.location.href = uri;
+    return;
+  }
+
+  // We have web3 + injected wallet: do proper programmatic transaction
+  if (!walletPublicKey) {
+    const pk = await connectWallet();
+    if (!pk) return;
   }
 
   try{
-    status.textContent="Creating transaction…";
+    status.textContent = "Creating transaction...";
 
-    const to=new solanaWeb3.PublicKey(PRESALE_WALLET);
-    const lamports=Math.round(solAmount*solanaWeb3.LAMPORTS_PER_SOL);
+    const toPubkey = new solanaWeb3.PublicKey(PRESALE_WALLET);
+    const lamports = Math.round(solAmount * solanaWeb3.LAMPORTS_PER_SOL);
 
-    const {blockhash}=await connection.getLatestBlockhash("finalized");
+    const { blockhash } = await connection.getLatestBlockhash("finalized");
 
-    const tx=new solanaWeb3.Transaction({
-      recentBlockhash:blockhash,
-      feePayer:walletPublicKey
+    const tx = new solanaWeb3.Transaction({
+      recentBlockhash: blockhash,
+      feePayer: walletPublicKey
     });
 
-    tx.add(
-      solanaWeb3.SystemProgram.transfer({
-        fromPubkey:walletPublicKey,
-        toPubkey:to,
-        lamports
-      })
-    );
+    const transferIx = solanaWeb3.SystemProgram.transfer({
+      fromPubkey: walletPublicKey,
+      toPubkey,
+      lamports: lamports,
+    });
 
-    status.textContent="Approve in wallet…";
+    tx.add(transferIx);
 
-    const provider=selectedWallet.provider;
-    let sig;
+    status.textContent = "Please approve in your wallet...";
 
-    if(typeof provider.signAndSendTransaction==="function"){
-      const r=await provider.signAndSendTransaction(tx);
-      sig=r.signature||r;
-    } else if(typeof provider.sendTransaction==="function"){
-      sig=await provider.sendTransaction(tx,connection);
-    } else {
-      window.location.href=buildSolanaDeepLink(solAmount);
+    const provider = selectedWallet?.provider || window.solana;
+    if (!provider) {
+      status.textContent = "No wallet provider available.";
       return;
     }
 
-    status.innerHTML =
-      `Sent! <a href="https://solscan.io/tx/${sig}" target="_blank">View TX</a>`;
+    let signature;
+    if (typeof provider.signAndSendTransaction === "function") {
+      const sendResult = await provider.signAndSendTransaction(tx);
+      signature = sendResult.signature || sendResult;
+    } else if (typeof provider.sendTransaction === "function") {
+      signature = await provider.sendTransaction(tx, connection);
+    } else {
+      // Fallback: deep-link if provider can't send
+      const uri = buildSolanaDeepLink(solAmount);
+      status.textContent = "Wallet can't send programmatic tx; opening deep-link instead…";
+      window.location.href = uri;
+      return;
+    }
+
+    const solscanUrl = `https://solscan.io/tx/${signature}`;
+    status.innerHTML = `Sent! <a href="${solscanUrl}" target="_blank" rel="noopener noreferrer">View transaction on Solscan</a>`;
 
   } catch(e){
-    status.textContent="Transaction failed.";
+    console.error(e);
+    status.textContent = "Transaction failed or was rejected.";
   }
 }
 
 function handleQuickBuy(amount){
-  document.getElementById("solInput").value=amount;
+  const input = document.getElementById("solInput");
+  input.value = amount;
   updateCalc();
   handleBuyClick();
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  document.getElementById("solInput").addEventListener("input",updateCalc);
+/* =========================
+   INIT
+   ========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const solInput = document.getElementById("solInput");
+  if (solInput) {
+    solInput.addEventListener("input", updateCalc);
+  }
+
   updateCountdown();
   updateProgress();
-  setInterval(updateCountdown,1000);
+  setInterval(updateCountdown, 1000);
+
   detectWallets();
-  window.addEventListener("load",detectWallets);
+  // If wallets inject slightly later
+  window.addEventListener("load", detectWallets);
 });
 </script>
 
