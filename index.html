@@ -14,6 +14,11 @@
     --bg-dark: #070712;
     --bg-card: #11111f;
     --border-subtle: #262640;
+    --text-soft: #c7c7ff;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   body {
@@ -21,6 +26,10 @@
     background: radial-gradient(circle at top, #17172a 0, #070712 55%);
     color: #fff;
     font-family: 'Poppins', sans-serif;
+  }
+
+  a {
+    color: inherit;
   }
 
   header {
@@ -192,7 +201,7 @@
 
   #token-progress-fill {
     height: 100%;
-    width: 100%; /* starts full and empties as tokens sell */
+    width: 100%;
     background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
     box-shadow: 0 0 12px rgba(216,150,255,0.8);
     transition: width 0.4s ease-out;
@@ -219,28 +228,75 @@
     vertical-align: middle;
   }
 
-  /* Calculator + Wallet grid */
-  .buy-grid {
+  /* BUY CARD (vertical pump.fun style) */
+  .buy-card {
     max-width: 900px;
-    margin: auto;
-    padding: 0 20px 40px;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 18px;
-  }
-
-  @media (max-width: 900px) {
-    .buy-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .calc-box {
-    background: var(--bg-card);
+    margin: 0 auto 40px;
     padding: 20px;
+    background: radial-gradient(circle at top left, rgba(176,38,255,0.14), #101020);
+    border-radius: 16px;
+    border: 1px solid #2e2e4c;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.6);
+  }
+
+  .buy-card h2 {
+    margin-top: 0;
+  }
+
+  .wallet-address-row {
+    margin-top: 10px;
+    background: rgba(5,5,20,0.9);
     border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+    border: 1px solid #3b3b63;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.15s;
+  }
+
+  .wallet-address-row:hover {
+    border-color: var(--purple-main);
+    box-shadow: 0 0 14px rgba(176,38,255,0.5);
+  }
+
+  .wallet-address-text {
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    word-break: break-all;
+    flex: 1;
+  }
+
+  .wallet-copy-icon {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+  }
+
+  .wallet-copy-icon::before {
+    content: "📋";
+  }
+
+  .wallet-copy-icon.copied::before {
+    content: "✅";
+  }
+
+  .wallet-subtext {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .calc-row {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .calc-input {
@@ -249,71 +305,85 @@
     border-radius: 10px;
     border: none;
     font-size: 1rem;
-    margin-top: 10px;
     background: #16162a;
     color: #fff;
   }
 
   .calc-result {
-    margin-top: 14px;
-    font-size: 1.02rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--purple-neon);
+    min-height: 1.2em;
   }
 
-  .wallet-card {
-    background: radial-gradient(circle at left top, rgba(176,38,255,0.14), #101020);
-    border-radius: 12px;
-    border: 1px solid #2e2e4c;
-    padding: 20px 20px 18px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+  .quick-row {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .wallet-box {
-    background: rgba(5,5,20,0.85);
-    border-radius: 10px;
-    border: 1px solid #3b3b63;
-    padding: 18px;
-    font-size: 0.98rem;
-    word-break: break-all;
-    margin-top: 10px;
+  .quick-buy-btn {
+    background: #18182b;
+    color: #f7f7ff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid #383868;
+    cursor: pointer;
+    transition: 0.15s;
   }
 
-  .button-row {
+  .quick-buy-btn:hover {
+    background: var(--purple-main);
+    border-color: var(--purple-main);
+    box-shadow: 0 0 12px rgba(176,38,255,0.7);
+    transform: translateY(-1px);
+  }
+
+  .cta-row {
+    margin-top: 16px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 16px;
   }
 
-  .primary-btn,
-  .copy-btn,
-  .quick-buy-btn {
+  .primary-btn {
     background: var(--purple-main);
     color: #000;
-    padding: 10px 16px;
+    padding: 12px 20px;
     border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
-    display: inline-block;
-    transition: 0.18s;
-    font-size: 0.9rem;
     border: none;
-    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.18s;
+    flex: 1 1 150px;
+    text-align: center;
   }
 
-  .primary-btn:hover,
-  .copy-btn:hover,
-  .quick-buy-btn:hover {
-    transform: translateY(-1px) scale(1.04);
+  .primary-btn:hover {
     background: var(--purple-neon);
-    box-shadow: 0 0 14px rgba(176,38,255,0.75);
+    box-shadow: 0 0 16px rgba(176,38,255,0.85);
+    transform: translateY(-1px) scale(1.02);
   }
 
   .wallet-note {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     opacity: 0.8;
     margin-top: 10px;
+  }
+
+  #buyStatus {
+    font-size: 0.85rem;
+    margin-top: 8px;
+    min-height: 1.2em;
+  }
+
+  #buyStatus a {
+    color: var(--purple-neon);
+    text-decoration: underline;
   }
 
   /* General buttons */
@@ -466,7 +536,7 @@
 
   <div class="callout">
     <strong>Presale is simple:</strong><br>
-    • Send SOL to the presale wallet during the 36h window (via quick-buy buttons or manual send).<br>
+    • Send SOL to the presale wallet during the 36h window (via quick-buy buttons or custom amount).<br>
     • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
     • Everything is matched to on-chain data. No “trust-me-bro” balances.
   </div>
@@ -495,51 +565,50 @@
   </p>
 </div>
 
-<!-- BUY GRID: CALCULATOR + WALLET -->
-<div class="buy-grid">
-  <!-- Left: Calculator -->
-  <div class="calc-box">
-    <h2>🔢 SOL → BLOJOB Calculator</h2>
-    <p style="font-size:0.9rem; opacity:0.85;">
-      <strong>Presale price:</strong> $0.000001 = 1 BLOJOB.<br>
-      Enter how much SOL you want to ape. Estimated USD value and BLOJOB based on live SOL price.
-      This is for guidance only — final numbers follow the presale price and on-chain totals.
-    </p>
-    <input id="solInput" class="calc-input" type="number" step="0.0001" placeholder="Enter SOL amount">
-    <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
-  </div>
+<!-- BUY CARD (pump.fun-style vertical) -->
+<div class="buy-card">
+  <h2>💋 BLOJOB Presale</h2>
+  <p style="font-size:0.9rem; opacity:0.85;">
+    Set your amount, see your estimate, connect, and send. Simple degen flow. 🔥
+  </p>
 
-  <!-- Right: Presale Wallet / Quick-buy -->
-  <div class="wallet-card">
-    <h2>💋 Presale Wallet — Come Get Filled</h2>
-    <p style="font-size:0.9rem; opacity:0.85;">
-      Use quick-buy buttons or set your own custom amount, then connect and confirm in your wallet.
-      BLOJOB will be airdropped to this same wallet after presale ends.
-    </p>
-
-    <div class="wallet-box" id="walletBox">
+  <!-- Address + copy integrated -->
+  <div class="wallet-address-row" onclick="copyWallet()">
+    <div class="wallet-address-text" id="walletBox">
       7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
     </div>
-
-    <div class="button-row" style="margin-top:14px;">
-      <button class="primary-btn" onclick="handleConnectClick()">Connect Wallet</button>
-      <button class="primary-btn" onclick="handleBuyClick()">Custom Amount Buy</button>
-
-      <button class="quick-buy-btn" onclick="handleQuickBuy(0.1)">Buy 0.1 SOL</button>
-      <button class="quick-buy-btn" onclick="handleQuickBuy(0.25)">Buy 0.25 SOL</button>
-      <button class="quick-buy-btn" onclick="handleQuickBuy(0.5)">Buy 0.5 SOL</button>
-      <button class="quick-buy-btn" onclick="handleQuickBuy(1)">Buy 1 SOL</button>
-
-      <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
-    </div>
-
-    <p id="buyStatus" class="wallet-note"></p>
-
-    <p class="wallet-note">
-      📱 <strong>Mobile tip:</strong> For best results, open this page inside your wallet’s in-app browser
-      (Phantom, Solflare, Backpack, etc.), connect, then tap your buy amount.
-    </p>
+    <div class="wallet-copy-icon" id="copyIcon"></div>
   </div>
+  <div class="wallet-subtext">
+    Tap or click to copy the presale wallet. All contributions must come from a Solana wallet you control.
+  </div>
+
+  <!-- Calculator -->
+  <div class="calc-row">
+    <input id="solInput" class="calc-input" type="number" step="0.0001" placeholder="Enter SOL amount you want to send">
+    <div id="calcResult" class="calc-result">Enter SOL to calculate estimated BLOJOB.</div>
+  </div>
+
+  <!-- Quick-buy buttons -->
+  <div class="quick-row">
+    <button class="quick-buy-btn" onclick="handleQuickBuy(0.1)">0.1 SOL</button>
+    <button class="quick-buy-btn" onclick="handleQuickBuy(0.25)">0.25 SOL</button>
+    <button class="quick-buy-btn" onclick="handleQuickBuy(0.5)">0.5 SOL</button>
+    <button class="quick-buy-btn" onclick="handleQuickBuy(1)">1 SOL</button>
+  </div>
+
+  <!-- Connect + Buy -->
+  <div class="cta-row">
+    <button class="primary-btn" onclick="handleConnectClick()">Connect Wallet</button>
+    <button class="primary-btn" onclick="handleBuyClick()">Buy Now</button>
+  </div>
+
+  <p id="buyStatus" class="wallet-note"></p>
+
+  <p class="wallet-note">
+    📱 <strong>Mobile tip:</strong> For best results, open this page inside your wallet’s in-app browser
+    (Phantom, Solflare, Backpack, etc.). If no wallet is detected, we’ll try a Solana deep-link instead.
+  </p>
 </div>
 
 <!-- Tokenomics -->
@@ -597,7 +666,7 @@ const MIN_SOL = 0.1;
 const presaleStart = new Date("2025-11-29T20:00:00-05:00");
 const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
 
-function pad(n){return n.toString().padStart(2,'0')}
+function pad(n){return n.toString().padStart(2,'0');}
 
 function updateCountdown(){
   const now = new Date();
@@ -628,13 +697,30 @@ function updateCountdown(){
 }
 
 /* =========================
-   COPY WALLET
+   COPY WALLET (integrated)
    ========================= */
 function copyWallet(){
   const text = document.getElementById("walletBox").textContent.trim();
-  navigator.clipboard.writeText(text).then(() => {
-    alert("Presale wallet address copied. 🫦");
-  });
+  const icon = document.getElementById("copyIcon");
+
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    // fallback
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(temp);
+  } else {
+    navigator.clipboard.writeText(text).catch(() => {});
+  }
+
+  if (icon) {
+    icon.classList.add("copied");
+    setTimeout(() => icon.classList.remove("copied"), 1500);
+  }
+
+  alert("Presale wallet address copied. 🫦");
 }
 
 /* =========================
@@ -645,7 +731,7 @@ async function updateCalc(){
   const resultEl = document.getElementById("calcResult");
 
   if(!sol){
-    resultEl.textContent = "Enter SOL to calculate.";
+    resultEl.textContent = "Enter SOL to calculate estimated BLOJOB.";
     return;
   }
 
@@ -679,7 +765,7 @@ function updateProgress(){
   document.getElementById("progress-fill").style.width = percent + "%";
 
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "🤤​ Soft cap reached" : "😪 Soft cap not reached";
+    currentRaisedUSD >= softCapUSD ? "🤤 Soft cap reached" : "😪 Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
@@ -719,6 +805,10 @@ let selectedWallet = null;
 
 function getStatusEl(){
   return document.getElementById("buyStatus");
+}
+
+function isMobile(){
+  return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
 }
 
 function detectWallets(){
@@ -774,7 +864,7 @@ function detectWallets(){
   if (!status) return;
 
   if (availableWallets.length === 0) {
-    status.textContent = "No Solana wallet detected. Open this in Phantom, Solflare, Backpack, etc.";
+    status.textContent = "No injected Solana wallet detected. On mobile, open this page inside your wallet's in-app browser or we’ll use a Solana deep-link on Buy.";
   } else if (availableWallets.length === 1) {
     selectedWallet = availableWallets[0];
     status.textContent = `Detected: ${selectedWallet.name}. Click Connect or Buy to continue.`;
@@ -824,6 +914,9 @@ async function ensureConnection(){
   }
 }
 
+/* =========================
+   CONNECT WALLET
+   ========================= */
 async function connectWallet(){
   const status = getStatusEl();
 
@@ -838,7 +931,7 @@ async function connectWallet(){
     } else if (availableWallets.length === 1) {
       selectedWallet = availableWallets[0];
     } else {
-      if (status) status.textContent = "No Solana wallet detected.";
+      if (status) status.textContent = "No Solana wallet detected. On mobile, we’ll use a Solana deep-link when you press Buy.";
       return null;
     }
   }
@@ -878,33 +971,45 @@ async function handleConnectClick(){
   await connectWallet();
 }
 
+function buildSolanaDeepLink(amount){
+  const label = encodeURIComponent("BLOJOB Presale");
+  const msg = encodeURIComponent(`Presale contribution ${amount} SOL`);
+  return `solana:${PRESALE_WALLET}?amount=${amount}&label=${label}&message=${msg}`;
+}
+
 async function handleBuyClick(){
   const status = getStatusEl();
   if (!status) return;
 
-  await ensureConnection();
-  if (!connection) {
-    status.textContent = "Unable to initialize Solana connection. Try refreshing the page.";
+  const solAmount = parseFloat(document.getElementById("solInput").value);
+  if (!solAmount || solAmount <= 0) {
+    status.textContent = "Enter how much SOL you want to send.";
+    return;
+  }
+  if (solAmount < MIN_SOL) {
+    status.textContent = `Minimum buy is ${MIN_SOL} SOL 🚫`;
     return;
   }
 
+  await ensureConnection();
+
+  // If we have no injected wallets at all, or connection couldn't initialize, use deep-link fallback (mobile or desktop).
   if (!availableWallets.length) {
     detectWallets();
   }
 
+  if (!availableWallets.length || !window.solanaWeb3 || !connection) {
+    // Deep-link fallback (works great on mobile with wallets installed)
+    const uri = buildSolanaDeepLink(solAmount);
+    status.textContent = "Opening your Solana wallet via deep-link… approve the transaction there.";
+    window.location.href = uri;
+    return;
+  }
+
+  // We have web3 + injected wallet: do proper programmatic transaction
   if (!walletPublicKey) {
     const pk = await connectWallet();
     if (!pk) return;
-  }
-
-  const solAmount = parseFloat(document.getElementById("solInput").value);
-  if(!solAmount || solAmount <= 0){
-    status.textContent = "Enter how much SOL you want to send.";
-    return;
-  }
-  if(solAmount < MIN_SOL){
-    status.textContent = `Minimum buy is ${MIN_SOL} SOL 🚫`;
-    return;
   }
 
   try{
@@ -943,7 +1048,10 @@ async function handleBuyClick(){
     } else if (typeof provider.sendTransaction === "function") {
       signature = await provider.sendTransaction(tx, connection);
     } else {
-      status.textContent = "Selected wallet doesn't support sending transactions.";
+      // Fallback: deep-link if provider can't send
+      const uri = buildSolanaDeepLink(solAmount);
+      status.textContent = "Wallet can't send programmatic tx; opening deep-link instead…";
+      window.location.href = uri;
       return;
     }
 
