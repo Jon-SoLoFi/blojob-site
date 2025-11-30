@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>BLOJOB — Come Get This Pump</title>
+<title>$BLOJOB — Come Get This Pump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -192,7 +192,7 @@
 
   #token-progress-fill {
     height: 100%;
-    width: 100%;
+    width: 100%; /* starts full and empties as tokens sell */
     background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
     box-shadow: 0 0 12px rgba(216,150,255,0.8);
     transition: width 0.4s ease-out;
@@ -282,26 +282,29 @@
   .button-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     margin-top: 16px;
   }
 
+  .primary-btn,
   .copy-btn,
-  .primary-btn {
+  .quick-buy-btn {
     background: var(--purple-main);
     color: #000;
-    padding: 12px 18px;
+    padding: 10px 16px;
     border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
     display: inline-block;
     transition: 0.18s;
-    font-size: 0.94rem;
+    font-size: 0.9rem;
     border: none;
+    text-decoration: none;
   }
 
+  .primary-btn:hover,
   .copy-btn:hover,
-  .primary-btn:hover {
+  .quick-buy-btn:hover {
     transform: translateY(-1px) scale(1.04);
     background: var(--purple-neon);
     box-shadow: 0 0 14px rgba(176,38,255,0.75);
@@ -339,6 +342,7 @@
     font-size: 0.9rem;
     opacity: 0.65;
   }
+
 </style>
 </head>
 
@@ -348,14 +352,14 @@
   <div class="logo-wrap">
     <img src="blojob.png" alt="$BLOJOB logo">
     <h1>BLOJOB</h1>
-    <h2>Solana’s Most Seductive Degenerate Token ​❤️‍🔥​</h2>
+    <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥</h2>
   </div>
 </header>
 
 <!-- Countdown + Progress -->
 <div class="countdown-progress">
   <div class="card">
-    <div class="card-title">​🕔​ Presale Timing</div>
+    <div class="card-title">🕙​ Presale Timing</div>
     <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
     <p class="countdown-sub">
@@ -398,7 +402,7 @@
 
   <div class="callout">
     <strong>Presale is simple:</strong><br>
-    • Send SOL to the presale wallet during the 36h window using the Buy button.<br>
+    • Send SOL to the presale wallet during the 36h window (via quick-buy buttons or manual send).<br>
     • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
     • Everything is matched to on-chain data. No “trust-me-bro” balances.
   </div>
@@ -409,19 +413,16 @@
   <h2>🧾 How To Join The Presale</h2>
 
   <div class="callout">
-    <strong>​⚠️​ Use a non-custodial Solana wallet</strong><br>
-    Phantom is preferred. Solflare, Backpack, Rabby (Solana), OKX, etc. also work
-    when you open this page inside their in-app browser.
+    <strong>⚠️ Use a non-custodial Solana wallet</strong><br>
+    Phantom, Solflare, Backpack, Rabby (Solana), OKX, etc.
     <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
   </div>
 
   <ul class="howto-list">
     <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
-    <li><strong>Step 2:</strong> Enter the SOL amount in the calculator below.</li>
-    <li><strong>Step 3:</strong> Hit <strong>Connect Wallet &amp; Buy</strong> and approve the transaction in Phantom.</li>
-    <li><strong>Step 4:</strong> After presale closes and totals are locked, BLOJOB
-      is distributed to the same wallet that sent the SOL.
-    </li>
+    <li><strong>Step 2:</strong> Tap one of the quick-buy buttons or copy the address and send any amount of SOL you want.</li>
+    <li><strong>Step 3:</strong> Keep your transaction link (Solscan) if you want to flex in Telegram or for your own records.</li>
+    <li><strong>Step 4:</strong> After presale closes and totals are locked, $BLOJOB is distributed to the same wallet that sent the SOL.</li>
   </ul>
 
   <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
@@ -435,34 +436,50 @@
   <div class="calc-box">
     <h2>🔢 SOL → BLOJOB Calculator</h2>
     <p style="font-size:0.9rem; opacity:0.85;">
-      Presale price: <strong>$0.000001 = 1 BLOJOB</strong>.
-      Enter how much SOL you’re thinking of aping. We’ll estimate USD value and BLOJOB based on live SOL price.
+      <strong>Presale price:</strong> $0.000001 = 1 BLOJOB.<br>
+      Enter how much SOL you want to ape. Estimated USD value and BLOJOB based on live SOL price.
       This is for guidance only — final numbers follow the presale price and on-chain totals.
     </p>
     <input id="solInput" class="calc-input" type="number" step="0.0001" placeholder="Enter SOL amount">
     <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
   </div>
 
-  <!-- Right: Presale Wallet / Connect -->
+  <!-- Right: Presale Wallet / Quick-buy -->
   <div class="wallet-card">
     <h2>💋 Presale Wallet — Come Get Filled</h2>
     <p style="font-size:0.9rem; opacity:0.85;">
-      After you’ve decided how hard you want to ape, connect your wallet and confirm the transaction.
-      $BLOJOB will be airdropped to the same wallet after presale ends.
+      Use a quick-buy button for a pre-filled transfer, or copy the address and send manually
+      from any Solana wallet. BLOJOB will be airdropped to this same wallet after presale ends.
     </p>
 
     <div class="wallet-box" id="walletBox">
       7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
     </div>
 
-    <div class="button-row">
-      <button class="primary-btn" onclick="handleBuyClick()">Connect Wallet &amp; Buy</button>
+    <div class="button-row" style="margin-top:14px;">
+      <!-- solana: URI deep links — change amounts if you want different presets -->
+      <a class="quick-buy-btn"
+         href="solana:7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA?amount=0.1&label=BLOJOB%20Presale&message=Presale%20contribution%200.1%20SOL">
+        Buy 0.1 SOL
+      </a>
+      <a class="quick-buy-btn"
+         href="solana:7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA?amount=0.25&label=BLOJOB%20Presale&message=Presale%20contribution%200.25%20SOL">
+        Buy 0.25 SOL
+      </a>
+      <a class="quick-buy-btn"
+         href="solana:7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA?amount=0.5&label=BLOJOB%20Presale&message=Presale%20contribution%200.5%20SOL">
+        Buy 0.5 SOL
+      </a>
+      <a class="quick-buy-btn"
+         href="solana:7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA?amount=1&label=BLOJOB%20Presale&message=Presale%20contribution%201%20SOL">
+        Buy 1 SOL
+      </a>
       <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
     </div>
 
     <p class="wallet-note">
-      On mobile, the Buy button will try Phantom first. If it can’t connect,
-      open Phantom → in-app browser → paste this URL for a smooth experience.
+      📱 <strong>Mobile tip:</strong> If nothing happens when tapping quick-buy, open this page
+      inside your wallet’s in-app browser and try again. Or just paste the address and send manually.
     </p>
   </div>
 </div>
@@ -473,9 +490,9 @@
 
   <p>
     <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term reserves, treasury operations, stabilization, staking pools, and CumUnity incentives, micro-liquidity support.<br>
-    <strong>💦 PreLoad (Presale):</strong> 10% — Distributed proportionally at TGE based on contribution size.<br>
-    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth.<br>
-    <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% — Distributed proportionally at TGE based on contribution size, unsold tokens burned.<br>
+    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth. marketing pushes, raids, incentives, CumUnity foreplay.<br>
+    <strong>🫟 StickyLiquidity (Liquidity Pool):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
   </p>
 </div>
 
@@ -496,16 +513,7 @@
   Pump... Harder. Faster. Stronger.
 </footer>
 
-<!-- Solana web3.js -->
-<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-
 <script>
-/* =========================
-   CONFIG
-   ========================= */
-const PRESALE_WALLET = "7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA";
-const PRICE_PER_TOKEN_USD = 0.000001;
-
 /* =========================
    PRESALE TIMING
    ========================= */
@@ -572,7 +580,8 @@ async function updateCalc(){
     const solPrice = data.solana.usd;
 
     const usdValue = sol * solPrice;
-    const blojobTokens = usdValue / PRICE_PER_TOKEN_USD;
+    const pricePerToken = 0.000001; // $0.000001 per token
+    const blojobTokens = usdValue / pricePerToken;
 
     resultEl.textContent =
       `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
@@ -584,17 +593,21 @@ async function updateCalc(){
 /* =========================
    PROGRESS + TOKEN TRACKER
    ========================= */
+/* Admin helper from console:
+   presaleAdminSetRaised(420);
+*/
 let currentRaisedUSD = 0;
 const hardCapUSD = 9600;
 const softCapUSD = 6900;
 const PRESALE_TOKENS_TOTAL = 6900000000;
+const PRICE_PER_TOKEN = 0.000001;
 
 function updateProgress(){
   const percent = Math.min(currentRaisedUSD / hardCapUSD, 1) * 100;
   document.getElementById("progress-fill").style.width = percent + "%";
 
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "​🤤​ Soft cap reached" : "😪 Soft cap not reached";
+    currentRaisedUSD >= softCapUSD ? "🤤​ Soft cap reached" : "😪 Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
@@ -603,7 +616,7 @@ function updateProgress(){
 }
 
 function updateTokenTracker(){
-  const tokensSoldRaw = currentRaisedUSD / PRICE_PER_TOKEN_USD;
+  const tokensSoldRaw = currentRaisedUSD / PRICE_PER_TOKEN;
   const tokensSold = Math.min(tokensSoldRaw, PRESALE_TOKENS_TOTAL);
   const tokensRemaining = Math.max(PRESALE_TOKENS_TOTAL - tokensSold, 0);
 
@@ -614,75 +627,16 @@ function updateTokenTracker(){
   soldEl.textContent = `Sold: ${Math.floor(tokensSold).toLocaleString()} BLOJOB`;
   remainingEl.textContent = `Remaining: ${Math.floor(tokensRemaining).toLocaleString()} BLOJOB`;
 
-  const percentTokens = (tokensRemaining / PRESALE_TOKENS_TOTAL) * 100;
-  bar.style.width = percentTokens + "%";
+  const percentRemaining = (tokensRemaining / PRESALE_TOKENS_TOTAL) * 100;
+  bar.style.width = percentRemaining + "%";
 }
 
-/* Helper for you from console: presaleAdminSetRaised(420); */
+/* Helper for you from console */
 window.presaleAdminSetRaised = function(usd){
   currentRaisedUSD = Math.max(0, Number(usd) || 0);
   updateProgress();
   console.log("Updated presale raised to: $" + currentRaisedUSD);
 };
-
-/* =========================
-   CONNECT + BUY (PHANTOM-FIRST)
-   ========================= */
-async function handleBuyClick(){
-  const solField = document.getElementById("solInput");
-  let solAmount = parseFloat(solField.value);
-
-  if(!solAmount || solAmount <= 0){
-    const entered = prompt("How much SOL do you want to send?");
-    solAmount = parseFloat(entered);
-  }
-
-  if(!solAmount || solAmount <= 0){
-    alert("Invalid SOL amount.");
-    return;
-  }
-
-  // If Phantom provider exists (desktop or in-app browser)
-  if (window.solana && window.solana.isPhantom && window.solana.isConnected !== false) {
-    try {
-      if (!window.solana.publicKey) {
-        await window.solana.connect();
-      }
-
-      const provider = window.solana;
-      const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
-      const fromPubkey = provider.publicKey;
-      const toPubkey = new solanaWeb3.PublicKey(PRESALE_WALLET);
-      const lamports = solAmount * solanaWeb3.LAMPORTS_PER_SOL;
-
-      const tx = new solanaWeb3.Transaction().add(
-        solanaWeb3.SystemProgram.transfer({
-          fromPubkey,
-          toPubkey,
-          lamports
-        })
-      );
-
-      tx.feePayer = fromPubkey;
-      const latest = await connection.getLatestBlockhash();
-      tx.recentBlockhash = latest.blockhash;
-
-      const result = await provider.signAndSendTransaction(tx);
-      alert("Transaction sent! Signature:\n" + result.signature);
-    } catch (e) {
-      console.error(e);
-      alert("Transaction failed or was rejected. Try again.");
-    }
-    return;
-  }
-
-  // No Phantom provider → deep-link into Phantom mobile browser
-  const currentUrl = encodeURIComponent(window.location.href);
-  const phantomUrl = `https://phantom.app/ul/browse/${currentUrl}`;
-
-  alert("Phantom not detected in this browser.\n\nIf you have Phantom installed, you'll be redirected to open this page inside Phantom's in-app browser for a smoother buy flow.");
-  window.location.href = phantomUrl;
-}
 
 /* =========================
    INIT
