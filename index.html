@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <title>$BLOJOB — Come Get This Pump</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ========================================================= -->
+<!-- 🔥 FULL FAVICON SUPPORT (Option C — using blojob.png only) -->
+<!-- ========================================================= -->
+<link rel="icon" href="blojob.png" sizes="16x16" type="image/png">
+<link rel="icon" href="blojob.png" sizes="32x32" type="image/png">
+<link rel="icon" href="blojob.png" sizes="48x48" type="image/png">
+<link rel="icon" href="blojob.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="blojob.png">
+<link rel="manifest" href="site.webmanifest">
+<!-- ========================================================= -->
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -650,7 +662,7 @@
   </div>
 </div>
 
-<!-- Solana web3.js from CDN -->
+<!-- Solana web3.js -->
 <script src="https://unpkg.com/@solana/web3.js@1.95.2/lib/index.iife.js"></script>
 
 <script>
@@ -697,14 +709,13 @@ function updateCountdown(){
 }
 
 /* =========================
-   COPY WALLET (integrated)
+   COPY WALLET
    ========================= */
 function copyWallet(){
   const text = document.getElementById("walletBox").textContent.trim();
   const icon = document.getElementById("copyIcon");
 
   if (!navigator.clipboard || !navigator.clipboard.writeText) {
-    // fallback
     const temp = document.createElement("textarea");
     temp.value = text;
     document.body.appendChild(temp);
@@ -741,7 +752,7 @@ async function updateCalc(){
     const solPrice = data.solana.usd;
 
     const usdValue = sol * solPrice;
-    const pricePerToken = 0.000001; // $0.000001 per token
+    const pricePerToken = 0.000001;
     const blojobTokens = usdValue / pricePerToken;
 
     resultEl.textContent =
@@ -807,14 +818,9 @@ function getStatusEl(){
   return document.getElementById("buyStatus");
 }
 
-function isMobile(){
-  return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
-}
-
 function detectWallets(){
   availableWallets = [];
 
-  // Generic injected window.solana
   if (window.solana && typeof window.solana === "object") {
     const label =
       window.solana.isPhantom ? "Phantom" :
@@ -827,7 +833,6 @@ function detectWallets(){
     });
   }
 
-  // Phantom extension
   if (window.phantom && window.phantom.solana) {
     if (!availableWallets.some(w => w.provider === window.phantom.solana)) {
       availableWallets.push({
@@ -838,7 +843,6 @@ function detectWallets(){
     }
   }
 
-  // Solflare
   if (window.solflare && window.solflare.isSolflare) {
     if (!availableWallets.some(w => w.provider === window.solflare)) {
       availableWallets.push({
@@ -849,7 +853,6 @@ function detectWallets(){
     }
   }
 
-  // Rabby (Solana)
   if (window.rabby && window.rabby.solana) {
     if (!availableWallets.some(w => w.provider === window.rabby.solana)) {
       availableWallets.push({
@@ -864,23 +867,23 @@ function detectWallets(){
   if (!status) return;
 
   if (availableWallets.length === 0) {
-    status.textContent = "No injected Solana wallet detected. On mobile, open this page inside your wallet's in-app browser or we’ll use a Solana deep-link on Buy.";
+    status.textContent =
+      "No injected Solana wallet detected. On mobile, open this page inside your wallet’s in-app browser.";
   } else if (availableWallets.length === 1) {
     selectedWallet = availableWallets[0];
-    status.textContent = `Detected: ${selectedWallet.name}. Click Connect or Buy to continue.`;
+    status.textContent =
+      `Detected: ${selectedWallet.name}. Click Connect or Buy to continue.`;
   } else {
-    status.textContent = "Multiple wallets detected. Click Connect Wallet to choose.";
+    status.textContent =
+      "Multiple wallets detected. Click Connect Wallet to choose.";
   }
 }
 
 function openWalletModal(){
-  const status = getStatusEl();
-
+  if (!availableWallets.length) detectWallets();
   if (!availableWallets.length) {
-    detectWallets();
-  }
-  if (!availableWallets.length) {
-    if (status) status.textContent = "No Solana wallet detected. Install/open Phantom, Solflare, Backpack, etc.";
+    const status = getStatusEl();
+    if (status) status.textContent = "No Solana wallet detected.";
     return;
   }
 
@@ -894,9 +897,8 @@ function openWalletModal(){
     btn.onclick = () => {
       selectedWallet = w;
       closeWalletModal();
-      if (status) {
-        status.textContent = `Selected: ${w.name}. Click Buy to continue.`;
-      }
+      const status = getStatusEl();
+      if (status) status.textContent = `Selected: ${w.name}. Click Buy to continue.`;
     };
     listEl.appendChild(btn);
   });
@@ -910,7 +912,10 @@ function closeWalletModal(){
 
 async function ensureConnection(){
   if(!connection && window.solanaWeb3){
-    connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
+    connection = new solanaWeb3.Connection(
+      "https://api.mainnet-beta.solana.com",
+      "confirmed"
+    );
   }
 }
 
@@ -920,9 +925,7 @@ async function ensureConnection(){
 async function connectWallet(){
   const status = getStatusEl();
 
-  if (!availableWallets.length) {
-    detectWallets();
-  }
+  if (!availableWallets.length) detectWallets();
 
   if (!selectedWallet) {
     if (availableWallets.length > 1) {
@@ -931,14 +934,15 @@ async function connectWallet(){
     } else if (availableWallets.length === 1) {
       selectedWallet = availableWallets[0];
     } else {
-      if (status) status.textContent = "No Solana wallet detected. On mobile, we’ll use a Solana deep-link when you press Buy.";
+      status.textContent =
+        "No Solana wallet detected. On mobile, we’ll use deep-link fallback.";
       return null;
     }
   }
 
   const provider = selectedWallet.provider;
   if (!provider || typeof provider.connect !== "function") {
-    if (status) status.textContent = "Selected wallet doesn't support connect(). Try another.";
+    status.textContent = "Selected wallet can't connect(). Try another.";
     selectedWallet = null;
     return null;
   }
@@ -947,30 +951,24 @@ async function connectWallet(){
     const resp = await provider.connect();
     walletPublicKey = resp.publicKey || provider.publicKey;
     if (!walletPublicKey) {
-      if (status) status.textContent = "Wallet connected but no public key found.";
+      status.textContent = "Connected but no public key found.";
       return null;
     }
-    const keyStr = walletPublicKey.toString();
-    if (status) {
-      status.textContent = `Connected: ${keyStr.slice(0,4)}...${keyStr.slice(-4)} via ${selectedWallet.name}`;
-    }
+
+    const k = walletPublicKey.toString();
+    status.textContent =
+      `Connected: ${k.slice(0,4)}...${k.slice(-4)} via ${selectedWallet.name}`;
+
     return walletPublicKey;
-  } catch(e){
-    if (status) status.textContent = "Wallet connection cancelled.";
+  } catch {
+    status.textContent = "Wallet connection cancelled.";
     return null;
   }
 }
 
 /* =========================
-   CONNECT + BUY HANDLERS
+   BUY LOGIC
    ========================= */
-async function handleConnectClick(){
-  const status = getStatusEl();
-  if (status) status.textContent = "Connecting wallet...";
-  await ensureConnection();
-  await connectWallet();
-}
-
 function buildSolanaDeepLink(amount){
   const label = encodeURIComponent("BLOJOB Presale");
   const msg = encodeURIComponent(`Presale contribution ${amount} SOL`);
@@ -993,32 +991,27 @@ async function handleBuyClick(){
 
   await ensureConnection();
 
-  // If we have no injected wallets at all, or connection couldn't initialize, use deep-link fallback (mobile or desktop).
-  if (!availableWallets.length) {
-    detectWallets();
-  }
-
+  if (!availableWallets.length) detectWallets();
   if (!availableWallets.length || !window.solanaWeb3 || !connection) {
-    // Deep-link fallback (works great on mobile with wallets installed)
     const uri = buildSolanaDeepLink(solAmount);
-    status.textContent = "Opening your Solana wallet via deep-link… approve the transaction there.";
+    status.textContent = "Opening wallet via deep-link… approve there.";
     window.location.href = uri;
     return;
   }
 
-  // We have web3 + injected wallet: do proper programmatic transaction
   if (!walletPublicKey) {
     const pk = await connectWallet();
     if (!pk) return;
   }
 
-  try{
+  try {
     status.textContent = "Creating transaction...";
 
     const toPubkey = new solanaWeb3.PublicKey(PRESALE_WALLET);
     const lamports = Math.round(solAmount * solanaWeb3.LAMPORTS_PER_SOL);
 
-    const { blockhash } = await connection.getLatestBlockhash("finalized");
+    const { blockhash } =
+      await connection.getLatestBlockhash("finalized");
 
     const tx = new solanaWeb3.Transaction({
       recentBlockhash: blockhash,
@@ -1028,7 +1021,7 @@ async function handleBuyClick(){
     const transferIx = solanaWeb3.SystemProgram.transfer({
       fromPubkey: walletPublicKey,
       toPubkey,
-      lamports: lamports,
+      lamports
     });
 
     tx.add(transferIx);
@@ -1048,15 +1041,16 @@ async function handleBuyClick(){
     } else if (typeof provider.sendTransaction === "function") {
       signature = await provider.sendTransaction(tx, connection);
     } else {
-      // Fallback: deep-link if provider can't send
       const uri = buildSolanaDeepLink(solAmount);
-      status.textContent = "Wallet can't send programmatic tx; opening deep-link instead…";
+      status.textContent =
+        "Wallet can't send programmatically; using deep-link instead…";
       window.location.href = uri;
       return;
     }
 
     const solscanUrl = `https://solscan.io/tx/${signature}`;
-    status.innerHTML = `Sent! <a href="${solscanUrl}" target="_blank" rel="noopener noreferrer">View transaction on Solscan</a>`;
+    status.innerHTML =
+      `Sent! <a href="${solscanUrl}" target="_blank">View on Solscan</a>`;
 
   } catch(e){
     console.error(e);
@@ -1073,22 +1067,4 @@ function handleQuickBuy(amount){
 
 /* =========================
    INIT
-   ========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  const solInput = document.getElementById("solInput");
-  if (solInput) {
-    solInput.addEventListener("input", updateCalc);
-  }
-
-  updateCountdown();
-  updateProgress();
-  setInterval(updateCountdown, 1000);
-
-  detectWallets();
-  // If wallets inject slightly later
-  window.addEventListener("load", detectWallets);
-});
-</script>
-
-</body>
-</html>
+   =====================
