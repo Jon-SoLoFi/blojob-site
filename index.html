@@ -288,6 +288,72 @@
     margin-left: 6px;
     vertical-align: middle;
   }
+
+  /* Wallet chooser modal */
+  .wallet-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .wallet-modal {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-subtle);
+    padding: 20px 20px 18px;
+    max-width: 340px;
+    width: 90%;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+  }
+
+  .wallet-modal h3 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+  }
+
+  .wallet-modal p {
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  .wallet-option {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #3a3a60;
+    background: #16162a;
+    color: #fff;
+    font-size: 0.92rem;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .wallet-option:hover {
+    background: #21213a;
+    border-color: var(--purple-main);
+    box-shadow: 0 0 10px rgba(176,38,255,0.4);
+  }
+
+  .modal-close {
+    margin-top: 6px;
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 6px 0 0;
+  }
+
+  .modal-close:hover {
+    color: #fff;
+  }
 </style>
 </head>
 
@@ -319,7 +385,7 @@
     <p class="progress-title">Soft cap: $6,900 • Hard cap: $9,600</p>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <p id="progress-amounts" class="progress-amounts">
-      Raised: $0 / $6,900 (soft cap) • 😪​ Soft cap not reached
+      Raised: $0 / $6,900 (soft cap) • 😪 Soft cap not reached
     </p>
   </div>
 </div>
@@ -390,12 +456,12 @@
 
   <div class="callout">
     <strong>1️⃣ Use a non-custodial Solana wallet</strong><br>
-    Phantom, Solflare, Backpack, XDEFI, etc.
+    Phantom, Solflare, Backpack, Rabby (Solana mode), etc.
     <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
   </div>
 
   <ul class="howto-list">
-    <li><strong>Step 1:</strong> Connect your wallet using the <strong>Connect Wallet & Buy</strong> button.</li>
+    <li><strong>Step 1:</strong> Click <strong>Connect Wallet & Buy</strong> and pick which wallet you want to use.</li>
     <li><strong>Step 2:</strong> Enter how much SOL you want to send in the calculator box.</li>
     <li><strong>Step 3:</strong> Click <strong>Connect Wallet & Buy</strong> again to confirm the on-chain transaction.</li>
     <li><strong>Step 4:</strong> Your SOL goes directly to the presale wallet. On-chain, verifiable, no middleman.</li>
@@ -437,6 +503,16 @@
   $BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br>
   Pump... Harder. Faster. Stronger.
 </footer>
+
+<!-- Wallet chooser modal -->
+<div id="walletModalBackdrop" class="wallet-modal-backdrop">
+  <div class="wallet-modal">
+    <h3>Select a wallet</h3>
+    <p>Pick which Solana wallet you want to use for this presale.</p>
+    <div id="walletOptions"></div>
+    <button class="modal-close" onclick="closeWalletModal()">Cancel</button>
+  </div>
+</div>
 
 <!-- Solana web3.js from CDN -->
 <script src="https://unpkg.com/@solana/web3.js@1.95.2/lib/index.iife.js"></script>
@@ -537,39 +613,117 @@ function updateProgress(){
   document.getElementById("progress-fill").style.width = percent + "%";
 
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "​​🤤​ Soft cap reached" : "​😪​ Soft cap not reached";
+    currentRaisedUSD >= softCapUSD ? "🤤 Soft cap reached" : "😪 Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
 }
 
-/* ===== Admin helpers for console use ===== */
-function setPresaleRaisedUSD(amount){
-  const n = Number(amount);
-  if (Number.isNaN(n) || n < 0) return;
-  currentRaisedUSD = n;
-  updateProgress();
-}
-
-function bumpPresaleRaisedUSD(delta){
-  const n = Number(delta);
-  if (Number.isNaN(n)) return;
-  currentRaisedUSD = Math.max(0, currentRaisedUSD + n);
-  updateProgress();
-}
-
-/* expose helpers globally */
-window.setPresaleRaisedUSD = setPresaleRaisedUSD;
-window.bumpPresaleRaisedUSD = bumpPresaleRaisedUSD;
-
 /* =========================
-   WALLET CONNECT + BUY FLOW
+   WALLET DETECTION & PICKER
    ========================= */
 let connection;
 let walletPublicKey = null;
+let availableWallets = [];
+let selectedWallet = null;
 
 function getStatusEl(){
   return document.getElementById("buyStatus");
+}
+
+function detectWallets(){
+  availableWallets = [];
+
+  // Phantom (window.phantom.solana)
+  if (window.phantom && window.phantom.solana) {
+    availableWallets.push({
+      id: "phantom",
+      name: "Phantom",
+      provider: window.phantom.solana
+    });
+  }
+
+  // Solflare (window.solflare)
+  if (window.solflare && window.solflare.isSolflare) {
+    availableWallets.push({
+      id: "solflare",
+      name: "Solflare",
+      provider: window.solflare
+    });
+  }
+
+  // Rabby (guess)
+  if (window.rabby && window.rabby.solana) {
+    availableWallets.push({
+      id: "rabby",
+      name: "Rabby (Solana)",
+      provider: window.rabby.solana
+    });
+  }
+
+  // Generic window.solana (if not already included)
+  if (window.solana && !availableWallets.some(w => w.provider === window.solana)) {
+    const label = window.solana.isPhantom ? "Phantom (default)" : "Solana Wallet";
+    availableWallets.push({
+      id: "solana",
+      name: label,
+      provider: window.solana
+    });
+  }
+
+  const status = getStatusEl();
+  if (availableWallets.length === 1) {
+    selectedWallet = availableWallets[0];
+    if (status) {
+      status.textContent = `Detected: ${selectedWallet.name}. Click "Connect Wallet & Buy" to continue.`;
+    }
+  } else if (availableWallets.length === 0) {
+    if (status) {
+      status.textContent = "No Solana wallet detected. Install Phantom, Solflare, Rabby (Solana), etc.";
+    }
+  } else {
+    if (status) {
+      status.textContent = "Multiple wallets detected. Click \"Connect Wallet & Buy\" to choose.";
+    }
+  }
+}
+
+function openWalletModal(){
+  const status = getStatusEl();
+
+  if (!availableWallets.length) {
+    detectWallets();
+  }
+
+  if (!availableWallets.length) {
+    if (status) {
+      status.textContent = "No Solana wallet detected. Install Phantom, Solflare, Rabby (Solana), etc.";
+    }
+    return;
+  }
+
+  const listEl = document.getElementById("walletOptions");
+  listEl.innerHTML = "";
+
+  availableWallets.forEach(w => {
+    const btn = document.createElement("button");
+    btn.className = "wallet-option";
+    btn.textContent = w.name;
+    btn.onclick = () => {
+      selectedWallet = w;
+      closeWalletModal();
+      if (status) {
+        status.textContent = `Selected: ${w.name}. Click "Connect Wallet & Buy" again to connect & send.`;
+      }
+    };
+    listEl.appendChild(btn);
+  });
+
+  document.getElementById("walletModalBackdrop").style.display = "flex";
+}
+
+function closeWalletModal(){
+  document.getElementById("walletModalBackdrop").style.display = "none";
 }
 
 async function ensureConnection(){
@@ -581,36 +735,82 @@ async function ensureConnection(){
 
 async function connectWallet(){
   const status = getStatusEl();
-  if(!window.solana){
-    status.textContent = "No Solana wallet found. Please install Phantom or a compatible wallet.";
+
+  if (!availableWallets.length) {
+    detectWallets();
+  }
+
+  // If no wallet selected and multiple available, open chooser
+  if (!selectedWallet) {
+    if (availableWallets.length > 1) {
+      openWalletModal();
+      return null;
+    } else if (availableWallets.length === 1) {
+      selectedWallet = availableWallets[0];
+    } else {
+      if (status) {
+        status.textContent = "No Solana wallet detected. Install Phantom, Solflare, Rabby (Solana), etc.";
+      }
+      return null;
+    }
+  }
+
+  const provider = selectedWallet.provider;
+  if (!provider || typeof provider.connect !== "function") {
+    if (status) {
+      status.textContent = "Selected wallet doesn't support connect(). Try another wallet.";
+    }
+    selectedWallet = null;
     return null;
   }
 
-  try{
-    const resp = await window.solana.connect();
-    walletPublicKey = resp.publicKey;
-    status.textContent = `Connected: ${walletPublicKey.toString().slice(0,4)}...${walletPublicKey.toString().slice(-4)}`;
+  try {
+    const resp = await provider.connect();
+    walletPublicKey = resp.publicKey || provider.publicKey;
+    if (!walletPublicKey) {
+      if (status) status.textContent = "Wallet connected but no public key found.";
+      return null;
+    }
+    if (status) {
+      const keyStr = walletPublicKey.toString();
+      status.textContent = `Connected: ${keyStr.slice(0,4)}...${keyStr.slice(-4)} via ${selectedWallet.name}`;
+    }
     return walletPublicKey;
   } catch(e){
-    status.textContent = "Wallet connection cancelled.";
+    if (status) status.textContent = "Wallet connection cancelled.";
     return null;
   }
 }
 
+/* =========================
+   WALLET CONNECT + BUY FLOW
+   ========================= */
 async function handleBuyClick(){
   const status = getStatusEl();
   status.textContent = "";
 
+  // Make sure connection exists
   await ensureConnection();
 
-  // 1) Connect if not already
+  // If nothing detected yet, detect now
+  if (!availableWallets.length) {
+    detectWallets();
+  }
+
+  // If no selected wallet yet and more than one, open modal
+  if (!selectedWallet && availableWallets.length > 1) {
+    openWalletModal();
+    return;
+  }
+
+  // Connect if not already
   if(!walletPublicKey){
-    status.textContent = "Connecting wallet...";
+    if (status) status.textContent = "Connecting wallet...";
     const pk = await connectWallet();
     if(!pk) return;
   }
 
-  // 2) Read SOL amount from input
+  // Read SOL amount
   const solAmount = parseFloat(document.getElementById("solInput").value);
   if(!solAmount || solAmount <= 0){
     status.textContent = "Enter how much SOL you want to send.";
@@ -644,14 +844,21 @@ async function handleBuyClick(){
 
     status.textContent = "Please approve in your wallet...";
 
-    const { signature } = await window.solana.signAndSendTransaction(tx);
+    const provider = selectedWallet?.provider || window.solana;
+    if (!provider || typeof provider.signAndSendTransaction !== "function") {
+      status.textContent = "Selected wallet doesn't support signAndSendTransaction().";
+      return;
+    }
+
+    const sendResult = await provider.signAndSendTransaction(tx);
+    const signature = sendResult.signature || sendResult; // some wallets return string, some {signature}
 
     const solscanUrl = `https://solscan.io/tx/${signature}`;
     status.innerHTML = `Sent! <a href="${solscanUrl}" target="_blank" rel="noopener noreferrer">View transaction on Solscan</a>`;
 
-    // If you want to visually bump the bar right after a confirmed buy,
-    // you can manually adjust from the console after you verify:
-    //   bumpPresaleRaisedUSD(69);
+    // OPTIONAL: manually bump raised amount after verifying off-chain
+    // currentRaisedUSD += ...; updateProgress();
+
   } catch(e){
     console.error(e);
     status.textContent = "Transaction failed or rejected.";
@@ -663,6 +870,7 @@ async function handleBuyClick(){
    ========================= */
 document.getElementById("solInput").addEventListener("input", updateCalc);
 
+detectWallets();
 updateCountdown();
 updateProgress();
 setInterval(updateCountdown, 1000);
