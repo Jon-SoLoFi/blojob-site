@@ -35,16 +35,68 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
   }
 
-  .logo-wrap img {
+  /* Holographic logo orb */
+  .logo-orb {
+    position: relative;
+    border-radius: 50%;
+    padding: 8px;
+    background: radial-gradient(circle at top, rgba(208,140,255,0.45), rgba(14,6,32,1));
+    box-shadow:
+      0 0 22px rgba(0,0,0,0.8),
+      0 0 36px rgba(176,38,255,0.75);
+  }
+
+  .logo-orb::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid rgba(216,150,255,0.35);
+    box-shadow:
+      0 0 18px rgba(176,38,255,0.7),
+      0 0 32px rgba(176,38,255,0.5);
+    opacity: 0.9;
+    animation: rotateGlow 16s linear infinite;
+  }
+
+  .logo-orb::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,150,255,0.24), transparent 70%);
+    filter: blur(6px);
+    opacity: 0.7;
+    animation: pulseGlow 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .logo-orb img {
     width: 140px;
     height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 0 32px rgba(0,0,0,0.6);
+    box-shadow:
+      0 0 16px rgba(0,0,0,0.9),
+      0 0 26px rgba(176,38,255,0.75);
     border: 2px solid rgba(255,255,255,0.18);
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes rotateGlow {
+    0%   { transform: rotate(0deg);   opacity: 0.75; }
+    50%  { transform: rotate(180deg); opacity: 1;    }
+    100% { transform: rotate(360deg); opacity: 0.75; }
+  }
+
+  @keyframes pulseGlow {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    50%  { transform: scale(1.08); opacity: 1;  }
+    100% { transform: scale(1);   opacity: 0.6; }
   }
 
   h1 {
@@ -52,7 +104,9 @@
     font-weight: 800;
     margin: 0;
     letter-spacing: 0.04em;
-    text-shadow: 0 0 16px rgba(0,0,0,0.8);
+    text-shadow:
+      0 0 16px rgba(0,0,0,0.8),
+      0 0 20px rgba(176,38,255,0.7);
   }
 
   h2 {
@@ -90,7 +144,7 @@
   /* Countdown + Progress */
   .countdown-progress {
     max-width: 900px;
-    margin: -20px auto 10px;
+    margin: -10px auto 10px;
     padding: 0 20px 10px;
     display: grid;
     grid-template-columns: 1.1fr 1.1fr;
@@ -276,7 +330,6 @@
     margin-left: 6px;
     vertical-align: middle;
   }
-
 </style>
 </head>
 
@@ -284,11 +337,24 @@
 
 <header>
   <div class="logo-wrap">
-    <img src="blojob.png" alt="$BLOJOB logo">
+    <div class="logo-orb">
+      <img src="blojob.png" alt="$BLOJOB logo">
+    </div>
     <h1>$BLOJOB</h1>
     <h2>Solana’s Most Seductive Degenerate Token 💦🔥</h2>
   </div>
 </header>
+
+<!-- PRESALE WALLET (HIGH CONVERSION PLACEMENT) -->
+<div class="section">
+  <h2>💋 Presale Wallet — Come Get Filled</h2>
+  <p>Send SOL — get $BLOJOB at TGE in the same wallet you used to send.</p>
+
+  <div class="wallet-box" id="walletBox">
+    7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
+  </div>
+  <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
+</div>
 
 <!-- Countdown + Progress -->
 <div class="countdown-progress">
@@ -299,7 +365,7 @@
     <p class="countdown-sub">
       Presale starts at <span class="highlight">8:00 PM EST</span> and runs for
       <span class="highlight">36 hours</span>.<br>
-      SOL only. Minimum buy <span class="highlight">0.1 SOL</span>. No refunds.
+      SOL only. Minimum buy <span class="highlight">0.1 SOL</span>.
     </p>
   </div>
 
@@ -315,7 +381,7 @@
 
 <div class="section">
   <p class="nsfw-line">
-    You came here curious… now let Daddy $BLOJOB show you exactly what you’re getting. 😈
+    You came here curious… now let Daddy show you exactly what you’re getting.
   </p>
 
   <p>
@@ -332,24 +398,13 @@
   </div>
 </div>
 
-<!-- Presale Wallet -->
-<div class="section">
-  <h2>💋 Presale Wallet — Come Get Filled</h2>
-  <p>Send SOL — get $BLOJOB at TGE in the same wallet you used to send.</p>
-
-  <div class="wallet-box" id="walletBox">
-    7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
-  </div>
-  <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
-</div>
-
 <!-- PRICE SECTION -->
 <div class="section">
   <h2>💵 Presale Price</h2>
 
   <p><strong>1 BLOJOB = $0.000001</strong> (fixed for presale)</p>
 
-  <p><strong>Minimum buy: 0.1 SOL</strong> • No hard max (whales welcome — but we keep it fair)</p>
+  <p><strong>Minimum: 0.1 SOL</strong> • No Hard Maximum</p>
 
   <h3>📌 What You Get (Examples)</h3>
   <ul>
@@ -396,7 +451,7 @@
 
   <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
     Final allocations are always based on <strong>on-chain totals at presale close</strong>.
-    The Telegram receipts + leaderboard (if used) are for transparency and hype, not for calculus.
+    The Telegram receipts are for transparency and hype, not for calculus.
   </p>
 </div>
 
@@ -405,40 +460,36 @@
   <h2>🪙 Tokenomics (69B Supply)</h2>
 
   <p>
-    <strong>🍑 SpankBank (Vault):</strong> 69% — long-term CumUnity reserves, listings, ecosystem boosts & vested dev share.<br>
-    <strong>💦 PreLoad (Presale):</strong> 10% (6.9B) — this presale allocation only.<br>
-    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — marketing pushes, raids, incentives, community foreplay.<br>
-    <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — liquidity pool at launch, locked for stability.<br>
+    <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term CumUnity reserves, listings, ecosystem expansion.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% (6.9B) — This presale allocation only.<br>
+    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Marketing pushes, raids, incentives, community foreplay.<br>
+    <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
   </p>
 
-  <p style="font-size:0.9rem; opacity:0.8; margin-top:8px;">
-    Dev allocation sits inside the <strong>SpankBank Vault</strong>, not in a separate
-    “mystery dev” wallet — aligned with the CumUnity and unlocked over time.
-  </p>
 </div>
 
 <!-- Socials -->
 <div class="section">
-  <h2>💦 Socials</h2>
+  <h2>🌐 Socials</h2>
   <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
   <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
   <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
 
   <p class="nsfw-line" style="margin-top:30px;">
-    Join the CumUnity and let’s make this chart rise together… Daddy’s watching. 😈
+    Join the CumUnity, watch the chart, and decide how hard you want to ride it. 🚀
   </p>
 </div>
 
 <footer>
   $BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br>
-  Stay degen. Stay wet. Stay winning.
+  Pump... Harder. Faster. Longer.
 </footer>
 
 <script>
 /* =========================
    PRESALE TIMING
    ========================= */
-/* TODO: set this to your real presale start time */
+/* Set this to your real presale start time */
 const presaleStart = new Date("2025-11-29T20:00:00-05:00");
 /* 36 hours duration */
 const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
@@ -473,9 +524,7 @@ function updateCountdown(){
   label.textContent = (mode === "pre") ? "Presale starts in" : "Presale ends in";
 }
 
-/* =========================
-   COPY WALLET
-   ========================= */
+/* COPY WALLET */
 function copyWallet(){
   const text = document.getElementById("walletBox").textContent.trim();
   navigator.clipboard.writeText(text).then(() => {
@@ -483,9 +532,7 @@ function copyWallet(){
   });
 }
 
-/* =========================
-   CALCULATOR — SOL → BLOJOB
-   ========================= */
+/* CALCULATOR — SOL → BLOJOB */
 async function updateCalc(){
   const sol = parseFloat(document.getElementById("solInput").value);
   const resultEl = document.getElementById("calcResult");
@@ -515,14 +562,11 @@ async function updateCalc(){
   }
 }
 
-/* =========================
-   PROGRESS (MANUAL UPDATE)
-   ========================= */
-/*
-  During presale, update this number as USD raised increases.
-  Example:
-    currentRaisedUSD = 420;
-    updateProgress();
+/* PROGRESS (MANUAL UPDATE)
+   During presale, update this number as USD raised increases.
+   Example:
+     currentRaisedUSD = 420;
+     updateProgress();
 */
 let currentRaisedUSD = 0;
 
