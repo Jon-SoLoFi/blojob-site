@@ -543,6 +543,25 @@ function updateProgress(){
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
 }
 
+/* ===== Admin helpers for console use ===== */
+function setPresaleRaisedUSD(amount){
+  const n = Number(amount);
+  if (Number.isNaN(n) || n < 0) return;
+  currentRaisedUSD = n;
+  updateProgress();
+}
+
+function bumpPresaleRaisedUSD(delta){
+  const n = Number(delta);
+  if (Number.isNaN(n)) return;
+  currentRaisedUSD = Math.max(0, currentRaisedUSD + n);
+  updateProgress();
+}
+
+/* expose helpers globally */
+window.setPresaleRaisedUSD = setPresaleRaisedUSD;
+window.bumpPresaleRaisedUSD = bumpPresaleRaisedUSD;
+
 /* =========================
    WALLET CONNECT + BUY FLOW
    ========================= */
@@ -626,16 +645,13 @@ async function handleBuyClick(){
     status.textContent = "Please approve in your wallet...";
 
     const { signature } = await window.solana.signAndSendTransaction(tx);
-    status.textContent =
-      `Sent! Tx: ${signature.slice(0,8)}...${signature.slice(-8)} (click to view on Solscan)`;
 
-    // make the status clickable to Solscan
     const solscanUrl = `https://solscan.io/tx/${signature}`;
     status.innerHTML = `Sent! <a href="${solscanUrl}" target="_blank" rel="noopener noreferrer">View transaction on Solscan</a>`;
 
-    // OPTIONAL: you can manually bump currentRaisedUSD here after checking tx off-chain
-    // currentRaisedUSD += ...; updateProgress();
-
+    // If you want to visually bump the bar right after a confirmed buy,
+    // you can manually adjust from the console after you verify:
+    //   bumpPresaleRaisedUSD(69);
   } catch(e){
     console.error(e);
     status.textContent = "Transaction failed or rejected.";
