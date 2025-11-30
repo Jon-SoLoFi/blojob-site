@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -77,7 +77,7 @@
   .callout {
     background: linear-gradient(135deg, rgba(176,38,255,0.12), rgba(13,13,40,0.96));
     border-left: 3px solid var(--purple-main);
-    padding: 18px 18px 18px;
+    padding: 18px;
     margin-top: 20px;
     font-size: 1.02rem;
     border-radius: 10px;
@@ -154,7 +154,6 @@
     border-radius: 999px;
     overflow: hidden;
     margin: 10px 0 6px;
-    border: 1px sealed #2e2e4c;
     border: 1px solid #2e2e4c;
   }
 
@@ -171,23 +170,127 @@
     opacity: 0.85;
   }
 
-  /* Wallet + Copy + CTA */
-  .wallet-box {
-    background: radial-gradient(circle at left top, rgba(176,38,255,0.14), #101020);
-    border: 1px solid #2e2e4c;
+  .token-tracker {
+    font-size: 0.88rem;
+    opacity: 0.86;
+    margin-top: 8px;
+  }
+
+  .token-tracker strong {
+    color: var(--purple-neon);
+  }
+
+  .token-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #141428;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 8px;
+    border: 1px solid #313159;
+  }
+
+  #token-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
+    box-shadow: 0 0 12px rgba(216,150,255,0.8);
+    transition: width 0.4s ease-out;
+  }
+
+  /* How-to + badges */
+  .howto-list {
+    margin-top: 12px;
+    padding-left: 20px;
+  }
+
+  .howto-list li {
+    margin-bottom: 6px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    background: #16162a;
+    border: 1px solid #41416a;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Calculator + Wallet grid */
+  .buy-grid {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 20px 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+  }
+
+  @media (max-width: 900px) {
+    .buy-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .calc-box {
+    background: var(--bg-card);
+    padding: 20px;
     border-radius: 12px;
-    padding: 22px;
-    font-size: 1.05rem;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+  }
+
+  .calc-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    margin-top: 10px;
+    background: #16162a;
+    color: #fff;
+  }
+
+  .calc-result {
+    margin-top: 14px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--purple-neon);
+  }
+
+  .wallet-card {
+    background: radial-gradient(circle at left top, rgba(176,38,255,0.14), #101020);
+    border-radius: 12px;
+    border: 1px solid #2e2e4c;
+    padding: 20px 20px 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+  }
+
+  .wallet-box {
+    background: rgba(5,5,20,0.85);
+    border-radius: 10px;
+    border: 1px solid #3b3b63;
+    padding: 18px;
+    font-size: 0.98rem;
     word-break: break-all;
-    margin-top: 15px;
+    margin-top: 10px;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
   }
 
   .copy-btn,
-  .primary-buy-btn {
-    margin-top: 14px;
+  .primary-btn {
     background: var(--purple-main);
     color: #000;
-    padding: 12px 20px;
+    padding: 12px 18px;
     border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
@@ -197,24 +300,20 @@
     border: none;
   }
 
-  .primary-buy-btn {
-    margin-right: 12px;
-  }
-
   .copy-btn:hover,
-  .primary-buy-btn:hover {
+  .primary-btn:hover {
     transform: translateY(-1px) scale(1.04);
     background: var(--purple-neon);
     box-shadow: 0 0 14px rgba(176,38,255,0.75);
   }
 
-  .buy-status {
+  .wallet-note {
+    font-size: 0.82rem;
+    opacity: 0.8;
     margin-top: 10px;
-    font-size: 0.9rem;
-    opacity: 0.9;
   }
 
-  /* Buttons */
+  /* General buttons */
   .btn {
     display: inline-block;
     background: var(--purple-main);
@@ -241,120 +340,91 @@
     opacity: 0.65;
   }
 
-  /* Calculator */
-  .calc-box {
-    background: var(--bg-card);
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid var(--border-subtle);
-    margin-top: 20px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
-  }
-
-  .calc-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-size: 1rem;
-    margin-top: 10px;
-    background: #16162a;
-    color: #fff;
-  }
-
-  .calc-result {
-    margin-top: 14px;
-    font-size: 1.02rem;
-    font-weight: 600;
-    color: var(--purple-neon);
-  }
-
-  /* How-to + badges */
-  .howto-list {
-    margin-top: 12px;
-    padding-left: 20px;
-  }
-
-  .howto-list li {
-    margin-bottom: 6px;
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    background: #16162a;
-    border: 1px solid #41416a;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
-
-  /* Wallet chooser modal */
-  .wallet-modal-backdrop {
+  /* Wallet modal */
+  .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.65);
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 9999;
   }
 
-  .wallet-modal {
-    background: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid var(--border-subtle);
-    padding: 20px 20px 18px;
-    max-width: 340px;
+  .modal {
+    background: #111123;
+    border-radius: 14px;
+    border: 1px solid #34345c;
+    max-width: 360px;
     width: 90%;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+    padding: 18px 18px 16px;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.7);
   }
 
-  .wallet-modal h3 {
-    margin: 0 0 8px;
-    font-size: 1.1rem;
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
   }
 
-  .wallet-modal p {
-    margin: 0 0 12px;
-    font-size: 0.9rem;
-    opacity: 0.85;
+  .modal-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .modal-close {
+    cursor: pointer;
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+
+  .wallet-list {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+  }
+
+  .wallet-list li {
+    margin-bottom: 8px;
   }
 
   .wallet-option {
     width: 100%;
-    margin-bottom: 8px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid #3a3a60;
-    background: #16162a;
-    color: #fff;
-    font-size: 0.92rem;
     text-align: left;
+    border-radius: 999px;
+    border: 1px solid #34345c;
+    background: #17172b;
+    color: #fff;
+    padding: 10px 14px;
+    font-size: 0.9rem;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: 0.15s;
   }
 
+  .wallet-option span {
+    font-weight: 500;
+  }
+
+  .wallet-option small {
+    opacity: 0.7;
+    font-size: 0.75rem;
+  }
+
   .wallet-option:hover {
-    background: #21213a;
-    border-color: var(--purple-main);
-    box-shadow: 0 0 10px rgba(176,38,255,0.4);
+    background: #22223c;
+    border-color: var(--purple-neon);
   }
 
-  .modal-close {
-    margin-top: 6px;
-    background: transparent;
-    border: none;
-    color: #aaa;
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 6px 0 0;
+  .modal-tip {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    opacity: 0.8;
   }
 
-  .modal-close:hover {
-    color: #fff;
-  }
 </style>
 </head>
 
@@ -364,20 +434,20 @@
   <div class="logo-wrap">
     <img src="blojob.png" alt="$BLOJOB logo">
     <h1>$BLOJOB</h1>
-    <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥​</h2>
+    <h2>Solana’s Most Seductive Degenerate Token 💦🔥</h2>
   </div>
 </header>
 
 <!-- Countdown + Progress -->
 <div class="countdown-progress">
   <div class="card">
-    <div class="card-title">🕚​ Presale Timing</div>
+    <div class="card-title">⏳ Presale Timing</div>
     <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
     <p class="countdown-sub">
       Presale starts at <span class="highlight">8:00 PM EST</span> and runs for
       <span class="highlight">36 hours</span>.<br>
-      SOL only. Minimum buy <span class="highlight">0.1 SOL</span>.
+      SOL only. No refunds.
     </p>
   </div>
 
@@ -386,14 +456,24 @@
     <p class="progress-title">Soft cap: $6,900 • Hard cap: $9,600</p>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <p id="progress-amounts" class="progress-amounts">
-      Raised: $0 / $6,900 (soft cap) • 😪 Soft cap not reached
+      Raised: $0 / $6,900 (soft cap) • ⏳ Soft cap not reached
     </p>
+
+    <div class="token-tracker">
+      <div><strong>Presale Allocation:</strong> 6,900,000,000 BLOJOB</div>
+      <div id="tokenSoldText">Sold: 0 BLOJOB</div>
+      <div id="tokenRemainingText">Remaining: 6,900,000,000 BLOJOB</div>
+      <div class="token-progress-bar">
+        <div id="token-progress-fill"></div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- Intro -->
 <div class="section">
   <p class="nsfw-line">
-    You came here curious… now let Daddy show you exactly what you’re getting.
+    You came here curious… now let Daddy $BLOJOB show you exactly what you’re getting. 😈
   </p>
 
   <p>
@@ -404,134 +484,174 @@
 
   <div class="callout">
     <strong>Presale is simple:</strong><br>
-    • Enter how much SOL you want to send in the calculator.<br>
-    • Connect your wallet & send SOL via the Buy button.<br>
+    • Send SOL to the presale wallet during the 36h window using the Buy button.<br>
     • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
     • Everything is matched to on-chain data. No “trust-me-bro” balances.
   </div>
 </div>
 
-<!-- PRICE SECTION (now ABOVE wallet section) -->
-<div class="section">
-  <h2>💵 Presale Price</h2>
-
-  <p><strong>1 BLOJOB = $0.000001</strong></p>
-
-  <p><strong>Minimum: 0.1 SOL</strong> • <strong>No Hard Maximum</strong></p>
-
-  <h3>💰​ What You Get</h3>
-  <ul>
-    <li>$10 → <strong>10,000,000 BLOJOB</strong></li>
-    <li>$25 → <strong>25,000,000 BLOJOB</strong></li>
-    <li>$50 → <strong>50,000,000 BLOJOB</strong></li>
-    <li>$100 → <strong>100,000,000 BLOJOB</strong></li>
-  </ul>
-
-  <div class="calc-box">
-    <h3>🔢 Live SOL → BLOJOB Calculator</h3>
-    <input id="solInput" class="calc-input" type="number" step="0.01" placeholder="Enter SOL amount you want to send">
-    <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
-  </div>
-</div>
-
-<!-- Presale Wallet + CONNECT & BUY (now BELOW calculator section) -->
-<div class="section">
-  <h2>💋 Presale Wallet — Come Get Filled</h2>
-  <p>
-    After you’ve decided how hard you want to ape, connect your wallet and confirm the transaction.<br>
-    $BLOJOB will be airdropped to the same wallet after presale ends.
-  </p>
-
-  <div class="wallet-box" id="walletBox">
-    7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
-  </div>
-
-  <button class="primary-buy-btn" onclick="handleBuyClick()">Connect Wallet & Buy</button>
-  <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
-
-  <div id="buyStatus" class="buy-status"></div>
-</div>
-
-<!-- HOW TO BUY + WHALE-SAFE -->
+<!-- HOW TO JOIN -->
 <div class="section">
   <h2>🧾 How To Join The Presale</h2>
 
   <div class="callout">
     <strong>1️⃣ Use a non-custodial Solana wallet</strong><br>
-    Phantom, Solflare, Backpack, Rabby (Solana mode), etc.
+    Phantom, Solflare, Backpack, Rabby (Solana), OKX, etc.
     <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
   </div>
 
   <ul class="howto-list">
-    <li><strong>Step 1:</strong> Enter how much SOL you want to send in the calculator box.</li>
-    <li><strong>Step 2:</strong> Click <strong>Connect Wallet & Buy</strong> and pick which wallet you want to use.</li>
-    <li><strong>Step 3:</strong> Approve the transaction in your wallet when prompted.</li>
-    <li><strong>Step 4:</strong> Your SOL goes directly to the presale wallet. On-chain, verifiable, no middleman.</li>
-    <li><strong>Step 5:</strong> After presale closes & totals are locked, your $BLOJOB is airdropped to the same wallet.</li>
+    <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
+    <li><strong>Step 2:</strong> Hit <strong>Connect Wallet &amp; Buy</strong> below and confirm the transaction.</li>
+    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet (Solscan link).</li>
+    <li><strong>Step 4 — Public route:</strong> Post your TX link in the Telegram group with
+      your SOL amount and (optional) nickname so the CumUnity can see who’s aping.
+    </li>
+    <li><strong>Step 5 — Whale-safe route:</strong>
+      If you’re sending big size and don’t want to flex in public chat, DM the dev/mods your TX link instead.
+      <span class="badge">🐳 Whale-friendly</span>
+      <span class="badge">🛡 Privacy-respect</span>
+    </li>
+    <li><strong>Step 6:</strong> After presale closes and totals are locked, $BLOJOB
+      is distributed to the same wallet that sent the SOL.
+    </li>
   </ul>
 
   <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
     Final allocations are always based on <strong>on-chain totals at presale close</strong>.
-    Screenshots / TX links in Telegram are just for hype & receipts.
+    The Telegram receipts are for transparency and hype, not for math.
   </p>
+</div>
+
+<!-- BUY GRID: CALCULATOR + WALLET -->
+<div class="buy-grid">
+  <!-- Left: Calculator -->
+  <div class="calc-box">
+    <h2>🔢 SOL → $BLOJOB Calculator</h2>
+    <p style="font-size:0.9rem; opacity:0.85;">
+      Enter how much SOL you’re thinking of aping. We’ll estimate USD value and BLOJOB based on live SOL price.
+      This is for guidance only — final numbers follow the presale price and on-chain totals.
+    </p>
+    <input id="solInput" class="calc-input" type="number" step="0.0001" placeholder="Enter SOL amount">
+    <div id="calcResult" class="calc-result">Enter SOL to calculate.</div>
+  </div>
+
+  <!-- Right: Presale Wallet / Connect -->
+  <div class="wallet-card">
+    <h2>💋 Presale Wallet — Come Get Filled</h2>
+    <p style="font-size:0.9rem; opacity:0.85;">
+      After you’ve decided how hard you want to ape, connect your wallet and confirm the transaction.
+      $BLOJOB will be airdropped to the same wallet after presale ends.
+    </p>
+
+    <div class="wallet-box" id="walletBox">
+      7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA
+    </div>
+
+    <div class="button-row">
+      <button class="primary-btn" onclick="openWalletModal()">Connect Wallet &amp; Buy</button>
+      <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
+    </div>
+
+    <p class="wallet-note">
+      Tip: On mobile, open this page <strong>inside</strong> your wallet’s in-app browser
+      (Phantom, Solflare, Rabby, etc.) for the smoothest connect experience.
+    </p>
+  </div>
 </div>
 
 <!-- Tokenomics -->
 <div class="section">
-  <h2>🪙 Tokenomics (69,000,000,000 Supply)</h2>
+  <h2>🪙 Tokenomics (69B Supply)</h2>
 
   <p>
-    <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term reserves, treasury operations, stabilization, staking pools, and community incentives.<br>
-    <strong>💦 PreLoad (Presale):</strong> 10% (6.9B) — Distributed proportionally at TGE based on contribution size.<br>
-    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth, micro-liquidity support.<br>
-    <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
+    <strong>🍑 SpankBank (Vault):</strong> 69% — long-term CumUnity reserves, listings, ecosystem boosts &amp; vested dev share.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% (6.9B) — this presale allocation only.<br>
+    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — marketing pushes, raids, incentives, community foreplay.<br>
+    <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — liquidity pool at launch, locked for stability.<br>
   </p>
 
+  <p style="font-size:0.9rem; opacity:0.8; margin-top:8px;">
+    Dev allocation sits inside the <strong>SpankBank Vault</strong>, not in a separate
+    “mystery dev” wallet — aligned with the CumUnity and unlocked over time.
+  </p>
 </div>
 
 <!-- Socials -->
 <div class="section">
-  <h2>🌐​ Socials</h2>
+  <h2>💦 Socials</h2>
   <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
   <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
   <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
 
   <p class="nsfw-line" style="margin-top:30px;">
-    Join the CumUnity, watch the chart, and decide how hard you want to ride it. 🚀
+    Join the CumUnity and let’s make this chart rise together… Daddy’s watching. 😈
   </p>
 </div>
 
 <footer>
   $BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br>
-  Pump... Harder. Faster. Stronger.
+  Stay degen. Stay wet. Stay winning.
 </footer>
 
-<!-- Wallet chooser modal -->
-<div id="walletModalBackdrop" class="wallet-modal-backdrop">
-  <div class="wallet-modal">
-    <h3>Select a wallet</h3>
-    <p>Pick which Solana wallet you want to use for this presale.</p>
-    <div id="walletOptions"></div>
-    <button class="modal-close" onclick="closeWalletModal()">Cancel</button>
+<!-- Wallet Connect Modal -->
+<div id="walletModalBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Connect Wallet</div>
+      <div class="modal-close" onclick="closeWalletModal()">&times;</div>
+    </div>
+
+    <ul class="wallet-list">
+      <li>
+        <button class="wallet-option" onclick="connectSpecificWallet('phantom')">
+          <span>Phantom</span>
+          <small>Browser / in-app</small>
+        </button>
+      </li>
+      <li>
+        <button class="wallet-option" onclick="connectSpecificWallet('solflare')">
+          <span>Solflare</span>
+          <small>Browser / in-app</small>
+        </button>
+      </li>
+      <li>
+        <button class="wallet-option" onclick="connectSpecificWallet('backpack')">
+          <span>Backpack</span>
+          <small>Browser / in-app</small>
+        </button>
+      </li>
+      <li>
+        <button class="wallet-option" onclick="connectSpecificWallet('rabby')">
+          <span>Rabby (Solana)</span>
+          <small>Browser extension</small>
+        </button>
+      </li>
+      <li>
+        <button class="wallet-option" onclick="connectSpecificWallet('okx')">
+          <span>OKX Wallet</span>
+          <small>Browser / in-app</small>
+        </button>
+      </li>
+    </ul>
+
+    <p class="modal-tip">
+      If nothing pops up, make sure you have that wallet installed
+      and try opening this site inside the wallet’s built-in browser on mobile.
+    </p>
   </div>
 </div>
 
-<!-- Solana web3.js from CDN -->
-<script src="https://unpkg.com/@solana/web3.js@1.95.2/lib/index.iife.js" defer></script>
 <script>
-/* =========================
-   CONFIG
-   ========================= */
-const PRESALE_WALLET = "7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA";
-const MIN_SOL = 0.1;
-
 /* =========================
    PRESALE TIMING
    ========================= */
-const presaleStart = new Date("2025-11-29T20:00:00-05:00"); // adjust if needed
+/* TODO: set this to your real presale start time */
+const presaleStart = new Date("2025-11-29T20:00:00-05:00");
+/* 36 hours duration */
 const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
 
-function pad(n){return n.toString().padStart(2,"0");}
+function pad(n){return n.toString().padStart(2,'0')}
 
 function updateCountdown(){
   const now = new Date();
@@ -573,24 +693,7 @@ function copyWallet(){
 
 /* =========================
    CALCULATOR — SOL → BLOJOB
-   (with simple price caching)
    ========================= */
-let lastSolPrice = null;
-let lastSolPriceTs = 0;
-const PRICE_TTL_MS = 60 * 1000; // 60 seconds cache
-
-async function getSolPrice() {
-  const now = Date.now();
-  if (lastSolPrice && (now - lastSolPriceTs) < PRICE_TTL_MS) {
-    return lastSolPrice;
-  }
-  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-  const data = await res.json();
-  lastSolPrice = data.solana.usd;
-  lastSolPriceTs = now;
-  return lastSolPrice;
-}
-
 async function updateCalc(){
   const sol = parseFloat(document.getElementById("solInput").value);
   const resultEl = document.getElementById("calcResult");
@@ -600,15 +703,14 @@ async function updateCalc(){
     return;
   }
 
-  if(sol < MIN_SOL){
-    resultEl.textContent = "Minimum buy is 0.1 SOL 🚫";
-    return;
-  }
-
   try{
-    const solPrice = await getSolPrice();
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+    const data = await res.json();
+    const solPrice = data.solana.usd;
+
     const usdValue = sol * solPrice;
-    const blojobTokens = usdValue / 0.000001; // $0.000001 per token
+    const pricePerToken = 0.000001; // $0.000001 per token
+    const blojobTokens = usdValue / pricePerToken;
 
     resultEl.textContent =
       `${sol} SOL ≈ $${usdValue.toFixed(2)} → ${blojobTokens.toLocaleString()} BLOJOB`;
@@ -618,127 +720,59 @@ async function updateCalc(){
 }
 
 /* =========================
-   PROGRESS (MANUAL UPDATE)
+   PROGRESS + TOKEN TRACKER
    ========================= */
+/*
+  During presale, update this number as USD raised increases.
+  Example in console:
+    presaleAdminSetRaised(420);
+*/
 let currentRaisedUSD = 0;
-function updateProgress(){
-  const hardCapUSD = 9600;
-  const softCapUSD = 6900;
+const hardCapUSD = 9600;
+const softCapUSD = 6900;
+const PRESALE_TOKENS_TOTAL = 6900000000;
 
+function updateProgress(){
   const percent = Math.min(currentRaisedUSD / hardCapUSD, 1) * 100;
   document.getElementById("progress-fill").style.width = percent + "%";
 
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "🤤 Soft cap reached" : "😪 Soft cap not reached";
+    currentRaisedUSD >= softCapUSD ? "✅ Soft cap reached" : "⏳ Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
+
+  updateTokenTracker();
 }
+
+function updateTokenTracker(){
+  const pricePerToken = 0.000001;
+  const tokensSoldRaw = currentRaisedUSD / pricePerToken;
+  const tokensSold = Math.min(tokensSoldRaw, PRESALE_TOKENS_TOTAL);
+  const tokensRemaining = Math.max(PRESALE_TOKENS_TOTAL - tokensSold, 0);
+
+  const soldEl = document.getElementById("tokenSoldText");
+  const remainingEl = document.getElementById("tokenRemainingText");
+  const bar = document.getElementById("token-progress-fill");
+
+  soldEl.textContent = `Sold: ${Math.floor(tokensSold).toLocaleString()} BLOJOB`;
+  remainingEl.textContent = `Remaining: ${Math.floor(tokensRemaining).toLocaleString()} BLOJOB`;
+
+  const percentTokens = (tokensSold / PRESALE_TOKENS_TOTAL) * 100;
+  bar.style.width = percentTokens + "%";
+}
+
+/* Helper for you from console */
+window.presaleAdminSetRaised = function(usd){
+  currentRaisedUSD = Math.max(0, Number(usd) || 0);
+  updateProgress();
+  console.log("Updated presale raised to: $" + currentRaisedUSD);
+};
 
 /* =========================
-   WALLET DETECTION & PICKER
-   (improved for mobile + late injection)
+   WALLET MODAL + CONNECT
    ========================= */
-let connection;
-let walletPublicKey = null;
-let availableWallets = [];
-let selectedWallet = null;
-
-function getStatusEl(){
-  return document.getElementById("buyStatus");
-}
-
-function detectWallets(){
-  availableWallets = [];
-
-  // Generic provider (most mobile wallets inject this)
-  if (window.solana && typeof window.solana === "object") {
-    const label = window.solana.isPhantom ? "Phantom" : (window.solana.isBackpack ? "Backpack" : "Solana Wallet");
-    availableWallets.push({
-      id: "solana",
-      name: label,
-      provider: window.solana
-    });
-  }
-
-  // Phantom (desktop extension pattern)
-  if (window.phantom && window.phantom.solana) {
-    // avoid double-adding same provider
-    if (!availableWallets.some(w => w.provider === window.phantom.solana)) {
-      availableWallets.push({
-        id: "phantom",
-        name: "Phantom (Extension)",
-        provider: window.phantom.solana
-      });
-    }
-  }
-
-  // Solflare
-  if (window.solflare && window.solflare.isSolflare) {
-    if (!availableWallets.some(w => w.provider === window.solflare)) {
-      availableWallets.push({
-        id: "solflare",
-        name: "Solflare",
-        provider: window.solflare
-      });
-    }
-  }
-
-  // Rabby (Solana)
-  if (window.rabby && window.rabby.solana) {
-    if (!availableWallets.some(w => w.provider === window.rabby.solana)) {
-      availableWallets.push({
-        id: "rabby",
-        name: "Rabby (Solana)",
-        provider: window.rabby.solana
-      });
-    }
-  }
-
-  const status = getStatusEl();
-  if (!status) return;
-
-  if (availableWallets.length === 0) {
-    status.textContent = "No Solana wallet detected. Use Phantom, Solflare, Rabby, Backpack, etc. (or open this page inside your wallet's dApp browser).";
-  } else if (availableWallets.length === 1) {
-    selectedWallet = availableWallets[0];
-    status.textContent = `Detected: ${selectedWallet.name}. Click "Connect Wallet & Buy" to continue.`;
-  } else {
-    status.textContent = "Multiple wallets detected. Click \"Connect Wallet & Buy\" to choose.";
-  }
-}
-
 function openWalletModal(){
-  const status = getStatusEl();
-
-  if (!availableWallets.length) {
-    detectWallets();
-  }
-
-  if (!availableWallets.length) {
-    if (status) {
-      status.textContent = "No Solana wallet detected. Install Phantom, Solflare, Rabby (Solana), etc.";
-    }
-    return;
-  }
-
-  const listEl = document.getElementById("walletOptions");
-  listEl.innerHTML = "";
-
-  availableWallets.forEach(w => {
-    const btn = document.createElement("button");
-    btn.className = "wallet-option";
-    btn.textContent = w.name;
-    btn.onclick = () => {
-      selectedWallet = w;
-      closeWalletModal();
-      if (status) {
-        status.textContent = `Selected: ${w.name}. Click "Connect Wallet & Buy" again to connect & send.`;
-      }
-    };
-    listEl.appendChild(btn);
-  });
-
   document.getElementById("walletModalBackdrop").style.display = "flex";
 }
 
@@ -746,172 +780,63 @@ function closeWalletModal(){
   document.getElementById("walletModalBackdrop").style.display = "none";
 }
 
-async function ensureConnection(){
-  if(!connection && window.solanaWeb3){
-    // mainnet endpoint
-    connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
-  }
-}
-
-async function connectWallet(){
-  const status = getStatusEl();
-
-  if (!availableWallets.length) {
-    detectWallets();
-  }
-
-  // If no wallet selected and multiple available, open chooser
-  if (!selectedWallet) {
-    if (availableWallets.length > 1) {
-      openWalletModal();
-      return null;
-    } else if (availableWallets.length === 1) {
-      selectedWallet = availableWallets[0];
-    } else {
-      if (status) {
-        status.textContent = "No Solana wallet detected. Install Phantom, Solflare, Rabby (Solana), etc.";
-      }
-      return null;
-    }
-  }
-
-  const provider = selectedWallet.provider;
-  if (!provider || typeof provider.connect !== "function") {
-    if (status) {
-      status.textContent = "Selected wallet doesn't support connect(). Try another wallet.";
-    }
-    selectedWallet = null;
-    return null;
-  }
-
+/* Very lightweight connectors.
+   Real degens will usually already have the wallet injected. */
+async function connectSpecificWallet(type){
   try {
-    const resp = await provider.connect();
-    walletPublicKey = resp.publicKey || provider.publicKey;
-    if (!walletPublicKey) {
-      if (status) status.textContent = "Wallet connected but no public key found.";
-      return null;
+    if(type === 'phantom'){
+      if(window.solana && window.solana.isPhantom){
+        await window.solana.connect();
+        alert("Phantom connected. Now confirm the send to the presale wallet in your wallet UI.");
+      } else {
+        window.open("https://phantom.app/", "_blank");
+      }
+    } else if(type === 'solflare'){
+      if(window.solflare){
+        await window.solflare.connect();
+        alert("Solflare connected. Now confirm the send to the presale wallet in your wallet UI.");
+      } else {
+        window.open("https://solflare.com/", "_blank");
+      }
+    } else if(type === 'backpack'){
+      if(window.backpack){
+        await window.backpack.connect();
+        alert("Backpack connected. Now confirm the send to the presale wallet in your wallet UI.");
+      } else {
+        window.open("https://www.backpack.app/", "_blank");
+      }
+    } else if(type === 'rabby'){
+      if(window.rabby){
+        await window.rabby.connect();
+        alert("Rabby connected. Now confirm the send to the presale wallet in your wallet UI.");
+      } else {
+        window.open("https://rabby.io/", "_blank");
+      }
+    } else if(type === 'okx'){
+      if(window.okxwallet){
+        await window.okxwallet.solana.connect();
+        alert("OKX Wallet connected. Now confirm the send to the presale wallet in your wallet UI.");
+      } else {
+        window.open("https://www.okx.com/web3", "_blank");
+      }
     }
-    if (status) {
-      const keyStr = walletPublicKey.toString();
-      status.textContent = `Connected: ${keyStr.slice(0,4)}...${keyStr.slice(-4)} via ${selectedWallet.name}`;
-    }
-    return walletPublicKey;
-  } catch(e){
-    if (status) status.textContent = "Wallet connection cancelled.";
-    return null;
-  }
-}
-
-/* =========================
-   WALLET CONNECT + BUY FLOW
-   ========================= */
-async function handleBuyClick(){
-  const status = getStatusEl();
-  if (!status) return;
-
-  status.textContent = "";
-
-  await ensureConnection();
-  if (!connection) {
-    status.textContent = "Unable to initialize Solana connection. Try refreshing the page.";
-    return;
-  }
-
-  if (!availableWallets.length) {
-    detectWallets();
-  }
-
-  if (!selectedWallet && availableWallets.length > 1) {
-    openWalletModal();
-    return;
-  }
-
-  if(!walletPublicKey){
-    status.textContent = "Connecting wallet...";
-    const pk = await connectWallet();
-    if(!pk) return;
-  }
-
-  const solAmount = parseFloat(document.getElementById("solInput").value);
-  if(!solAmount || solAmount <= 0){
-    status.textContent = "Enter how much SOL you want to send.";
-    return;
-  }
-  if(solAmount < MIN_SOL){
-    status.textContent = "Minimum buy is 0.1 SOL 🚫";
-    return;
-  }
-
-  try{
-    status.textContent = "Creating transaction...";
-
-    const toPubkey = new solanaWeb3.PublicKey(PRESALE_WALLET);
-    const lamports = solAmount * solanaWeb3.LAMPORTS_PER_SOL;
-
-    const { blockhash } = await connection.getLatestBlockhash("finalized");
-
-    const tx = new solanaWeb3.Transaction({
-      recentBlockhash: blockhash,
-      feePayer: walletPublicKey
-    });
-
-    const transferIx = solanaWeb3.SystemProgram.transfer({
-      fromPubkey: walletPublicKey,
-      toPubkey,
-      lamports: lamports,
-    });
-
-    tx.add(transferIx);
-
-    status.textContent = "Please approve in your wallet...";
-
-    const provider = selectedWallet?.provider || window.solana;
-    if (!provider || typeof provider.signAndSendTransaction !== "function") {
-      status.textContent = "Selected wallet doesn't support signAndSendTransaction().";
-      return;
-    }
-
-    const sendResult = await provider.signAndSendTransaction(tx);
-    const signature = sendResult.signature || sendResult;
-
-    const solscanUrl = `https://solscan.io/tx/${signature}`;
-    status.innerHTML = `Sent! <a href="${solscanUrl}" target="_blank" rel="noopener noreferrer">View transaction on Solscan</a>`;
-
-    // OPTIONAL: manually bump raised amount after verifying off-chain
-    // currentRaisedUSD += ...; updateProgress();
-
   } catch(e){
     console.error(e);
-    status.textContent = "Transaction failed or rejected.";
+    alert("Wallet connection failed or was rejected. Try again or use your wallet’s in-app browser.");
+  } finally {
+    closeWalletModal();
   }
 }
 
 /* =========================
    INIT
    ========================= */
-function initPresaleUI() {
-  const solInput = document.getElementById("solInput");
-  if (solInput) {
-    solInput.addEventListener("input", updateCalc);
-  }
+document.getElementById("solInput").addEventListener("input", updateCalc);
 
-  detectWallets();
-  updateCountdown();
-  updateProgress();
-
-  setInterval(updateCountdown, 1000);
-
-  // If Phantom initializes late (mobile), detect again
-  window.addEventListener("solana#initialized", detectWallets, { once: true });
-}
-
-if (document.readyState === "complete" || document.readyState === "interactive") {
-  initPresaleUI();
-} else {
-  document.addEventListener("DOMContentLoaded", initPresaleUI);
-}
+updateCountdown();
+updateProgress();
+setInterval(updateCountdown, 1000);
 </script>
 
 </body>
 </html>
-
