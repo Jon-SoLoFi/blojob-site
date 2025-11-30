@@ -192,7 +192,7 @@
 
   #token-progress-fill {
     height: 100%;
-    width: 0%;
+    width: 100%; /* starts full */
     background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
     box-shadow: 0 0 12px rgba(216,150,255,0.8);
     transition: width 0.4s ease-out;
@@ -433,15 +433,15 @@
 <header>
   <div class="logo-wrap">
     <img src="blojob.png" alt="$BLOJOB logo">
-    <h1>$BLOJOB</h1>
-    <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥​</h2>
+    <h1>BLOJOB</h1>
+    <h2>Solana’s Most Seductive Degenerate Token ​❤️‍🔥​</h2>
   </div>
 </header>
 
 <!-- Countdown + Progress -->
 <div class="countdown-progress">
   <div class="card">
-    <div class="card-title">🕜​ Presale Timing</div>
+    <div class="card-title">​🕑​ Presale Timing</div>
     <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
     <p class="countdown-sub">
@@ -473,12 +473,12 @@
 <!-- Intro -->
 <div class="section">
   <p class="nsfw-line">
-    You came here curious… now let Daddy show you exactly what you’re getting. 😏​
+    You came here curious… now let Daddy show you exactly what you’re getting. ​😏​
   </p>
 
   <p>
     No utility. No promises. No corporate foreplay.<br>
-    Just raw, dripping, <strong>pure degen momentum</strong> built to pump hard, fast,
+    Just raw, throbbing, <strong>pure degen momentum</strong> built to pump hard, fast,
     and as long as the CumUnity can handle.
   </p>
 
@@ -503,16 +503,8 @@
   <ul class="howto-list">
     <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
     <li><strong>Step 2:</strong> Hit <strong>Connect Wallet &amp; Buy</strong> below and confirm the transaction.</li>
-    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet (Solscan link).</li>
-    <li><strong>Step 4 — Public route:</strong> Post your TX link in the Telegram group with
-      your SOL amount and (optional) nickname so the CumUnity can see who’s aping.
-    </li>
-    <li><strong>Step 5 — Whale-safe route:</strong>
-      If you’re sending big size and don’t want to flex in public chat, DM the dev/mods your TX link instead.
-      <span class="badge">🐳 Whale-friendly</span>
-      <span class="badge">​🫆​ Privacy-respect</span>
-    </li>
-    <li><strong>Step 6:</strong> After presale closes and totals are locked, $BLOJOB
+    <li><strong>Step 3:</strong> After sending, you can grab your <strong>transaction link</strong> from your wallet (Solscan link) if you want a receipt or to flex in chat.</li>
+    <li><strong>Step 4:</strong> After presale closes and totals are locked, BLOJOB
       is distributed to the same wallet that sent the SOL.
     </li>
   </ul>
@@ -528,6 +520,9 @@
   <!-- Left: Calculator -->
   <div class="calc-box">
     <h2>🔢 SOL → $BLOJOB Calculator</h2>
+    <p style="font-size:0.9rem; opacity:0.85;">
+      Presale price: <strong>$0.000001 = 1 BLOJOB</strong>.
+    </p>
     <p style="font-size:0.9rem; opacity:0.85;">
       Enter how much SOL you’re thinking of aping. We’ll estimate USD value and BLOJOB based on live SOL price.
       This is for guidance only — final numbers follow the presale price and on-chain totals.
@@ -562,21 +557,20 @@
 
 <!-- Tokenomics -->
 <div class="section">
-  <h2>🪙 Tokenomics (69B Supply)</h2>
+  <h2>🪙 Tokenomics (69,000,000,000 Supply)</h2>
 
   <p>
     <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term reserves, treasury operations, stabilization, staking pools, and community incentives.<br>
-    <strong>💦 PreLoad (Presale):</strong> 10% (6.9B) — Distributed proportionally at TGE based on contribution size.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% — Distributed proportionally at TGE based on contribution size.<br>
     <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth, micro-liquidity support.<br>
     <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
   </p>
 
-  </p>
 </div>
 
 <!-- Socials -->
 <div class="section">
-  <h2>​🌐​ Socials</h2>
+  <h2>🌐 Socials</h2>
   <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
   <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
   <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
@@ -734,7 +728,7 @@ function updateProgress(){
   document.getElementById("progress-fill").style.width = percent + "%";
 
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "🤤​ Soft cap reached" : "😪​ Soft cap not reached";
+    currentRaisedUSD >= softCapUSD ? "​🤤​ Soft cap reached" : "😪 Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
@@ -755,8 +749,8 @@ function updateTokenTracker(){
   soldEl.textContent = `Sold: ${Math.floor(tokensSold).toLocaleString()} BLOJOB`;
   remainingEl.textContent = `Remaining: ${Math.floor(tokensRemaining).toLocaleString()} BLOJOB`;
 
-  const percentTokens = (tokensSold / PRESALE_TOKENS_TOTAL) * 100;
-  bar.style.width = percentTokens + "%";
+  const percentRemaining = (tokensRemaining / PRESALE_TOKENS_TOTAL) * 100;
+  bar.style.width = percentRemaining + "%";
 }
 
 /* Helper for you from console */
