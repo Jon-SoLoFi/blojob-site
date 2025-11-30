@@ -432,7 +432,7 @@
 
 <header>
   <div class="logo-wrap">
-    <img src="blojob.png" alt="$BLOJOB logo">
+    <img src="blojob.png" alt="BLOJOB logo">
     <h1>BLOJOB</h1>
     <h2>Solana’s Most Seductive Degenerate Token ​❤️‍🔥​</h2>
   </div>
@@ -484,7 +484,7 @@
 
   <div class="callout">
     <strong>Presale is simple:</strong><br>
-    • Send SOL to the presale wallet during the 36h window using the Buy button.<br>
+    • Connect your wallet and send SOL to the presale wallet using the Buy flow.<br>
     • After TGE, tokens are distributed proportionally to your total dollar contribution.<br>
     • Everything is matched to on-chain data. No “trust-me-bro” balances.
   </div>
@@ -496,16 +496,15 @@
 
   <div class="callout">
     <strong>​⚠️​ Use a non-custodial Solana wallet</strong><br>
-    Phantom, Solflare, Backpack, Rabby (Solana), OKX, etc.
+    Phantom, Solflare, Backpack, Rabby (Solana desktop), OKX, etc.
     <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
   </div>
 
   <ul class="howto-list">
     <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
-    <li><strong>Step 2:</strong> Hit <strong>Connect Wallet &amp; Buy</strong> below and confirm the transaction.</li>
-    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet (Solscan link) in case we need to cross-check anything.</li>
-    <li><strong>Step 4:</strong> After presale closes and totals are locked, $BLOJOB
-      is distributed to the same wallet that sent the SOL.
+    <li><strong>Step 2:</strong> Enter how much SOL you want to ape, then hit <strong>Connect Wallet &amp; Buy</strong> and approve the transaction.</li>
+    <li><strong>Step 3:</strong> After presale closes and totals are locked, BLOJOB
+      is airdropped to the same wallet that sent the SOL.
     </li>
   </ul>
 
@@ -535,7 +534,7 @@
     <h2>💋 Presale Wallet — Come Get Filled</h2>
     <p style="font-size:0.9rem; opacity:0.85;">
       After you’ve decided how hard you want to ape, connect your wallet and confirm the transaction.
-      $BLOJOB will be airdropped to the same wallet after presale ends.
+      BLOJOB will be airdropped to the same wallet after presale ends.
     </p>
 
     <div class="wallet-box" id="walletBox">
@@ -543,13 +542,13 @@
     </div>
 
     <div class="button-row">
-      <button class="primary-btn" onclick="openWalletModal()">Connect Wallet &amp; Buy</button>
+      <button class="primary-btn" onclick="startBuyFlow()">Connect Wallet &amp; Buy</button>
       <button class="copy-btn" onclick="copyWallet()">Copy Address</button>
     </div>
 
     <p class="wallet-note">
-      Tip: On mobile, open this page <strong>inside</strong> your wallet’s in-app browser
-      (Phantom, Solflare, Rabby, etc.) for the smoothest connect experience.
+      Tip: For automatic buy flow, open this page <strong>inside</strong> your wallet’s in-app browser
+      (Phantom, Solflare, Backpack, OKX, etc.). Desktop browser + wallet extension also works.
     </p>
   </div>
 </div>
@@ -631,13 +630,20 @@
   </div>
 </div>
 
+<!-- Solana web3.js CDN -->
+<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+
 <script>
+/* =========================
+   CONSTANTS
+   ========================= */
+const PRESALE_WALLET = "7982bnhc9G23KyUkcNJSJjJ2ampVQPh21P7LEM1UmoNA";
+const CONNECTION = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
+
 /* =========================
    PRESALE TIMING
    ========================= */
-/* TODO: set this to your real presale start time */
 const presaleStart = new Date("2025-11-29T20:00:00-05:00");
-/* 36 hours duration */
 const presaleEnd   = new Date(presaleStart.getTime() + 36 * 3600 * 1000);
 
 function pad(n){return n.toString().padStart(2,'0')}
@@ -681,6 +687,15 @@ function copyWallet(){
 }
 
 /* =========================
+   SOL PRICE HELPER
+   ========================= */
+async function fetchSolPrice(){
+  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+  const data = await res.json();
+  return data.solana.usd;
+}
+
+/* =========================
    CALCULATOR — SOL → BLOJOB
    ========================= */
 async function updateCalc(){
@@ -693,10 +708,7 @@ async function updateCalc(){
   }
 
   try{
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-    const data = await res.json();
-    const solPrice = data.solana.usd;
-
+    const solPrice = await fetchSolPrice();
     const usdValue = sol * solPrice;
     const pricePerToken = 0.000001; // $0.000001 per token
     const blojobTokens = usdValue / pricePerToken;
@@ -711,11 +723,6 @@ async function updateCalc(){
 /* =========================
    PROGRESS + TOKEN TRACKER
    ========================= */
-/*
-  During presale, update this number as USD raised increases.
-  Example in console:
-    presaleAdminSetRaised(420);
-*/
 let currentRaisedUSD = 0;
 const hardCapUSD = 9600;
 const softCapUSD = 6900;
@@ -751,7 +758,7 @@ function updateTokenTracker(){
   bar.style.width = percentRemaining + "%";  // bar shrinks as tokens are sold
 }
 
-/* Helper for you from console */
+/* Helper for you from console if you want to override */
 window.presaleAdminSetRaised = function(usd){
   currentRaisedUSD = Math.max(0, Number(usd) || 0);
   updateProgress();
@@ -759,8 +766,20 @@ window.presaleAdminSetRaised = function(usd){
 };
 
 /* =========================
-   WALLET MODAL + CONNECT
+   WALLET MODAL + BUY FLOW
    ========================= */
+let pendingSolAmount = null;
+
+function startBuyFlow(){
+  const solInput = parseFloat(document.getElementById("solInput").value);
+  if(!solInput || solInput <= 0){
+    alert("Enter how much SOL you want to ape first.");
+    return;
+  }
+  pendingSolAmount = solInput;
+  openWalletModal();
+}
+
 function openWalletModal(){
   document.getElementById("walletModalBackdrop").style.display = "flex";
 }
@@ -769,48 +788,113 @@ function closeWalletModal(){
   document.getElementById("walletModalBackdrop").style.display = "none";
 }
 
-/* Deep-link + injected wallet handling */
+/* Build & send SOL TX to presale wallet */
+async function sendPresaleTransaction(provider, amountSol){
+  if(!provider || !provider.publicKey){
+    alert("Wallet not connected. Try again.");
+    return;
+  }
+
+  try {
+    const fromPubkey = provider.publicKey;
+    const toPubkey = new solanaWeb3.PublicKey(PRESALE_WALLET);
+    const lamports = Math.round(amountSol * solanaWeb3.LAMPORTS_PER_SOL);
+
+    const { blockhash, lastValidBlockHeight } =
+      await CONNECTION.getLatestBlockhash("finalized");
+
+    const tx = new solanaWeb3.Transaction({
+      feePayer: fromPubkey,
+      recentBlockhash: blockhash
+    }).add(
+      solanaWeb3.SystemProgram.transfer({
+        fromPubkey,
+        toPubkey,
+        lamports
+      })
+    );
+
+    let signature;
+
+    if (provider.signAndSendTransaction) {
+      // Some wallets provide this convenience method
+      const res = await provider.signAndSendTransaction(tx);
+      signature = res.signature || res;
+    } else if (provider.signTransaction) {
+      const signed = await provider.signTransaction(tx);
+      signature = await CONNECTION.sendRawTransaction(signed.serialize());
+    } else {
+      alert("Wallet does not support transaction signing from this dapp. Use in-app browser.");
+      return;
+    }
+
+    await CONNECTION.confirmTransaction({
+      signature,
+      blockhash,
+      lastValidBlockHeight
+    });
+
+    // Update raised + tracker based on live SOL price
+    try {
+      const solPrice = await fetchSolPrice();
+      const usdValue = amountSol * solPrice;
+      currentRaisedUSD += usdValue;
+      updateProgress();
+    } catch (e) {
+      console.warn("Could not update USD raised after TX:", e);
+    }
+
+    alert("Transaction sent! TX: " + signature + "\nYour BLOJOB allocation will be included at TGE.");
+  } catch (e) {
+    console.error(e);
+    alert("Transaction failed or was rejected. Try again or check your wallet.");
+  }
+}
+
+/* Connect & immediately trigger buy */
 async function connectSpecificWallet(type) {
+  closeWalletModal();
+
+  if(!pendingSolAmount || pendingSolAmount <= 0){
+    alert("Enter a valid SOL amount first.");
+    return;
+  }
+
   try {
     if (type === "phantom") {
       if (window.solana && window.solana.isPhantom) {
         await window.solana.connect();
-        alert("Phantom connected. Confirm the send inside your wallet.");
+        await sendPresaleTransaction(window.solana, pendingSolAmount);
       } else {
-        // Mobile deep link into Phantom
-        window.location.href = "phantom://app/ul/v1/open";
+        alert("Phantom not detected. Open this site inside Phantom's in-app browser or install the extension.");
       }
     } else if (type === "solflare") {
       if (window.solflare) {
         await window.solflare.connect();
-        alert("Solflare connected. Confirm the send inside your wallet.");
+        await sendPresaleTransaction(window.solflare, pendingSolAmount);
       } else {
-        window.location.href =
-          "solflare://v1/open?url=" + encodeURIComponent(window.location.href);
+        alert("Solflare not detected. Open this site inside Solflare's in-app browser or install the extension.");
       }
     } else if (type === "backpack") {
       if (window.backpack) {
         await window.backpack.connect();
-        alert("Backpack connected. Confirm the send inside your wallet.");
+        await sendPresaleTransaction(window.backpack, pendingSolAmount);
       } else {
-        window.location.href = "backpack://";
+        alert("Backpack not detected. Open this site inside Backpack's in-app browser or install it.");
       }
     } else if (type === "okx") {
       if (window.okxwallet && window.okxwallet.solana) {
         await window.okxwallet.solana.connect();
-        alert("OKX Wallet connected. Confirm the send inside your wallet.");
+        await sendPresaleTransaction(window.okxwallet.solana, pendingSolAmount);
       } else {
-        window.location.href =
-          "okx://wallet/dapp/browser?url=" + encodeURIComponent(window.location.href);
+        alert("OKX wallet not detected. Open this site inside OKX Web3 wallet or install it.");
       }
     } else if (type === "rabby") {
-      alert("Rabby doesn’t support Solana on mobile. Use Phantom, Solflare, Backpack, or OKX.");
+      alert("Rabby Solana support is limited on mobile. Use Phantom, Solflare, Backpack, or OKX with this presale.");
     }
   } catch (e) {
     console.error(e);
     alert("Wallet connection failed or was rejected. Try again or open this site inside your wallet’s in-app browser.");
-  } finally {
-    closeWalletModal();
   }
 }
 
