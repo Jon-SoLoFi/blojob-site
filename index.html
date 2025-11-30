@@ -192,7 +192,7 @@
 
   #token-progress-fill {
     height: 100%;
-    width: 100%; /* starts full */
+    width: 100%; /* starts full and empties as tokens are sold */
     background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
     box-shadow: 0 0 12px rgba(216,150,255,0.8);
     transition: width 0.4s ease-out;
@@ -441,7 +441,7 @@
 <!-- Countdown + Progress -->
 <div class="countdown-progress">
   <div class="card">
-    <div class="card-title">​🕑​ Presale Timing</div>
+    <div class="card-title">​🕒​ Presale Timing</div>
     <p id="countdown-label">Presale starts in</p>
     <div id="countdown-timer">--d --h --m --s</div>
     <p class="countdown-sub">
@@ -456,7 +456,7 @@
     <p class="progress-title">Soft cap: $6,900 • Hard cap: $9,600</p>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <p id="progress-amounts" class="progress-amounts">
-      Raised: $0 / $6,900 (soft cap) • ​😪​ Soft cap not reached
+      Raised: $0 / $6,900 (soft cap) • 😪 Soft cap not reached
     </p>
 
     <div class="token-tracker">
@@ -503,15 +503,14 @@
   <ul class="howto-list">
     <li><strong>Step 1:</strong> Make sure you have enough SOL for your buy + gas.</li>
     <li><strong>Step 2:</strong> Hit <strong>Connect Wallet &amp; Buy</strong> below and confirm the transaction.</li>
-    <li><strong>Step 3:</strong> After sending, you can grab your <strong>transaction link</strong> from your wallet (Solscan link) if you want a receipt or to flex in chat.</li>
-    <li><strong>Step 4:</strong> After presale closes and totals are locked, BLOJOB
+    <li><strong>Step 3:</strong> After sending, grab your <strong>transaction link</strong> from your wallet (Solscan link) in case we need to cross-check anything.</li>
+    <li><strong>Step 4:</strong> After presale closes and totals are locked, $BLOJOB
       is distributed to the same wallet that sent the SOL.
     </li>
   </ul>
 
   <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
     Final allocations are always based on <strong>on-chain totals at presale close</strong>.
-    The Telegram receipts are for transparency and hype, not for math.
   </p>
 </div>
 
@@ -519,9 +518,9 @@
 <div class="buy-grid">
   <!-- Left: Calculator -->
   <div class="calc-box">
-    <h2>🔢 SOL → $BLOJOB Calculator</h2>
+    <h2>🔢 SOL → BLOJOB Calculator</h2>
     <p style="font-size:0.9rem; opacity:0.85;">
-      Presale price: <strong>$0.000001 = 1 BLOJOB</strong>.
+      <strong>Presale price:</strong> $0.000001 = 1 BLOJOB.
     </p>
     <p style="font-size:0.9rem; opacity:0.85;">
       Enter how much SOL you’re thinking of aping. We’ll estimate USD value and BLOJOB based on live SOL price.
@@ -565,12 +564,11 @@
     <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes, TG/𝕏 growth, micro-liquidity support.<br>
     <strong>🫟 StickyLiquidity (LP):</strong> 14.1% — Liquidity pool at launch, locked for stability.<br>
   </p>
-
 </div>
 
 <!-- Socials -->
 <div class="section">
-  <h2>🌐 Socials</h2>
+  <h2>​🌐​ Socials</h2>
   <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
   <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
   <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
@@ -615,7 +613,7 @@
       <li>
         <button class="wallet-option" onclick="connectSpecificWallet('rabby')">
           <span>Rabby (Solana)</span>
-          <small>Browser extension</small>
+          <small>Desktop only</small>
         </button>
       </li>
       <li>
@@ -728,7 +726,7 @@ function updateProgress(){
   document.getElementById("progress-fill").style.width = percent + "%";
 
   const softCapStatus =
-    currentRaisedUSD >= softCapUSD ? "​🤤​ Soft cap reached" : "😪 Soft cap not reached";
+    currentRaisedUSD >= softCapUSD ? "🤤​ Soft cap reached" : "😪 Soft cap not reached";
 
   document.getElementById("progress-amounts").textContent =
     `Raised: $${currentRaisedUSD.toLocaleString()} / $${softCapUSD.toLocaleString()} (soft cap) • ${softCapStatus}`;
@@ -750,7 +748,7 @@ function updateTokenTracker(){
   remainingEl.textContent = `Remaining: ${Math.floor(tokensRemaining).toLocaleString()} BLOJOB`;
 
   const percentRemaining = (tokensRemaining / PRESALE_TOKENS_TOTAL) * 100;
-  bar.style.width = percentRemaining + "%";
+  bar.style.width = percentRemaining + "%";  // bar shrinks as tokens are sold
 }
 
 /* Helper for you from console */
@@ -771,49 +769,46 @@ function closeWalletModal(){
   document.getElementById("walletModalBackdrop").style.display = "none";
 }
 
-/* Very lightweight connectors.
-   Real degens will usually already have the wallet injected. */
-async function connectSpecificWallet(type){
+/* Deep-link + injected wallet handling */
+async function connectSpecificWallet(type) {
   try {
-    if(type === 'phantom'){
-      if(window.solana && window.solana.isPhantom){
+    if (type === "phantom") {
+      if (window.solana && window.solana.isPhantom) {
         await window.solana.connect();
-        alert("Phantom connected. Now confirm the send to the presale wallet in your wallet UI.");
+        alert("Phantom connected. Confirm the send inside your wallet.");
       } else {
-        window.open("https://phantom.app/", "_blank");
+        // Mobile deep link into Phantom
+        window.location.href = "phantom://app/ul/v1/open";
       }
-    } else if(type === 'solflare'){
-      if(window.solflare){
+    } else if (type === "solflare") {
+      if (window.solflare) {
         await window.solflare.connect();
-        alert("Solflare connected. Now confirm the send to the presale wallet in your wallet UI.");
+        alert("Solflare connected. Confirm the send inside your wallet.");
       } else {
-        window.open("https://solflare.com/", "_blank");
+        window.location.href =
+          "solflare://v1/open?url=" + encodeURIComponent(window.location.href);
       }
-    } else if(type === 'backpack'){
-      if(window.backpack){
+    } else if (type === "backpack") {
+      if (window.backpack) {
         await window.backpack.connect();
-        alert("Backpack connected. Now confirm the send to the presale wallet in your wallet UI.");
+        alert("Backpack connected. Confirm the send inside your wallet.");
       } else {
-        window.open("https://www.backpack.app/", "_blank");
+        window.location.href = "backpack://";
       }
-    } else if(type === 'rabby'){
-      if(window.rabby){
-        await window.rabby.connect();
-        alert("Rabby connected. Now confirm the send to the presale wallet in your wallet UI.");
-      } else {
-        window.open("https://rabby.io/", "_blank");
-      }
-    } else if(type === 'okx'){
-      if(window.okxwallet){
+    } else if (type === "okx") {
+      if (window.okxwallet && window.okxwallet.solana) {
         await window.okxwallet.solana.connect();
-        alert("OKX Wallet connected. Now confirm the send to the presale wallet in your wallet UI.");
+        alert("OKX Wallet connected. Confirm the send inside your wallet.");
       } else {
-        window.open("https://www.okx.com/web3", "_blank");
+        window.location.href =
+          "okx://wallet/dapp/browser?url=" + encodeURIComponent(window.location.href);
       }
+    } else if (type === "rabby") {
+      alert("Rabby doesn’t support Solana on mobile. Use Phantom, Solflare, Backpack, or OKX.");
     }
-  } catch(e){
+  } catch (e) {
     console.error(e);
-    alert("Wallet connection failed or was rejected. Try again or use your wallet’s in-app browser.");
+    alert("Wallet connection failed or was rejected. Try again or open this site inside your wallet’s in-app browser.");
   } finally {
     closeWalletModal();
   }
