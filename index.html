@@ -547,8 +547,8 @@
     </div>
 
     <p class="wallet-note">
-      Tip: For automatic buy flow, open this page <strong>inside</strong> your wallet’s in-app browser
-      (Phantom, Solflare, Backpack, OKX, etc.). Desktop browser + wallet extension also works.
+      Tip: For the smoothest one-tap experience, open this page <strong>inside</strong> your wallet’s in-app browser
+      (Phantom, Solflare, Backpack, OKX, etc.) or use a desktop browser with the extension installed.
     </p>
   </div>
 </div>
@@ -758,7 +758,7 @@ function updateTokenTracker(){
   bar.style.width = percentRemaining + "%";  // bar shrinks as tokens are sold
 }
 
-/* Helper for you from console if you want to override */
+/* Helper for manual override from console if needed */
 window.presaleAdminSetRaised = function(usd){
   currentRaisedUSD = Math.max(0, Number(usd) || 0);
   updateProgress();
@@ -766,7 +766,7 @@ window.presaleAdminSetRaised = function(usd){
 };
 
 /* =========================
-   WALLET MODAL + BUY FLOW
+   BUY FLOW
    ========================= */
 let pendingSolAmount = null;
 
@@ -817,14 +817,13 @@ async function sendPresaleTransaction(provider, amountSol){
     let signature;
 
     if (provider.signAndSendTransaction) {
-      // Some wallets provide this convenience method
       const res = await provider.signAndSendTransaction(tx);
       signature = res.signature || res;
     } else if (provider.signTransaction) {
       const signed = await provider.signTransaction(tx);
       signature = await CONNECTION.sendRawTransaction(signed.serialize());
     } else {
-      alert("Wallet does not support transaction signing from this dapp. Use in-app browser.");
+      alert("Wallet does not support transaction signing from this dapp. Use the wallet’s in-app browser.");
       return;
     }
 
@@ -851,7 +850,9 @@ async function sendPresaleTransaction(provider, amountSol){
   }
 }
 
-/* Connect & immediately trigger buy */
+/* =========================
+   CONNECT + HYBRID LOGIC
+   ========================= */
 async function connectSpecificWallet(type) {
   closeWalletModal();
 
@@ -860,34 +861,43 @@ async function connectSpecificWallet(type) {
     return;
   }
 
+  const url = window.location.href;
+
   try {
     if (type === "phantom") {
       if (window.solana && window.solana.isPhantom) {
         await window.solana.connect();
         await sendPresaleTransaction(window.solana, pendingSolAmount);
       } else {
-        alert("Phantom not detected. Open this site inside Phantom's in-app browser or install the extension.");
+        // Deep-link into Phantom’s in-app browser pointing back to this page
+        window.location.href = "https://phantom.app/ul/v1/open?link=" + encodeURIComponent(url);
+        alert("Open this presale inside Phantom’s browser, then tap Buy again.");
       }
     } else if (type === "solflare") {
       if (window.solflare) {
         await window.solflare.connect();
         await sendPresaleTransaction(window.solflare, pendingSolAmount);
       } else {
-        alert("Solflare not detected. Open this site inside Solflare's in-app browser or install the extension.");
+        window.location.href =
+          "https://solflare.com/ul/v1/open?url=" + encodeURIComponent(url);
+        alert("Open this presale inside Solflare’s browser, then tap Buy again.");
       }
     } else if (type === "backpack") {
       if (window.backpack) {
         await window.backpack.connect();
         await sendPresaleTransaction(window.backpack, pendingSolAmount);
       } else {
-        alert("Backpack not detected. Open this site inside Backpack's in-app browser or install it.");
+        window.location.href = "https://www.backpack.app/redirect?url=" + encodeURIComponent(url);
+        alert("Open this presale inside Backpack’s browser, then tap Buy again.");
       }
     } else if (type === "okx") {
       if (window.okxwallet && window.okxwallet.solana) {
         await window.okxwallet.solana.connect();
         await sendPresaleTransaction(window.okxwallet.solana, pendingSolAmount);
       } else {
-        alert("OKX wallet not detected. Open this site inside OKX Web3 wallet or install it.");
+        window.location.href =
+          "okx://wallet/dapp/browser?url=" + encodeURIComponent(url);
+        alert("Open this presale inside OKX Web3 wallet, then tap Buy again.");
       }
     } else if (type === "rabby") {
       alert("Rabby Solana support is limited on mobile. Use Phantom, Solflare, Backpack, or OKX with this presale.");
