@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>$BLOJOB — Stealth Launch Coming Soon</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>$BLOJOB — Stealth Launch Incoming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -15,8 +17,8 @@
       --bg-card: #11111f;
       --border-subtle: #262640;
       --text-soft: #c7c7ff;
-      --danger: #ff4f7b;
-      --success: #4fe3a1;
+      --success: #63ffb4;
+      --danger: #ff4f98;
     }
 
     * {
@@ -27,20 +29,21 @@
       margin: 0;
       background: radial-gradient(circle at top, #17172a 0, #070712 55%);
       color: #fff;
-      font-family: "Poppins", sans-serif;
-      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
     }
 
     a {
       color: inherit;
     }
 
+    /* HEADER / HERO */
+
     header {
       text-align: center;
       padding: 60px 20px 40px;
       background: radial-gradient(circle at top, var(--purple-main), #1b082f 55%, #070712 100%);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       position: relative;
       overflow: hidden;
     }
@@ -51,26 +54,7 @@
       align-items: center;
       gap: 14px;
       position: relative;
-    }
-
-    .logo-wrap::before {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        rgba(176, 38, 255, 0.3),
-        rgba(216, 150, 255, 0.05),
-        rgba(123, 44, 255, 0.3),
-        rgba(255, 255, 255, 0.1),
-        rgba(176, 38, 255, 0.3)
-      );
-      filter: blur(10px);
-      opacity: 0.55;
-      z-index: 0;
-      animation: holoSweep 6s linear infinite;
+      z-index: 1;
     }
 
     .logo-wrap img {
@@ -78,11 +62,39 @@
       height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 32px rgba(0, 0, 0, 0.65);
-      border: 2px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 0 32px rgba(0,0,0,0.6);
+      border: 2px solid rgba(255,255,255,0.18);
       position: relative;
       z-index: 1;
-      animation: logoFloat 6s ease-in-out infinite, logoGlow 3.8s ease-in-out infinite;
+    }
+
+    /* HOLOGRAPHIC LOGO EFFECT */
+    .holo-logo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .holo-logo::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(255,255,255,0.15),
+        rgba(176,38,255,0.5),
+        rgba(151,255,255,0.45),
+        rgba(255,255,255,0.15)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.75;
+      animation: holoSweep 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes holoSweep {
+      0% { transform: translate3d(-20%, -20%, 0) rotate(0deg); }
+      50% { transform: translate3d(10%, 10%, 0) rotate(180deg); }
+      100% { transform: translate3d(-20%, -20%, 0) rotate(360deg); }
     }
 
     h1 {
@@ -90,8 +102,8 @@
       font-weight: 800;
       margin: 0;
       letter-spacing: 0.04em;
-      text-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
-      animation: titlePulse 2.8s ease-in-out infinite;
+      text-shadow: 0 0 16px rgba(0,0,0,0.8);
+      animation: pulseGlow 2.6s ease-in-out infinite;
     }
 
     h2 {
@@ -100,286 +112,308 @@
       margin-top: 6px;
     }
 
-    .status-pill {
+    .hero-tagline {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .pill-tag {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 10px;
-      padding: 6px 14px;
+      background: rgba(0,0,0,0.35);
       border-radius: 999px;
-      font-size: 0.86rem;
-      background: rgba(5, 5, 20, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.14);
+      margin-top: 10px;
+      animation: pulseGlow 3.4s ease-in-out infinite;
     }
 
-    .status-dot {
+    .pill-tag-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--danger);
-      box-shadow: 0 0 10px rgba(255, 79, 123, 0.9);
-      animation: statusBlink 1.3s ease-in-out infinite;
+      background: var(--success);
+      box-shadow: 0 0 12px rgba(99,255,180,0.8);
     }
 
-    .env-label {
-      font-size: 0.7rem;
-      opacity: 0.6;
-      margin-top: 4px;
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 0 0 8px rgba(216,150,255,0.55);
+        box-shadow: 0 0 12px rgba(176,38,255,0.4);
+      }
+      50% {
+        text-shadow: 0 0 18px rgba(216,150,255,0.9);
+        box-shadow: 0 0 24px rgba(176,38,255,0.8);
+      }
+    }
+
+    /* GENERAL LAYOUT */
+
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 18px 60px;
     }
 
     .section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 32px 20px;
-      line-height: 1.7;
+      margin: 24px 0;
     }
 
-    .section-tight {
-      max-width: 900px;
-    }
-
-    .section h3 {
-      margin-top: 0;
+    .section-title {
+      font-size: 1.4rem;
       margin-bottom: 12px;
-      font-size: 1.25rem;
     }
 
-    .nsfw-line {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--purple-neon);
+    .section-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.82;
+      margin-bottom: 12px;
     }
 
-    .callout {
-      background: linear-gradient(135deg, rgba(176, 38, 255, 0.12), rgba(13, 13, 40, 0.96));
-      border-left: 3px solid var(--purple-main);
-      padding: 18px;
-      margin-top: 20px;
-      font-size: 1.02rem;
-      border-radius: 10px;
-    }
-
-    .callout strong {
-      color: var(--purple-neon);
-    }
-
-    .grid-two {
+    .cards-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1.1fr;
-      gap: 18px;
-      align-items: flex-start;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
 
     @media (max-width: 900px) {
-      .grid-two {
+      .cards-grid {
         grid-template-columns: 1fr;
       }
     }
+
+    /* CARDS */
 
     .card {
       background: var(--bg-card);
       border-radius: 16px;
       border: 1px solid var(--border-subtle);
-      padding: 18px 18px 22px;
-      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+      padding: 18px 18px 20px;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
     }
 
-    .card-title {
-      font-size: 1.02rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .pill {
-      display: inline-flex;
+    .card-title-sm {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-bottom: 6px;
+      display: flex;
       align-items: center;
-      gap: 5px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      background: rgba(10, 10, 30, 0.96);
-      border: 1px solid #3a3a5a;
-      color: var(--text-soft);
-    }
-
-    .pill-success {
-      border-color: var(--success);
-      color: var(--success);
-    }
-
-    .supply-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
-
-    .supply-label {
-      opacity: 0.8;
-    }
-
-    .supply-value {
-      font-weight: 600;
-    }
-
-    .supply-value.highlight {
-      color: var(--purple-neon);
-    }
-
-    .burn-label {
-      color: var(--danger);
-    }
-
-    .burn-percent {
-      font-size: 0.86rem;
-      opacity: 0.9;
-    }
-
-    .burn-bar {
-      width: 100%;
-      height: 12px;
-      background: #141428;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 8px;
-      border: 1px solid #313159;
-    }
-
-    .burn-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #ffb3c7, #ff4f7b, #ffb3c7);
-      box-shadow: 0 0 14px rgba(255, 79, 123, 0.9);
-      animation: barPulse 2.7s ease-in-out infinite;
-    }
-
-    .tokenomics-list {
-      font-size: 0.9rem;
-      margin-top: 6px;
-    }
-
-    .tokenomics-list strong {
-      color: var(--purple-neon);
-    }
-
-    /* Address rows */
-    .address-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 14px;
-    }
-
-    @media (max-width: 800px) {
-      .address-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .address-row {
-      background: rgba(5, 5, 20, 0.92);
-      border-radius: 12px;
-      border: 1px solid #3b3b63;
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
       gap: 6px;
-      cursor: pointer;
-      user-select: none;
-      transition: 0.15s;
-      position: relative;
-      overflow-wrap: anywhere;
     }
 
-    .address-row:hover {
-      border-color: var(--purple-main);
-      box-shadow: 0 0 14px rgba(176, 38, 255, 0.5);
+    .card-main-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 4px 0;
     }
 
-    .address-row.copied {
-      border-color: var(--success);
-      box-shadow: 0 0 16px rgba(79, 227, 161, 0.6);
-    }
-
-    .address-label-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+    .card-subtext {
       font-size: 0.86rem;
-      opacity: 0.88;
-    }
-
-    .address-main-label {
-      font-weight: 600;
-    }
-
-    .address-copy-label {
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #16162a;
-      border: 1px solid #41416a;
-    }
-
-    .address-value {
-      font-size: 0.9rem;
-      color: var(--text-soft);
-    }
-
-    .address-help {
-      font-size: 0.78rem;
       opacity: 0.78;
     }
 
-    /* Chart section */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
 
-    .chart-wrapper {
+    .chip-success {
+      border-color: rgba(99,255,180,0.6);
+      color: var(--success);
+    }
+
+    .chip-danger {
+      border-color: rgba(255,79,152,0.6);
+      color: var(--danger);
+    }
+
+    /* PROGRESS / BURN BAR */
+
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 14px;
+      background: #19192a;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid #2e2e4c;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f4b3ff, var(--purple-main), var(--purple-soft));
+      box-shadow: 0 0 16px rgba(176,38,255,0.9);
+      transition: width 0.4s ease-out;
+      animation: progressPulse 2.6s ease-in-out infinite;
+    }
+
+    .progress-stripe {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        120deg,
+        rgba(255,255,255,0.08) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255,255,255,0.08) 50%,
+        rgba(255,255,255,0.08) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 40px 40px;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      animation: stripeSlide 4s linear infinite;
+      opacity: 0.65;
+    }
+
+    @keyframes progressPulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(176,38,255,0.7); }
+      50% { box-shadow: 0 0 24px rgba(176,38,255,1); }
+    }
+
+    @keyframes stripeSlide {
+      0% { background-position: 0 0; }
+      100% { background-position: 80px 0; }
+    }
+
+    /* ADDRESS LIST */
+
+    .address-section {
+      text-align: center;
+    }
+
+    .address-list {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .address-line {
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+
+    .wallet-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .wallet-address {
+      font-size: 0.9rem;
+      margin-top: 3px;
+      font-family: "Courier New", monospace;
+      word-break: break-all;
+      display: inline-block;
+      padding-bottom: 2px;
+      border-bottom: 1px dashed transparent;
+      transition: border-color 0.15s, opacity 0.15s;
+    }
+
+    .address-line:hover .wallet-address {
+      border-bottom-color: rgba(255,255,255,0.3);
+      opacity: 0.95;
+    }
+
+    /* LIVE CHART */
+
+    .chart-wrap {
+      margin-top: 12px;
       border-radius: 16px;
+      overflow: hidden;
       border: 1px solid var(--border-subtle);
-      background: radial-gradient(circle at top left, rgba(176, 38, 255, 0.18), #11111f);
-      padding: 14px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6);
+      background: #050510;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
     }
 
     .chart-frame {
       width: 100%;
       height: 420px;
       border: none;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #050513;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .chart-frame {
+        height: 360px;
+      }
     }
 
     .chart-note {
       font-size: 0.8rem;
-      opacity: 0.8;
-      margin-top: 6px;
+      opacity: 0.7;
+      margin-top: 8px;
+      text-align: right;
     }
 
-    /* How-to-buy */
+    /* COPY TOAST + AUDIO HINT */
 
-    .howto-list {
-      margin-top: 10px;
-      padding-left: 20px;
-      font-size: 0.92rem;
-    }
-
-    .howto-list li {
-      margin-bottom: 6px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: rgba(8,8,20,0.98);
+      padding: 8px 16px;
       border-radius: 999px;
-      font-size: 0.75rem;
-      background: #16162a;
-      border: 1px solid #41416a;
-      margin-left: 6px;
-      vertical-align: middle;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      z-index: 9999;
     }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+      pointer-events: auto;
+    }
+
+    .audio-hint {
+      position: fixed;
+      right: 14px;
+      bottom: 20px;
+      background: rgba(0,0,0,0.7);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      display: none;
+      align-items: center;
+      gap: 6px;
+      z-index: 9998;
+    }
+
+    .audio-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple-neon);
+      box-shadow: 0 0 12px rgba(216,150,255,0.9);
+    }
+
+    /* SOCIAL BUTTONS */
 
     .btn-row {
       display: flex;
@@ -392,670 +426,409 @@
       display: inline-block;
       background: var(--purple-main);
       color: #000;
-      padding: 12px 20px;
+      padding: 12px 22px;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
+      font-size: 0.92rem;
       transition: 0.18s;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      flex: 0 0 auto;
+      box-shadow: 0 0 12px rgba(0,0,0,0.6);
     }
 
     .btn:hover {
-      transform: translateY(-1px) scale(1.03);
+      transform: translateY(-1px) scale(1.04);
       background: var(--purple-neon);
-      box-shadow: 0 0 16px rgba(176, 38, 255, 0.8);
+      box-shadow: 0 0 16px rgba(176,38,255,0.8);
     }
 
-    .btn-ghost {
-      background: rgba(10, 10, 30, 0.9);
-      color: #f8f8ff;
-      border: 1px solid #3a3a5a;
-    }
+    /* COPY-ONLY AUDIO ICON (OPTIONAL) */
 
-    /* Audio control */
-
-    .audio-toggle {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      z-index: 999;
-      background: rgba(10, 10, 30, 0.95);
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      border: 1px solid #3a3a5a;
+    .audio-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-    }
-
-    .audio-toggle span {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.35);
+      margin-top: 8px;
       opacity: 0.9;
-    }
-
-    @media (max-width: 600px) {
-      .audio-toggle {
-        bottom: 10px;
-        right: 10px;
-        font-size: 0.78rem;
-        padding: 5px 10px;
-      }
     }
 
     footer {
       text-align: center;
-      padding: 40px 16px 60px;
-      font-size: 0.9rem;
+      padding: 30px 16px 40px;
+      font-size: 0.85rem;
       opacity: 0.65;
-    }
-
-    /* Animations */
-
-    @keyframes titlePulse {
-      0% {
-        text-shadow: 0 0 10px rgba(176, 38, 255, 0.35);
-      }
-      50% {
-        text-shadow: 0 0 22px rgba(216, 150, 255, 0.9);
-      }
-      100% {
-        text-shadow: 0 0 10px rgba(176, 38, 255, 0.35);
-      }
-    }
-
-    @keyframes barPulse {
-      0% {
-        box-shadow: 0 0 8px rgba(176, 38, 255, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 18px rgba(176, 38, 255, 0.9);
-      }
-      100% {
-        box-shadow: 0 0 8px rgba(176, 38, 255, 0.4);
-      }
-    }
-
-    @keyframes logoFloat {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-6px);
-      }
-    }
-
-    @keyframes logoGlow {
-      0%,
-      100% {
-        box-shadow: 0 0 22px rgba(176, 38, 255, 0.5);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(216, 150, 255, 0.9);
-      }
-    }
-
-    @keyframes holoSweep {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes statusBlink {
-      0%,
-      100% {
-        opacity: 0.4;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    /* Mode-specific tweaks */
-
-    body.mode-telegram header {
-      padding: 40px 16px 26px;
-    }
-
-    body.mode-telegram .chart-wrapper {
-      display: none;
-    }
-
-    body.mode-telegram .audio-toggle {
-      display: none;
-    }
-
-    body.mode-telegram .logo-wrap::before,
-    body.mode-telegram .logo-wrap img,
-    body.mode-telegram h1 {
-      animation: none;
-    }
-
-    body.mode-mobile .chart-wrapper {
-      display: none;
-    }
-
-    body.mode-mobile .chart-mobile-note {
-      display: block;
-    }
-
-    .chart-mobile-note {
-      display: none;
-      font-size: 0.82rem;
-      opacity: 0.78;
-      margin-top: 8px;
-    }
-
-    body.mode-desktop .chart-mobile-note {
-      display: none;
-    }
-
-    /* Tiny env label hidden on small screens */
-    @media (max-width: 480px) {
-      .env-label {
-        display: none;
-      }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="logo-wrap">
-      <!-- Swap this for your logo file -->
-      <img src="blojob.png" alt="$BLOJOB logo" />
-      <h1>$BLOJOB</h1>
-      <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥</h2>
 
-      <div class="status-pill">
-        <span class="status-dot"></span>
-        <span>Stealth Launch: <strong>Coming Soon</strong></span>
-      </div>
-
-      <div class="env-label">
-        Mode:&nbsp;<span id="envModeText">detecting…</span>
-      </div>
+<header>
+  <div class="logo-wrap">
+    <div class="holo-logo">
+      <!-- Replace with your own logo file -->
+      <img src="blojob.png" alt="$BLOJOB logo">
     </div>
-  </header>
+    <h1>BLOJOB</h1>
+    <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥</h2>
+    <p class="hero-tagline">
+      Presale died. Liquidity lives. <strong>Stealth launch coming in hot.</strong>
+    </p>
+    <div class="pill-tag">
+      <span class="pill-tag-dot"></span>
+      <span>Stealth mode armed — degen radar ON.</span>
+    </div>
+    <div class="audio-pill">
+      🎧 Lo-fi is on standby — tap anywhere to unmute if your browser blocks autoplay.
+    </div>
+  </div>
+</header>
 
-  <!-- Intro / narrative -->
-  <section class="section section-tight">
-    <p class="nsfw-line">
-      You missed the presale. Now you’re early for the stealth launch. 😏
+<div class="page-wrap">
+
+  <!-- TOP STATS -->
+  <section class="section">
+    <div class="section-title">📡 Stealth Launch Status</div>
+    <p class="section-subtitle">
+      No more presale cope. LP gets seeded, chart goes live, and whoever finds it first decides how hard to ride it.
     </p>
 
-    <p>
-      No utility. No promises. No corporate foreplay.<br />
-      Just raw, throbbing, <strong>pure degen momentum</strong> built to pump hard, fast,
-      and as long as the CumUnity can handle.
-    </p>
+    <div class="cards-grid">
 
-    <div class="callout">
-      <strong>What changed?</strong><br />
-      • Presale supply: <strong>burned</strong>.<br />
-      • LP will be seeded on Raydium with a tight, feral starting MC.<br />
-      • Contract is live — stealth launch window opens soon.<br />
-      <br />
-      When the chart appears and LP is locked, that’s your signal. No announcements, no hand-holding.
-      Just vibes and violence.
+      <!-- CARD 1: LAUNCH WINDOW -->
+      <div class="card">
+        <div class="card-title-sm">⏱️ Launch Window</div>
+        <div class="card-main-number" id="launchStatusText">Stealth: Primed</div>
+        <div class="card-subtext" id="launchSubText">
+          LP will be seeded and trading will open without warning. No countdown. No mercy. No refunds.
+        </div>
+        <div style="margin-top:10px;">
+          <span class="chip chip-success">Fair-ish stealth launch</span>
+        </div>
+      </div>
+
+      <!-- CARD 2: LP & MC (STATIC PLACEHOLDER) -->
+      <div class="card">
+        <div class="card-title-sm">💧 Liquidity & Market Cap</div>
+        <div class="card-main-number" id="lpUsdText">LP: 0.10 SOL</div>
+        <div class="card-subtext" id="mcText">
+          Target stealth MCs: <strong>$6.21K</strong> or <strong>$62.1K</strong> — depends how degenerate the deployment is.
+        </div>
+        <div style="margin-top:10px;">
+          <div class="progress-label-row">
+            <span>Liquidity seeded</span>
+            <span id="lpProgressPct">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="lpProgressFill"></div>
+            <div class="progress-stripe"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: SUPPLY & BURN -->
+      <div class="card">
+        <div class="card-title-sm">🔥 Supply & Burn Tracker</div>
+        <div class="card-main-number" id="circulatingText">Circulating: 0</div>
+        <div class="card-subtext">
+          Presale tokens are gone. Supply lives on-chain. Burn + LP + stealth allocation decide who actually eats.
+        </div>
+
+        <div style="margin-top:10px;">
+          <div class="progress-label-row">
+            <span>Total Supply</span>
+            <span id="totalSupplyText">69,000,000,000</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="burnInverseFill"></div>
+            <div class="progress-stripe"></div>
+          </div>
+
+          <div style="font-size:0.82rem; opacity:0.8; margin-top:6px;">
+            Burned: <span id="burnedText">0</span> • Remaining: <span id="remainingText">69,000,000,000</span>
+          </div>
+        </div>
+
+        <div style="margin-top:8px;">
+          <span class="chip chip-danger">Presale tokens burned</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- Supply + Burn tracker -->
-  <section class="section section-tight">
-    <div class="grid-two">
-      <!-- Supply card -->
-      <div class="card">
-        <div class="card-title">
-          🪙 Supply &amp; Burn Tracker
-          <span class="pill pill-success">Live Config</span>
-        </div>
-        <div class="supply-row">
-          <span class="supply-label">Total Supply</span>
-          <span class="supply-value" id="totalSupply">–</span>
-        </div>
-        <div class="supply-row">
-          <span class="supply-label burn-label">Burned</span>
-          <span class="supply-value burn-label" id="burnedSupply">–</span>
-        </div>
-        <div class="supply-row">
-          <span class="supply-label">Current Supply</span>
-          <span class="supply-value highlight" id="currentSupply">–</span>
-        </div>
-
-        <div class="burn-bar">
-          <div class="burn-bar-fill" id="burnBarFill"></div>
-        </div>
-        <div class="burn-percent">
-          Burned: <span id="burnPercentText">–%</span> of total
-        </div>
-      </div>
-
-      <!-- Tokenomics card -->
-      <div class="card">
-        <div class="card-title">
-          🍑 Tokenomics — 69,000,000,000 Supply
-        </div>
-        <div class="tokenomics-list">
-          <p>
-            <strong>🍑 SpankBank (Vault): 69%</strong><br />
-            Long-term reserves, treasury ops, stabilization, staking pools, CumUnity rewards,
-            micro-liquidity support.
-          </p>
-          <p>
-            <strong>💦 PreLoad (Presale): 10%</strong><br />
-            Fully allocated to presale — <strong>unsold tokens burned</strong>, adjusting real
-            circulating supply.
-          </p>
-          <p>
-            <strong>🫦 MILF (Marketing Initiative Liquidity Fund): 6.9%</strong><br />
-            Influencers, raids, TG/𝕏 growth, giveaways, and tasteful degeneracy.
-          </p>
-          <p>
-            <strong>🫟 StickyLiquidity (LP): 14.1%</strong><br />
-            Initial LP on Raydium, locked after stealth launch confirmation for stability.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Addresses -->
-  <section class="section section-tight">
-    <h3>🔍 Contract, LP &amp; Burn Wallets</h3>
-    <p style="font-size:0.9rem; opacity:0.85;">
-      Tap or click any row to copy. Always double-check on-chain before aping.
+  <!-- CONTRACT / ADDRESSES -->
+  <section class="section address-section">
+    <div class="section-title">🔗 Contract & Key Info</div>
+    <p class="section-subtitle">
+      Everything important lives on-chain. Tap any line to copy it, or highlight like a boomer and hit Ctrl+C.
     </p>
 
-    <div class="address-grid">
-      <!-- Token Mint -->
-      <div class="address-row" onclick="copyText('tokenAddress','Token mint address')">
-        <div class="address-label-line">
-          <span class="address-main-label">Token Mint</span>
-          <span class="address-copy-label">Click to copy</span>
-        </div>
-        <div class="address-value" id="tokenAddress">
-          76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw
-        </div>
-        <div class="address-help">
-          Official $BLOJOB SPL token. Use this when adding custom token or checking holders.
-        </div>
-      </div>
-
-      <!-- LP / Pair -->
-      <div class="address-row" onclick="copyText('lpAddress','Liquidity pool address')">
-        <div class="address-label-line">
-          <span class="address-main-label">Primary LP / Pair Address</span>
-          <span class="address-copy-label">Click to copy</span>
-        </div>
-        <div class="address-value" id="lpAddress">
+    <div class="address-list">
+      <!-- CONTRACT -->
+      <div class="address-line" onclick="copyAddress('HgsZcJxmngQQHBu85Fgw816LLSgeZffBahURx1WkT4FB')">
+        <div class="wallet-label">Token Contract (BLOJOB)</div>
+        <div class="wallet-address">
           HgsZcJxmngQQHBu85Fgw816LLSgeZffBahURx1WkT4FB
         </div>
-        <div class="address-help">
-          Raydium / DEX pair for $BLOJOB once the stealth launch is live.
+      </div>
+
+      <!-- Add your real LP and burn addresses when ready -->
+      <div class="address-line" onclick="copyAddress('TBA_AFTER_LAUNCH')">
+        <div class="wallet-label">LP Address (after stealth goes live)</div>
+        <div class="wallet-address">
+          TBA_AFTER_LAUNCH
         </div>
       </div>
 
-      <!-- Burn wallet -->
-      <div class="address-row" onclick="copyText('burnAddress','Burn wallet address')">
-        <div class="address-label-line">
-          <span class="address-main-label burn-label">Burn Wallet (Presale Burn)</span>
-          <span class="address-copy-label">Click to copy</span>
-        </div>
-        <div class="address-value" id="burnAddress">
-          PASTE_BURN_WALLET_ADDRESS_HERE
-        </div>
-        <div class="address-help">
-          Destination where presale tokens were sent to be permanently removed from supply.
-        </div>
-      </div>
-
-      <!-- Optional authority / dev -->
-      <div class="address-row" onclick="copyText('authorityAddress','Authority / dev wallet')">
-        <div class="address-label-line">
-          <span class="address-main-label">Authority / Dev Wallet (if applicable)</span>
-          <span class="address-copy-label">Click to copy</span>
-        </div>
-        <div class="address-value" id="authorityAddress">
-          PASTE_AUTHORITY_OR_DEV_WALLET_HERE
-        </div>
-        <div class="address-help">
-          For transparency. If contract is fully renounced, this may be a null / dead address instead.
+      <div class="address-line" onclick="copyAddress('TBA_BURN_ADDRESS')">
+        <div class="wallet-label">Burn Address (for verification)</div>
+        <div class="wallet-address">
+          TBA_BURN_ADDRESS
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chart (desktop only, mobile/Telegram hides or warns) -->
+  <!-- LIVE CHART -->
   <section class="section">
-    <h3>📈 Live Chart (Desktop Preferred)</h3>
+    <div class="section-title">📈 Live Chart (DEXScreener)</div>
+    <p class="section-subtitle">
+      Once the pair is live, this frame becomes your new religion. Refresh, stare, cope, repeat.
+    </p>
 
-    <div class="chart-wrapper" id="chartSection">
-      <!-- Swap this src for your DexScreener or Raydium chart embed once live -->
+    <div class="chart-wrap">
+      <!--
+        Replace PAIR_ADDRESS_HERE with your actual pair on DEXScreener once live,
+        e.g. https://dexscreener.com/solana/xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      -->
       <iframe
-        id="dexChart"
         class="chart-frame"
-        src="about:blank"
-        title="$BLOJOB chart"
+        src="https://dexscreener.com/solana/PAIR_ADDRESS_HERE?embed=1&theme=dark"
         loading="lazy"
       ></iframe>
-      <div class="chart-note">
-        When the pair is live, this will show the actual $BLOJOB chart. On mobile &amp; Telegram,
-        use your DEX / wallet chart directly for best performance.
-      </div>
-      <div class="chart-mobile-note">
-        Chart is hidden on mobile / in-app browsers to keep things fast. Open this page on desktop
-        for embedded chart view.
-      </div>
+    </div>
+    <div class="chart-note">
+      If the chart looks blank, either the pair isn’t live yet or you forgot to update the URL.
     </div>
   </section>
 
-  <!-- How to buy (once live) + socials -->
-  <section class="section section-tight">
-    <h3>🧾 How To Snipe The Stealth Launch</h3>
-
-    <div class="callout">
-      <strong>Before launch:</strong><br />
-      • Add the <strong>token mint</strong> to your wallet.<br />
-      • Bookmark this page &amp; your favorite DEX (Raydium / Jupiter).<br />
-      • Load up SOL and pay attention to TG / 𝕏 for launch hints.
-    </div>
-
-    <ul class="howto-list">
-      <li>
-        <strong>Step 1:</strong> Once the pair is live, open Raydium / Jupiter and paste the token
-        mint.<span class="badge">Always use the contract above</span>
-      </li>
-      <li>
-        <strong>Step 2:</strong> Confirm you’re looking at the correct LP (check volume &amp; links
-        from official TG / 𝕏).
-      </li>
-      <li>
-        <strong>Step 3:</strong> Set your slippage (start low, push higher only if you must). This
-        is degen, not DeFi school.
-      </li>
-      <li>
-        <strong>Step 4:</strong> Ape your entry. Screenshots or it didn’t happen.
-      </li>
-      <li>
-        <strong>Step 5:</strong> Watch the chart, watch the CumUnity, and decide when to reload,
-        ladder, or take profits.
-      </li>
+  <!-- ABOUT / LORE -->
+  <section class="section">
+    <div class="section-title">💦 What BLOJOB Actually Is</div>
+    <p class="section-subtitle">
+      No fake roadmap. No utility keynote. Just high-octane, low-IQ meme culture stapled to a Solana token.
+    </p>
+    <p style="font-size:0.95rem; line-height:1.7;">
+      <strong>$BLOJOB</strong> is a pure degen experiment in how far raw meme energy and terminal horniness can push
+      a chart with minimal hand-holding. There’s no VC, no private round, no 12-page whitepaper written in Times New Roman.
+      Just:
+    </p>
+    <ul style="font-size:0.92rem; line-height:1.7; padding-left:20px;">
+      <li><strong>Stealth launch</strong> to reward the ones actually watching.</li>
+      <li><strong>Burned presale tokens</strong> to nuke the dead weight and fake expectations.</li>
+      <li><strong>Sticky liquidity</strong> so the chart isn’t made of wet tissue and bad decisions (well, not all of it).</li>
+      <li><strong>CumUnity-driven pumps</strong> — raids, memes, and the occasional unhinged 𝕏 thread.</li>
     </ul>
+  </section>
 
-    <div class="btn-row">
-      <a
-        class="btn"
-        href="https://t.me/BLOJOBCumUnity"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Telegram CumUnity
-      </a>
-      <a
-        class="btn"
-        href="https://x.com/BLOJOB_Daddy?s=09"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        𝕏 (Twitter)
-      </a>
-      <a
-        class="btn btn-ghost"
-        href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View on Solscan
-      </a>
-    </div>
-
-    <p class="nsfw-line" style="margin-top:26px;">
-      Join the CumUnity, watch the chart, and decide how hard you want to ride it. 🚀
+  <!-- TOKENOMICS -->
+  <section class="section">
+    <div class="section-title">🪙 Tokenomics — 69,000,000,000 Supply</div>
+    <p style="font-size:0.95rem; line-height:1.7;">
+      Final numbers can be tweaked, but the core idea stays the same:
+      brutally simple and very on-brand.
+    </p>
+    <p style="font-size:0.92rem; line-height:1.7;">
+      <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term reserves, treasury ops, stabilization, staking, CumUnity incentives,
+      micro-liquidity support.<br>
+      <strong>💦 PreLoad (Presale):</strong> 10% — <em>Presale allocation nuked.</em> Unsold tokens burned and tracked in the burn stats above.<br>
+      <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promos, TG/𝕏 growth, raids, contests, and general foreplay.<br>
+      <strong>🫟 StickyLiquidity (Liquidity Pool):</strong> 14.1% — LP at launch, locked so degen hands can focus on pumping, not rugwatching.<br>
     </p>
   </section>
 
-  <footer>
-    BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br />
-    Stealth pumps only. No refunds on bad entries. 🫦
-  </footer>
+  <!-- SOCIALS -->
+  <section class="section">
+    <div class="section-title">🌐 Socials</div>
+    <p class="section-subtitle">
+      Find the hive, spam the memes, and watch who discovers the stealth launch first.
+    </p>
 
-  <!-- Lo-fi background audio (you provide the file URL) -->
-  <audio id="bgAudio" loop>
-    <!-- Replace lofi.mp3 with your hosted audio file -->
-    <source src="lofi.mp3" type="audio/mpeg" />
-  </audio>
+    <div class="btn-row">
+      <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
+      <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank" rel="noopener noreferrer">Solscan</a>
+    </div>
 
-  <!-- Audio toggle pill -->
-  <button id="audioToggle" class="audio-toggle">
-    <span id="audioIcon">🔊</span>
-    <span id="audioText">Lo-fi: loading…</span>
-  </button>
+    <p class="section-subtitle" style="margin-top:20px;">
+      Join the CumUnity, stalk the chart, and decide how hard you want to ride it. 🚀
+    </p>
+  </section>
 
-  <script>
-    // =========================
-    // CONFIG
-    // =========================
-    const TOTAL_SUPPLY = 69000000000; // 69B
-    const BURNED_SUPPLY = 6900000000; // 6.9B burned
-    const CURRENT_SUPPLY = TOTAL_SUPPLY - BURNED_SUPPLY;
+</div>
 
-    // OPTIONAL: set your DexScreener / DEX chart embed URL here (desktop only)
-    const DESKTOP_CHART_SRC =
-      "https://dexscreener.com/solana/PASTE_PAIR_OR_POOL_ADDRESS_HERE?embed=1&theme=dark";
+<footer>
+  BLOJOB is a meme token. 18+ vibes only. Nothing here is financial advice.<br>
+  Pump... Harder. Faster. Stronger.
+</footer>
 
-    // =========================
-    // ENV DETECTION (Option 2)
-    // =========================
-    function detectEnvironment() {
-      const ua = navigator.userAgent || "";
-      const isTelegram = /Telegram/i.test(ua);
-      const isMobile =
-        /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(ua) && !isTelegram;
+<!-- TOAST & AUDIO HINT -->
+<div id="toast" class="toast">Copied.</div>
+<div id="audioHint" class="audio-hint">
+  <span class="audio-dot"></span>
+  <span>Tap anywhere to enable lo-fi.</span>
+</div>
 
-      let mode = "desktop";
-      if (isTelegram) mode = "telegram";
-      else if (isMobile) mode = "mobile";
+<!-- BACKGROUND AUDIO (you provide lofi.mp3 in the same folder) -->
+<audio id="bgAudio" loop>
+  <source src="lofi.mp3" type="audio/mpeg">
+</audio>
 
-      document.body.classList.add("mode-" + mode);
+<script>
+  /* =========================
+     SUPPLY / BURN CONFIG
+     =========================
+     Edit these to match your actual numbers once you know them.
+  */
+  const TOTAL_SUPPLY = 69000000000;   // 69B
+  const BURNED_TOKENS = 6900000000;   // example: 6.9B burned
+  const CIRCULATING_TOKENS = TOTAL_SUPPLY - BURNED_TOKENS; // simple model
 
-      const modeText = document.getElementById("envModeText");
-      if (modeText) {
-        if (mode === "desktop") modeText.textContent = "Desktop (full experience)";
-        else if (mode === "mobile") modeText.textContent = "Mobile (light chart + audio)";
-        else if (mode === "telegram") modeText.textContent = "Telegram (lite mode)";
-      }
+  function formatNumber(n) {
+    return n.toLocaleString("en-US");
+  }
 
-      // Chart behavior
-      const chartFrame = document.getElementById("dexChart");
-      const chartSection = document.getElementById("chartSection");
-      if (chartFrame && chartSection) {
-        if (mode === "desktop") {
-          // load chart
-          chartFrame.src = DESKTOP_CHART_SRC;
-        } else if (mode === "mobile") {
-          // keep frame blank, show mobile note (CSS)
-          chartFrame.src = "about:blank";
-        } else if (mode === "telegram") {
-          // hide section entirely
-          chartSection.style.display = "none";
-        }
-      }
+  function initSupplyCard() {
+    const totalEl = document.getElementById("totalSupplyText");
+    const burnedEl = document.getElementById("burnedText");
+    const remainingEl = document.getElementById("remainingText");
+    const circEl = document.getElementById("circulatingText");
+    const burnInverseFill = document.getElementById("burnInverseFill");
 
-      // Audio toggle visibility: hidden only in Telegram mode
-      const audioToggle = document.getElementById("audioToggle");
-      if (audioToggle && mode === "telegram") {
-        audioToggle.style.display = "none";
-      }
+    if (totalEl) totalEl.textContent = formatNumber(TOTAL_SUPPLY);
+    if (burnedEl) burnedEl.textContent = formatNumber(BURNED_TOKENS);
+    if (remainingEl) remainingEl.textContent = formatNumber(CIRCULATING_TOKENS);
+    if (circEl) circEl.textContent = "Circulating: " + formatNumber(CIRCULATING_TOKENS);
 
-      return mode;
+    const remainingPct = TOTAL_SUPPLY > 0 ? (CIRCULATING_TOKENS / TOTAL_SUPPLY) * 100 : 0;
+    if (burnInverseFill) burnInverseFill.style.width = remainingPct + "%";
+  }
+
+  /* =========================
+     LP PROGRESS (STATIC DEMO)
+     ========================= */
+
+  // Example: you can tweak these manually
+  const LP_TARGET_SOL = 0.10; // target seed LP in SOL
+  let lpCurrentSol = 0.10;    // how much you actually seeded
+
+  function initLpCard() {
+    const lpText = document.getElementById("lpUsdText");
+    const lpPctText = document.getElementById("lpProgressPct");
+    const lpFill = document.getElementById("lpProgressFill");
+
+    if (lpText) {
+      lpText.textContent = "LP: " + lpCurrentSol + " SOL";
     }
 
-    // =========================
-    // SUPPLY / BURN TRACKER
-    // =========================
-    function initSupply() {
-      const fmt = (n) =>
-        n.toLocaleString("en-US", {
-          maximumFractionDigits: 0,
-        });
+    const pct = LP_TARGET_SOL > 0 ? Math.min(lpCurrentSol / LP_TARGET_SOL, 1) * 100 : 0;
+    if (lpPctText) {
+      lpPctText.textContent = Math.round(pct) + "%";
+    }
+    if (lpFill) {
+      lpFill.style.width = pct + "%";
+    }
+  }
 
-      const totalEl = document.getElementById("totalSupply");
-      const burnedEl = document.getElementById("burnedSupply");
-      const currentEl = document.getElementById("currentSupply");
-      const burnPercentEl = document.getElementById("burnPercentText");
-      const burnBarFill = document.getElementById("burnBarFill");
+  /* =========================
+     COPY ADDRESS
+     ========================= */
 
-      if (totalEl) totalEl.textContent = fmt(TOTAL_SUPPLY) + " BLOJOB";
-      if (burnedEl) burnedEl.textContent = fmt(BURNED_SUPPLY) + " BLOJOB";
-      if (currentEl) currentEl.textContent = fmt(CURRENT_SUPPLY) + " BLOJOB";
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = message || "Copied.";
+    toast.classList.add("show");
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1500);
+  }
 
-      const percent = (BURNED_SUPPLY / TOTAL_SUPPLY) * 100;
-      if (burnPercentEl) burnPercentEl.textContent = percent.toFixed(1) + "%";
-      if (burnBarFill) burnBarFill.style.width = percent.toFixed(1) + "%";
+  function copyAddress(address) {
+    if (!address) return;
+
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      const temp = document.createElement("textarea");
+      temp.value = address;
+      document.body.appendChild(temp);
+      temp.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(temp);
+      showToast("Copied.");
+      return;
     }
 
-    // =========================
-    // ADDRESS COPY HELPERS
-    // =========================
-    function copyText(elId, label) {
-      const valueEl = document.getElementById(elId);
-      if (!valueEl) return;
+    navigator.clipboard.writeText(address)
+      .then(() => showToast("Copied."))
+      .catch(() => showToast("Copied.")); // even if it fails, user can still manually select
+  }
 
-      const text = valueEl.textContent.trim();
-      const row = valueEl.closest(".address-row");
-      const copyLabel = row ? row.querySelector(".address-copy-label") : null;
+  /* =========================
+     LO-FI AUDIO AUTOPLAY
+     ========================= */
 
-      const applyCopiedState = () => {
-        if (row) row.classList.add("copied");
-        if (copyLabel) {
-          const original = copyLabel.textContent;
-          copyLabel.textContent = "Copied!";
-          setTimeout(() => {
-            copyLabel.textContent = original;
-            if (row) row.classList.remove("copied");
-          }, 1500);
-        }
-      };
+  let audioTried = false;
 
-      if (!navigator.clipboard || !navigator.clipboard.writeText) {
-        // Fallback
-        const temp = document.createElement("textarea");
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        try {
-          document.execCommand("copy");
-        } catch (e) {}
-        document.body.removeChild(temp);
-        applyCopiedState();
-      } else {
-        navigator.clipboard
-          .writeText(text)
-          .then(applyCopiedState)
-          .catch(() => {});
-      }
+  function tryPlayAudio(auto = true) {
+    const audio = document.getElementById("bgAudio");
+    const hint = document.getElementById("audioHint");
+    if (!audio) return;
 
-      // Optional small alert
-      try {
-        // don’t spam if multiple clicks
-        if (!copyText._lastAlert || Date.now() - copyText._lastAlert > 1200) {
-          alert(label + " copied to clipboard.");
-          copyText._lastAlert = Date.now();
-        }
-      } catch (e) {}
-    }
-
-    // Make copyText globally available
-    window.copyText = copyText;
-
-    // =========================
-    // LO-FI AUDIO (attempt autoplay)
-    // =========================
-    function initAudio(mode) {
-      const audio = document.getElementById("bgAudio");
-      const toggle = document.getElementById("audioToggle");
-      const icon = document.getElementById("audioIcon");
-      const text = document.getElementById("audioText");
-
-      if (!audio || !toggle || !icon || !text) return;
-      if (mode === "telegram") {
-        // handled already, but double-check
-        toggle.style.display = "none";
-        return;
-      }
-
-      audio.volume = 0.4;
-
-      function setStatePlaying() {
-        icon.textContent = "🔊";
-        text.textContent = "Lo-fi: On";
-      }
-
-      function setStatePaused(initial) {
-        icon.textContent = "🔈";
-        text.textContent = initial ? "Lo-fi: Tap to play" : "Lo-fi: Off";
-      }
-
-      // Try to autoplay on load
-      audio
-        .play()
-        .then(setStatePlaying)
-        .catch(() => {
-          // Autoplay blocked
-          setStatePaused(true);
-        });
-
-      // Also try again on first user gesture
-      function onFirstInteraction() {
-        if (audio.paused) {
-          audio
-            .play()
-            .then(setStatePlaying)
-            .catch(() => {
-              setStatePaused(true);
-            });
-        }
-        document.removeEventListener("click", onFirstInteraction);
-        document.removeEventListener("touchstart", onFirstInteraction);
-      }
-
-      document.addEventListener("click", onFirstInteraction, { once: true });
-      document.addEventListener("touchstart", onFirstInteraction, { once: true });
-
-      // Toggle button
-      toggle.addEventListener("click", function () {
-        if (audio.paused) {
-          audio
-            .play()
-            .then(setStatePlaying)
-            .catch(() => {
-              text.textContent = "Lo-fi: blocked by browser";
-            });
-        } else {
-          audio.pause();
-          setStatePaused(false);
+    const playPromise = audio.play();
+    if (playPromise && typeof playPromise.then === "function") {
+      playPromise.then(() => {
+        audio.muted = false;
+        if (hint) hint.style.display = "none";
+      }).catch(() => {
+        // browser blocked autoplay with sound
+        if (auto && hint) {
+          hint.style.display = "flex";
         }
       });
     }
+  }
 
-    // =========================
-    // INIT
-    // =========================
-    document.addEventListener("DOMContentLoaded", function () {
-      const mode = detectEnvironment();
-      initSupply();
-      initAudio(mode);
+  function setupAudio() {
+    const hint = document.getElementById("audioHint");
+    if (hint) hint.style.display = "none";
+
+    // Try once on load (may be blocked)
+    tryPlayAudio(true);
+
+    // First click or tap anywhere will unmute / play
+    document.addEventListener("click", function handleFirstClick() {
+      tryPlayAudio(false);
+      if (hint) hint.style.display = "none";
+      document.removeEventListener("click", handleFirstClick);
     });
-  </script>
+  }
+
+  /* =========================
+     INIT
+     ========================= */
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initSupplyCard();
+    initLpCard();
+    setupAudio();
+  });
+</script>
+
 </body>
 </html>
