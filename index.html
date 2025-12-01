@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$BLOJOB — Stealth Launch Incoming…</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"
-    rel="stylesheet"
-  />
+  <meta charset="UTF-8" />
+  <title>$BLOJOB — Stealth Launch Coming Soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -18,8 +15,8 @@
       --bg-card: #11111f;
       --border-subtle: #262640;
       --text-soft: #c7c7ff;
-      --danger-soft: #ff4d8b;
-      --success-soft: #4dffb3;
+      --danger: #ff4f7b;
+      --success: #4fe3a1;
     }
 
     * {
@@ -31,6 +28,7 @@
       background: radial-gradient(circle at top, #17172a 0, #070712 55%);
       color: #fff;
       font-family: "Poppins", sans-serif;
+      min-height: 100vh;
     }
 
     a {
@@ -40,12 +38,7 @@
     header {
       text-align: center;
       padding: 60px 20px 40px;
-      background: radial-gradient(
-        circle at top,
-        var(--purple-main),
-        #1b082f 55%,
-        #070712 100%
-      );
+      background: radial-gradient(circle at top, var(--purple-main), #1b082f 55%, #070712 100%);
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       position: relative;
@@ -60,48 +53,36 @@
       position: relative;
     }
 
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(176, 38, 255, 0.3),
+        rgba(216, 150, 255, 0.05),
+        rgba(123, 44, 255, 0.3),
+        rgba(255, 255, 255, 0.1),
+        rgba(176, 38, 255, 0.3)
+      );
+      filter: blur(10px);
+      opacity: 0.55;
+      z-index: 0;
+      animation: holoSweep 6s linear infinite;
+    }
+
     .logo-wrap img {
       width: 140px;
       height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 32px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 32px rgba(0, 0, 0, 0.65);
       border: 2px solid rgba(255, 255, 255, 0.18);
       position: relative;
       z-index: 1;
-    }
-
-    /* Holographic shimmer overlay on logo */
-    .logo-wrap::after {
-      content: "";
-      position: absolute;
-      width: 165px;
-      height: 165px;
-      border-radius: 50%;
-      top: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: conic-gradient(
-        from 0deg,
-        rgba(255, 255, 255, 0.0) 0deg,
-        rgba(255, 255, 255, 0.8) 40deg,
-        rgba(255, 255, 255, 0.0) 80deg,
-        rgba(255, 255, 255, 0.0) 360deg
-      );
-      mix-blend-mode: screen;
-      opacity: 0.65;
-      filter: blur(1px);
-      pointer-events: none;
-      animation: holoSweep 7.5s linear infinite;
-    }
-
-    @keyframes holoSweep {
-      0% {
-        transform: translateX(-50%) rotate(0deg);
-      }
-      100% {
-        transform: translateX(-50%) rotate(360deg);
-      }
+      animation: logoFloat 6s ease-in-out infinite, logoGlow 3.8s ease-in-out infinite;
     }
 
     h1 {
@@ -110,28 +91,7 @@
       margin: 0;
       letter-spacing: 0.04em;
       text-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
-    }
-
-    .title-glow {
-      animation: pulseTitle 2.8s ease-in-out infinite;
-    }
-
-    @keyframes pulseTitle {
-      0% {
-        text-shadow: 0 0 10px rgba(216, 150, 255, 0.5),
-          0 0 25px rgba(176, 38, 255, 0.7);
-        transform: translateY(0);
-      }
-      50% {
-        text-shadow: 0 0 18px rgba(216, 150, 255, 0.9),
-          0 0 40px rgba(176, 38, 255, 1);
-        transform: translateY(-1px);
-      }
-      100% {
-        text-shadow: 0 0 10px rgba(216, 150, 255, 0.5),
-          0 0 25px rgba(176, 38, 255, 0.7);
-        transform: translateY(0);
-      }
+      animation: titlePulse 2.8s ease-in-out infinite;
     }
 
     h2 {
@@ -140,16 +100,48 @@
       margin-top: 6px;
     }
 
-    .subtitle-soft {
-      opacity: 0.85;
-      font-size: 1rem;
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      background: rgba(5, 5, 20, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--danger);
+      box-shadow: 0 0 10px rgba(255, 79, 123, 0.9);
+      animation: statusBlink 1.3s ease-in-out infinite;
+    }
+
+    .env-label {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      margin-top: 4px;
     }
 
     .section {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 32px 20px;
       line-height: 1.7;
+    }
+
+    .section-tight {
+      max-width: 900px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.25rem;
     }
 
     .nsfw-line {
@@ -159,11 +151,7 @@
     }
 
     .callout {
-      background: linear-gradient(
-        135deg,
-        rgba(176, 38, 255, 0.12),
-        rgba(13, 13, 40, 0.96)
-      );
+      background: linear-gradient(135deg, rgba(176, 38, 255, 0.12), rgba(13, 13, 40, 0.96));
       border-left: 3px solid var(--purple-main);
       padding: 18px;
       margin-top: 20px;
@@ -175,20 +163,16 @@
       color: var(--purple-neon);
     }
 
-    /* GRID LAYOUT */
-    .grid-3 {
+    .grid-two {
       display: grid;
-      grid-template-columns: 1.1fr 1.1fr 0.9fr;
+      grid-template-columns: 1.1fr 1.1fr;
       gap: 18px;
-      max-width: 1000px;
-      margin: -10px auto 20px;
-      padding: 0 20px;
+      align-items: flex-start;
     }
 
-    @media (max-width: 960px) {
-      .grid-3 {
+    @media (max-width: 900px) {
+      .grid-two {
         grid-template-columns: 1fr;
-        margin-top: 16px;
       }
     }
 
@@ -198,6 +182,8 @@
       border: 1px solid var(--border-subtle);
       padding: 18px 18px 22px;
       box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
     }
 
     .card-title {
@@ -206,172 +192,200 @@
       margin-bottom: 8px;
     }
 
-    .status-pill {
+    .pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
+      gap: 5px;
+      padding: 3px 9px;
       border-radius: 999px;
-      font-size: 0.8rem;
-      border: 1px solid #41416a;
-      background: #16162a;
-      margin-bottom: 8px;
+      font-size: 0.72rem;
+      background: rgba(10, 10, 30, 0.96);
+      border: 1px solid #3a3a5a;
+      color: var(--text-soft);
     }
 
-    .status-pill span.dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--success-soft);
-      box-shadow: 0 0 8px rgba(77, 255, 179, 0.8);
+    .pill-success {
+      border-color: var(--success);
+      color: var(--success);
     }
 
-    .status-pill.status-warn span.dot {
-      background: var(--danger-soft);
-      box-shadow: 0 0 8px rgba(255, 77, 139, 0.8);
-    }
-
-    .status-keys {
-      font-size: 0.9rem;
-      opacity: 0.86;
-      margin-top: 6px;
-    }
-
-    .status-keys strong {
-      color: var(--purple-neon);
-    }
-
-    /* Burn Tracker */
-    .burn-row {
+    .supply-row {
+      display: flex;
+      justify-content: space-between;
       font-size: 0.9rem;
       margin-bottom: 4px;
     }
 
-    .burn-row strong {
+    .supply-label {
+      opacity: 0.8;
+    }
+
+    .supply-value {
+      font-weight: 600;
+    }
+
+    .supply-value.highlight {
       color: var(--purple-neon);
+    }
+
+    .burn-label {
+      color: var(--danger);
+    }
+
+    .burn-percent {
+      font-size: 0.86rem;
+      opacity: 0.9;
     }
 
     .burn-bar {
       width: 100%;
-      height: 14px;
-      background: #19192a;
+      height: 12px;
+      background: #141428;
       border-radius: 999px;
       overflow: hidden;
-      margin: 8px 0 6px;
-      border: 1px solid #2e2e4c;
-      position: relative;
+      margin-top: 8px;
+      border: 1px solid #313159;
     }
 
-    .burn-fill {
+    .burn-bar-fill {
       height: 100%;
-      width: 10%; /* 10% burned */
-      background: linear-gradient(
-        90deg,
-        #f98fb3,
-        #ff4d8b,
-        var(--purple-main),
-        var(--purple-neon)
-      );
-      box-shadow: 0 0 18px rgba(255, 77, 139, 0.9);
-      animation: glowBar 2.6s ease-in-out infinite alternate;
+      width: 0%;
+      background: linear-gradient(90deg, #ffb3c7, #ff4f7b, #ffb3c7);
+      box-shadow: 0 0 14px rgba(255, 79, 123, 0.9);
+      animation: barPulse 2.7s ease-in-out infinite;
     }
 
-    @keyframes glowBar {
-      0% {
-        box-shadow: 0 0 12px rgba(255, 77, 139, 0.7);
-        transform: translateX(0);
+    .tokenomics-list {
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    .tokenomics-list strong {
+      color: var(--purple-neon);
+    }
+
+    /* Address rows */
+    .address-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .address-grid {
+        grid-template-columns: 1fr;
       }
-      50% {
-        box-shadow: 0 0 22px rgba(255, 77, 139, 1);
-        transform: translateX(1px);
-      }
-      100% {
-        box-shadow: 0 0 14px rgba(255, 77, 139, 0.85);
-        transform: translateX(0);
-      }
     }
 
-    .burn-caption {
-      font-size: 0.82rem;
-      opacity: 0.8;
-    }
-
-    /* Address list with copy */
-    .addr-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .addr-label {
-      font-size: 0.85rem;
-      opacity: 0.85;
-      margin-bottom: 2px;
-    }
-
-    .addr-row {
-      background: rgba(5, 5, 20, 0.9);
+    .address-row {
+      background: rgba(5, 5, 20, 0.92);
       border-radius: 12px;
       border: 1px solid #3b3b63;
-      padding: 8px 10px;
+      padding: 10px 12px;
       display: flex;
-      align-items: center;
-      gap: 8px;
+      flex-direction: column;
+      gap: 6px;
       cursor: pointer;
       user-select: none;
       transition: 0.15s;
+      position: relative;
+      overflow-wrap: anywhere;
     }
 
-    .addr-row:hover {
+    .address-row:hover {
       border-color: var(--purple-main);
       box-shadow: 0 0 14px rgba(176, 38, 255, 0.5);
     }
 
-    .addr-text {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      word-break: break-all;
-      flex: 1;
-      font-family: "Poppins", monospace;
+    .address-row.copied {
+      border-color: var(--success);
+      box-shadow: 0 0 16px rgba(79, 227, 161, 0.6);
     }
 
-    .addr-copy-icon {
-      font-size: 0.95rem;
-      opacity: 0.8;
-      display: inline-flex;
+    .address-label-line {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      min-width: 24px;
+      gap: 10px;
+      font-size: 0.86rem;
+      opacity: 0.88;
     }
 
-    .addr-copy-icon::before {
-      content: "📋";
+    .address-main-label {
+      font-weight: 600;
     }
 
-    .addr-row.copied .addr-copy-icon::before {
-      content: "✅";
+    .address-copy-label {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #16162a;
+      border: 1px solid #41416a;
     }
 
-    .addr-row.copied {
-      border-color: var(--success-soft);
-      box-shadow: 0 0 12px rgba(77, 255, 179, 0.7);
+    .address-value {
+      font-size: 0.9rem;
+      color: var(--text-soft);
     }
 
-    .addr-hint {
+    .address-help {
       font-size: 0.78rem;
       opacity: 0.78;
-      margin-top: 4px;
     }
 
-    /* Tokenomics / general buttons */
-    .tokenomics p {
+    /* Chart section */
+
+    .chart-wrapper {
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top left, rgba(176, 38, 255, 0.18), #11111f);
+      padding: 14px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6);
+    }
+
+    .chart-frame {
+      width: 100%;
+      height: 420px;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #050513;
+    }
+
+    .chart-note {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-top: 6px;
+    }
+
+    /* How-to-buy */
+
+    .howto-list {
+      margin-top: 10px;
+      padding-left: 20px;
+      font-size: 0.92rem;
+    }
+
+    .howto-list li {
       margin-bottom: 6px;
-      font-size: 0.95rem;
     }
 
-    .tokenomics strong {
-      color: var(--purple-neon);
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #16162a;
+      border: 1px solid #41416a;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     .btn {
@@ -379,73 +393,59 @@
       background: var(--purple-main);
       color: #000;
       padding: 12px 20px;
-      margin: 10px 10px 0 0;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
       transition: 0.18s;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      flex: 0 0 auto;
     }
 
     .btn:hover {
-      transform: translateY(-1px) scale(1.04);
+      transform: translateY(-1px) scale(1.03);
       background: var(--purple-neon);
       box-shadow: 0 0 16px rgba(176, 38, 255, 0.8);
     }
 
-    /* Chart section */
-    .chart-section {
-      max-width: 1100px;
-      margin: 0 auto 32px;
-      padding: 0 20px 40px;
+    .btn-ghost {
+      background: rgba(10, 10, 30, 0.9);
+      color: #f8f8ff;
+      border: 1px solid #3a3a5a;
     }
 
-    .chart-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
+    /* Audio control */
 
-    @media (min-width: 960px) {
-      .chart-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .chart-card {
-      background: var(--bg-card);
-      border-radius: 16px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
-      padding: 14px 14px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .chart-card h3 {
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    .chart-note {
+    .audio-toggle {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 999;
+      background: rgba(10, 10, 30, 0.95);
+      border-radius: 999px;
+      padding: 6px 12px;
       font-size: 0.8rem;
-      opacity: 0.8;
+      border: 1px solid #3a3a5a;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
     }
 
-    .chart-frame {
-      border-radius: 10px;
-      border: 1px solid #2b2b47;
-      overflow: hidden;
-      background: #050512;
-      flex: 1;
-      min-height: 320px;
+    .audio-toggle span {
+      opacity: 0.9;
     }
 
-    .chart-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
+    @media (max-width: 600px) {
+      .audio-toggle {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.78rem;
+        padding: 5px 10px;
+      }
     }
 
     footer {
@@ -455,42 +455,115 @@
       opacity: 0.65;
     }
 
-    /* Lofi toggle */
-    .lofi-toggle {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      background: rgba(7, 7, 18, 0.95);
-      border-radius: 999px;
-      padding: 8px 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid #3b3b63;
-      font-size: 0.86rem;
-      cursor: pointer;
-      z-index: 999;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      transition: 0.15s;
+    /* Animations */
+
+    @keyframes titlePulse {
+      0% {
+        text-shadow: 0 0 10px rgba(176, 38, 255, 0.35);
+      }
+      50% {
+        text-shadow: 0 0 22px rgba(216, 150, 255, 0.9);
+      }
+      100% {
+        text-shadow: 0 0 10px rgba(176, 38, 255, 0.35);
+      }
     }
 
-    .lofi-toggle:hover {
-      border-color: var(--purple-main);
-      box-shadow: 0 0 14px rgba(176, 38, 255, 0.65);
-      transform: translateY(-1px);
+    @keyframes barPulse {
+      0% {
+        box-shadow: 0 0 8px rgba(176, 38, 255, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 18px rgba(176, 38, 255, 0.9);
+      }
+      100% {
+        box-shadow: 0 0 8px rgba(176, 38, 255, 0.4);
+      }
     }
 
-    .lofi-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #777;
+    @keyframes logoFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
     }
 
-    .lofi-on .lofi-dot {
-      background: var(--purple-neon);
-      box-shadow: 0 0 10px rgba(216, 150, 255, 0.9);
+    @keyframes logoGlow {
+      0%,
+      100% {
+        box-shadow: 0 0 22px rgba(176, 38, 255, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(216, 150, 255, 0.9);
+      }
+    }
+
+    @keyframes holoSweep {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes statusBlink {
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Mode-specific tweaks */
+
+    body.mode-telegram header {
+      padding: 40px 16px 26px;
+    }
+
+    body.mode-telegram .chart-wrapper {
+      display: none;
+    }
+
+    body.mode-telegram .audio-toggle {
+      display: none;
+    }
+
+    body.mode-telegram .logo-wrap::before,
+    body.mode-telegram .logo-wrap img,
+    body.mode-telegram h1 {
+      animation: none;
+    }
+
+    body.mode-mobile .chart-wrapper {
+      display: none;
+    }
+
+    body.mode-mobile .chart-mobile-note {
+      display: block;
+    }
+
+    .chart-mobile-note {
+      display: none;
+      font-size: 0.82rem;
+      opacity: 0.78;
+      margin-top: 8px;
+    }
+
+    body.mode-desktop .chart-mobile-note {
+      display: none;
+    }
+
+    /* Tiny env label hidden on small screens */
+    @media (max-width: 480px) {
+      .env-label {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -498,316 +571,490 @@
 <body>
   <header>
     <div class="logo-wrap">
-      <!-- Replace blojob.png with your actual logo path -->
+      <!-- Swap this for your logo file -->
       <img src="blojob.png" alt="$BLOJOB logo" />
-      <h1 class="title-glow">BLOJOB</h1>
+      <h1>$BLOJOB</h1>
       <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥</h2>
-      <div class="subtitle-soft">Presale dead. Supply burned. Stealth launch loading…</div>
+
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>Stealth Launch: <strong>Coming Soon</strong></span>
+      </div>
+
+      <div class="env-label">
+        Mode:&nbsp;<span id="envModeText">detecting…</span>
+      </div>
     </div>
   </header>
 
-  <!-- STATUS / SUPPLY / ADDRESSES -->
-  <div class="grid-3">
-    <!-- Launch status card -->
-    <div class="card">
-      <div class="card-title">🚦 Launch Status</div>
-      <div class="status-pill status-warn">
-        <span class="dot"></span>
-        <span>Stealth Launch — Coming Soon</span>
-      </div>
-      <p class="status-keys">
-        <strong>Presale:</strong> <span style="color:#ff9bbd;">Ended &amp; nuked 🔥</span><br />
-        <strong>Next step:</strong> LP seeding on Raydium, stealth style.<br />
-        <strong>Mode:</strong> <span style="color:#f4b3ff;">Fair degen hunt — no handholding.</span>
-      </p>
-      <p class="status-keys" style="margin-top:10px;">
-        When the stealth launch goes live, this page will auto-serve:
-        <strong>live Dexscreener + Raydium charts</strong> so hunters can stalk the pump in real-time.
-      </p>
-    </div>
-
-    <!-- Burn tracker card -->
-    <div class="card">
-      <div class="card-title">🔥 Supply &amp; Burn Tracker</div>
-      <p class="burn-row">
-        <strong>Max Supply:</strong> 69,000,000,000 BLOJOB
-      </p>
-      <p class="burn-row">
-        <strong>Burned (Presale Nuked):</strong> 6,900,000,000 BLOJOB
-      </p>
-      <p class="burn-row">
-        <strong>Current Live Supply:</strong> 62,100,000,000 BLOJOB
-      </p>
-      <div class="burn-bar">
-        <!-- 10% of 69B burned -->
-        <div class="burn-fill"></div>
-      </div>
-      <div class="burn-caption">
-        10% of the total supply sent to the burn wallet. No second chances. No mercy.
-      </div>
-    </div>
-
-    <!-- Addresses card -->
-    <div class="card">
-      <div class="card-title">📬 Key On-Chain Addresses</div>
-      <div class="addr-wrap">
-        <!-- Mint / Token address -->
-        <div>
-          <div class="addr-label">Token Mint</div>
-          <div
-            class="addr-row"
-            id="addr-mint"
-            data-address="76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw"
-          >
-            <div class="addr-text">
-              76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw
-            </div>
-            <div class="addr-copy-icon"></div>
-          </div>
-        </div>
-
-        <!-- Burn address -->
-        <div>
-          <div class="addr-label">Primary Burn Wallet</div>
-          <div
-            class="addr-row"
-            id="addr-burn"
-            data-address="HgsZcJxmngQQHBu85Fgw816LLSgeZffBahURx1WkT4FB"
-          >
-            <div class="addr-text">
-              HgsZcJxmngQQHBu85Fgw816LLSgeZffBahURx1WkT4FB
-            </div>
-            <div class="addr-copy-icon"></div>
-          </div>
-        </div>
-
-        <!-- LP / Pair placeholder -->
-        <div>
-          <div class="addr-label">LP / Raydium AMM (Post-Launch)</div>
-          <div
-            class="addr-row"
-            id="addr-lp"
-            data-address="REPLACE_WITH_RAYDIUM_AMM_OR_LP_WALLET"
-          >
-            <div class="addr-text">
-              REPLACE_WITH_RAYDIUM_AMM_OR_LP_WALLET
-            </div>
-            <div class="addr-copy-icon"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="addr-hint">
-        Tap / click any address to copy it for your own checks on Solscan, Dexscreener, or Raydium.
-      </div>
-    </div>
-  </div>
-
-  <!-- Intro -->
-  <div class="section">
+  <!-- Intro / narrative -->
+  <section class="section section-tight">
     <p class="nsfw-line">
-      You came here curious… now Daddy’s quietly loading the chamber. 😏
+      You missed the presale. Now you’re early for the stealth launch. 😏
     </p>
 
     <p>
-      Presale died the way all good degeneracy should: <strong>in flames</strong>.<br />
-      The unsold supply was burned, the weak hands got filtered, and what’s left is a
-      <strong>leaner, meaner, 62.1B stealth launch setup</strong> waiting for
-      the perfect moment to explode.
+      No utility. No promises. No corporate foreplay.<br />
+      Just raw, throbbing, <strong>pure degen momentum</strong> built to pump hard, fast,
+      and as long as the CumUnity can handle.
     </p>
 
     <div class="callout">
-      <strong>TL;DR for hunters:</strong><br />
-      • Presale allocation: <strong>burned</strong> — you’re now chasing a tighter supply.<br />
-      • LP will be seeded on Raydium with a low-liquidity, high-volatility setup.<br />
-      • Announcements and hints will go out via
-      <strong>Telegram &amp; 𝕏</strong> right before things go live.<br />
-      • No whitelist. No mercy. <span style="color:#ff9bbd;">If you see it late, you chase it.</span>
+      <strong>What changed?</strong><br />
+      • Presale supply: <strong>burned</strong>.<br />
+      • LP will be seeded on Raydium with a tight, feral starting MC.<br />
+      • Contract is live — stealth launch window opens soon.<br />
+      <br />
+      When the chart appears and LP is locked, that’s your signal. No announcements, no hand-holding.
+      Just vibes and violence.
     </div>
-  </div>
+  </section>
 
-  <!-- Tokenomics (updated to reflect burn) -->
-  <div class="section tokenomics">
-    <h2>🪙 Tokenomics — Post-Burn Reality Check</h2>
-    <p>
-      <strong>Max Supply:</strong> 69,000,000,000 BLOJOB
-    </p>
-    <p>
-      <strong>Burned (Presale Nuked):</strong> 6,900,000,000 BLOJOB (10%)
-    </p>
-    <p>
-      <strong>Effective Current Supply:</strong> 62,100,000,000 BLOJOB
-    </p>
-    <br />
-    <p>
-      <strong>🍑 SpankBank (Vault):</strong> 69% of original — long-term reserves, micro-liquidity support,
-      CumUnity rewards, and whatever degenerate experiments survive the cycle.<br />
-      <strong>💦 PreLoad (Presale):</strong> 10% — <span style="color:#ff9bbd;">sent to the burn wallet, gone forever.</span><br />
-      <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — influencers, 𝕏 raids, TG growth,
-      meme warfare, and bounty incentives.<br />
-      <strong>🫟 StickyLiquidity (Liquidity Pool):</strong> 14.1% — used to seed and stabilize the
-      Raydium LP for the stealth launch, then locked.
-    </p>
-  </div>
-
-  <!-- Charts: Dexscreener + Raydium -->
-  <div class="chart-section">
-    <h2>📈 Live Charts (Activate Once LP Is Live)</h2>
-    <p style="font-size:0.9rem; opacity:0.85; max-width:720px;">
-      These frames are wired for hunters watching the stealth launch. Once the LP is seeded and the pair
-      is live, plug in the final pair / AMM IDs and the charts will start updating in real-time.
-    </p>
-
-    <div class="chart-grid">
-      <!-- Dexscreener -->
-      <div class="chart-card">
-        <h3>Dexscreener — Live Price &amp; Volume</h3>
-        <div class="chart-note">
-          Replace <code>solana/PAIR_ADDRESS_HERE</code> in the iframe URL once your Raydium pair is live.
+  <!-- Supply + Burn tracker -->
+  <section class="section section-tight">
+    <div class="grid-two">
+      <!-- Supply card -->
+      <div class="card">
+        <div class="card-title">
+          🪙 Supply &amp; Burn Tracker
+          <span class="pill pill-success">Live Config</span>
         </div>
-        <div class="chart-frame">
-          <!-- Replace PAIR_ADDRESS_HERE with the real Solana pair after launch -->
-          <iframe
-            src="https://dexscreener.com/solana/PAIR_ADDRESS_HERE?embed=1&theme=dark&trades=0&info=0"
-            loading="lazy"
-            allowfullscreen
-          ></iframe>
+        <div class="supply-row">
+          <span class="supply-label">Total Supply</span>
+          <span class="supply-value" id="totalSupply">–</span>
+        </div>
+        <div class="supply-row">
+          <span class="supply-label burn-label">Burned</span>
+          <span class="supply-value burn-label" id="burnedSupply">–</span>
+        </div>
+        <div class="supply-row">
+          <span class="supply-label">Current Supply</span>
+          <span class="supply-value highlight" id="currentSupply">–</span>
+        </div>
+
+        <div class="burn-bar">
+          <div class="burn-bar-fill" id="burnBarFill"></div>
+        </div>
+        <div class="burn-percent">
+          Burned: <span id="burnPercentText">–%</span> of total
         </div>
       </div>
 
-      <!-- Raydium -->
-      <div class="chart-card">
-        <h3>Raydium — Direct Trading View</h3>
-        <div class="chart-note">
-          Replace <code>YOUR_AMM_ID_HERE</code> with your Raydium AMM ID once the pool is created.
+      <!-- Tokenomics card -->
+      <div class="card">
+        <div class="card-title">
+          🍑 Tokenomics — 69,000,000,000 Supply
         </div>
-        <div class="chart-frame">
-          <!-- Replace YOUR_AMM_ID_HERE with your actual Raydium AMM ID -->
-          <iframe
-            src="https://raydium.io/trade/?ammId=YOUR_AMM_ID_HERE"
-            loading="lazy"
-            allowfullscreen
-          ></iframe>
+        <div class="tokenomics-list">
+          <p>
+            <strong>🍑 SpankBank (Vault): 69%</strong><br />
+            Long-term reserves, treasury ops, stabilization, staking pools, CumUnity rewards,
+            micro-liquidity support.
+          </p>
+          <p>
+            <strong>💦 PreLoad (Presale): 10%</strong><br />
+            Fully allocated to presale — <strong>unsold tokens burned</strong>, adjusting real
+            circulating supply.
+          </p>
+          <p>
+            <strong>🫦 MILF (Marketing Initiative Liquidity Fund): 6.9%</strong><br />
+            Influencers, raids, TG/𝕏 growth, giveaways, and tasteful degeneracy.
+          </p>
+          <p>
+            <strong>🫟 StickyLiquidity (LP): 14.1%</strong><br />
+            Initial LP on Raydium, locked after stealth launch confirmation for stability.
+          </p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Socials -->
-  <div class="section">
-    <h2>🌐 Socials</h2>
-    <a
-      class="btn"
-      href="https://t.me/BLOJOBCumUnity"
-      target="_blank"
-      rel="noopener noreferrer"
-    >Telegram</a>
-    <a
-      class="btn"
-      href="https://x.com/BLOJOB_Daddy?s=09"
-      target="_blank"
-      rel="noopener noreferrer"
-    >𝕏 (Twitter)</a>
-    <a
-      class="btn"
-      href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw"
-      target="_blank"
-      rel="noopener noreferrer"
-    >Solscan</a>
-
-    <p class="nsfw-line" style="margin-top:30px;">
-      Join the CumUnity, watch for the signal, and decide how hard you want to ride the stealth launch. 🚀
+  <!-- Addresses -->
+  <section class="section section-tight">
+    <h3>🔍 Contract, LP &amp; Burn Wallets</h3>
+    <p style="font-size:0.9rem; opacity:0.85;">
+      Tap or click any row to copy. Always double-check on-chain before aping.
     </p>
-  </div>
+
+    <div class="address-grid">
+      <!-- Token Mint -->
+      <div class="address-row" onclick="copyText('tokenAddress','Token mint address')">
+        <div class="address-label-line">
+          <span class="address-main-label">Token Mint</span>
+          <span class="address-copy-label">Click to copy</span>
+        </div>
+        <div class="address-value" id="tokenAddress">
+          76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw
+        </div>
+        <div class="address-help">
+          Official $BLOJOB SPL token. Use this when adding custom token or checking holders.
+        </div>
+      </div>
+
+      <!-- LP / Pair -->
+      <div class="address-row" onclick="copyText('lpAddress','Liquidity pool address')">
+        <div class="address-label-line">
+          <span class="address-main-label">Primary LP / Pair Address</span>
+          <span class="address-copy-label">Click to copy</span>
+        </div>
+        <div class="address-value" id="lpAddress">
+          HgsZcJxmngQQHBu85Fgw816LLSgeZffBahURx1WkT4FB
+        </div>
+        <div class="address-help">
+          Raydium / DEX pair for $BLOJOB once the stealth launch is live.
+        </div>
+      </div>
+
+      <!-- Burn wallet -->
+      <div class="address-row" onclick="copyText('burnAddress','Burn wallet address')">
+        <div class="address-label-line">
+          <span class="address-main-label burn-label">Burn Wallet (Presale Burn)</span>
+          <span class="address-copy-label">Click to copy</span>
+        </div>
+        <div class="address-value" id="burnAddress">
+          PASTE_BURN_WALLET_ADDRESS_HERE
+        </div>
+        <div class="address-help">
+          Destination where presale tokens were sent to be permanently removed from supply.
+        </div>
+      </div>
+
+      <!-- Optional authority / dev -->
+      <div class="address-row" onclick="copyText('authorityAddress','Authority / dev wallet')">
+        <div class="address-label-line">
+          <span class="address-main-label">Authority / Dev Wallet (if applicable)</span>
+          <span class="address-copy-label">Click to copy</span>
+        </div>
+        <div class="address-value" id="authorityAddress">
+          PASTE_AUTHORITY_OR_DEV_WALLET_HERE
+        </div>
+        <div class="address-help">
+          For transparency. If contract is fully renounced, this may be a null / dead address instead.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart (desktop only, mobile/Telegram hides or warns) -->
+  <section class="section">
+    <h3>📈 Live Chart (Desktop Preferred)</h3>
+
+    <div class="chart-wrapper" id="chartSection">
+      <!-- Swap this src for your DexScreener or Raydium chart embed once live -->
+      <iframe
+        id="dexChart"
+        class="chart-frame"
+        src="about:blank"
+        title="$BLOJOB chart"
+        loading="lazy"
+      ></iframe>
+      <div class="chart-note">
+        When the pair is live, this will show the actual $BLOJOB chart. On mobile &amp; Telegram,
+        use your DEX / wallet chart directly for best performance.
+      </div>
+      <div class="chart-mobile-note">
+        Chart is hidden on mobile / in-app browsers to keep things fast. Open this page on desktop
+        for embedded chart view.
+      </div>
+    </div>
+  </section>
+
+  <!-- How to buy (once live) + socials -->
+  <section class="section section-tight">
+    <h3>🧾 How To Snipe The Stealth Launch</h3>
+
+    <div class="callout">
+      <strong>Before launch:</strong><br />
+      • Add the <strong>token mint</strong> to your wallet.<br />
+      • Bookmark this page &amp; your favorite DEX (Raydium / Jupiter).<br />
+      • Load up SOL and pay attention to TG / 𝕏 for launch hints.
+    </div>
+
+    <ul class="howto-list">
+      <li>
+        <strong>Step 1:</strong> Once the pair is live, open Raydium / Jupiter and paste the token
+        mint.<span class="badge">Always use the contract above</span>
+      </li>
+      <li>
+        <strong>Step 2:</strong> Confirm you’re looking at the correct LP (check volume &amp; links
+        from official TG / 𝕏).
+      </li>
+      <li>
+        <strong>Step 3:</strong> Set your slippage (start low, push higher only if you must). This
+        is degen, not DeFi school.
+      </li>
+      <li>
+        <strong>Step 4:</strong> Ape your entry. Screenshots or it didn’t happen.
+      </li>
+      <li>
+        <strong>Step 5:</strong> Watch the chart, watch the CumUnity, and decide when to reload,
+        ladder, or take profits.
+      </li>
+    </ul>
+
+    <div class="btn-row">
+      <a
+        class="btn"
+        href="https://t.me/BLOJOBCumUnity"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Telegram CumUnity
+      </a>
+      <a
+        class="btn"
+        href="https://x.com/BLOJOB_Daddy?s=09"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        𝕏 (Twitter)
+      </a>
+      <a
+        class="btn btn-ghost"
+        href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View on Solscan
+      </a>
+    </div>
+
+    <p class="nsfw-line" style="margin-top:26px;">
+      Join the CumUnity, watch the chart, and decide how hard you want to ride it. 🚀
+    </p>
+  </section>
 
   <footer>
     BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br />
-    Pump... Harder. Faster. Stronger.
+    Stealth pumps only. No refunds on bad entries. 🫦
   </footer>
 
-  <!-- Lofi audio (replace lofi.mp3 with your own URL / file) -->
-  <audio id="lofiAudio" loop preload="none">
-    <!-- Replace with your hosted MP3, e.g. https://yourcdn.com/lofi.mp3 -->
+  <!-- Lo-fi background audio (you provide the file URL) -->
+  <audio id="bgAudio" loop>
+    <!-- Replace lofi.mp3 with your hosted audio file -->
     <source src="lofi.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- Lofi toggle button -->
-  <div class="lofi-toggle" id="lofiToggle">
-    <div class="lofi-dot"></div>
-    <span>🎧 Lofi: <span id="lofiStatus">Off</span></span>
-  </div>
+  <!-- Audio toggle pill -->
+  <button id="audioToggle" class="audio-toggle">
+    <span id="audioIcon">🔊</span>
+    <span id="audioText">Lo-fi: loading…</span>
+  </button>
 
   <script>
-    // Copy-to-clipboard handler for address rows
-    function attachAddressCopyHandlers() {
-      const rows = document.querySelectorAll(".addr-row");
-      rows.forEach((row) => {
-        row.addEventListener("click", () => {
-          const addr =
-            row.getAttribute("data-address") ||
-            row.textContent.trim();
+    // =========================
+    // CONFIG
+    // =========================
+    const TOTAL_SUPPLY = 69000000000; // 69B
+    const BURNED_SUPPLY = 6900000000; // 6.9B burned
+    const CURRENT_SUPPLY = TOTAL_SUPPLY - BURNED_SUPPLY;
 
-          if (!addr) return;
+    // OPTIONAL: set your DexScreener / DEX chart embed URL here (desktop only)
+    const DESKTOP_CHART_SRC =
+      "https://dexscreener.com/solana/PASTE_PAIR_OR_POOL_ADDRESS_HERE?embed=1&theme=dark";
 
-          const doCopy = () => {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              return navigator.clipboard.writeText(addr);
-            } else {
-              // Fallback
-              const temp = document.createElement("textarea");
-              temp.value = addr;
-              document.body.appendChild(temp);
-              temp.select();
-              try {
-                document.execCommand("copy");
-              } catch (e) {}
-              document.body.removeChild(temp);
-              return Promise.resolve();
-            }
-          };
+    // =========================
+    // ENV DETECTION (Option 2)
+    // =========================
+    function detectEnvironment() {
+      const ua = navigator.userAgent || "";
+      const isTelegram = /Telegram/i.test(ua);
+      const isMobile =
+        /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(ua) && !isTelegram;
 
-          doCopy()
-            .catch(() => {})
-            .finally(() => {
-              row.classList.add("copied");
-              setTimeout(() => {
-                row.classList.remove("copied");
-              }, 1400);
-            });
-        });
-      });
+      let mode = "desktop";
+      if (isTelegram) mode = "telegram";
+      else if (isMobile) mode = "mobile";
+
+      document.body.classList.add("mode-" + mode);
+
+      const modeText = document.getElementById("envModeText");
+      if (modeText) {
+        if (mode === "desktop") modeText.textContent = "Desktop (full experience)";
+        else if (mode === "mobile") modeText.textContent = "Mobile (light chart + audio)";
+        else if (mode === "telegram") modeText.textContent = "Telegram (lite mode)";
+      }
+
+      // Chart behavior
+      const chartFrame = document.getElementById("dexChart");
+      const chartSection = document.getElementById("chartSection");
+      if (chartFrame && chartSection) {
+        if (mode === "desktop") {
+          // load chart
+          chartFrame.src = DESKTOP_CHART_SRC;
+        } else if (mode === "mobile") {
+          // keep frame blank, show mobile note (CSS)
+          chartFrame.src = "about:blank";
+        } else if (mode === "telegram") {
+          // hide section entirely
+          chartSection.style.display = "none";
+        }
+      }
+
+      // Audio toggle visibility: hidden only in Telegram mode
+      const audioToggle = document.getElementById("audioToggle");
+      if (audioToggle && mode === "telegram") {
+        audioToggle.style.display = "none";
+      }
+
+      return mode;
     }
 
-    // Lofi toggle
-    function setupLofiToggle() {
-      const toggle = document.getElementById("lofiToggle");
-      const statusEl = document.getElementById("lofiStatus");
-      const audio = document.getElementById("lofiAudio");
+    // =========================
+    // SUPPLY / BURN TRACKER
+    // =========================
+    function initSupply() {
+      const fmt = (n) =>
+        n.toLocaleString("en-US", {
+          maximumFractionDigits: 0,
+        });
 
-      if (!toggle || !statusEl || !audio) return;
+      const totalEl = document.getElementById("totalSupply");
+      const burnedEl = document.getElementById("burnedSupply");
+      const currentEl = document.getElementById("currentSupply");
+      const burnPercentEl = document.getElementById("burnPercentText");
+      const burnBarFill = document.getElementById("burnBarFill");
 
-      toggle.addEventListener("click", () => {
+      if (totalEl) totalEl.textContent = fmt(TOTAL_SUPPLY) + " BLOJOB";
+      if (burnedEl) burnedEl.textContent = fmt(BURNED_SUPPLY) + " BLOJOB";
+      if (currentEl) currentEl.textContent = fmt(CURRENT_SUPPLY) + " BLOJOB";
+
+      const percent = (BURNED_SUPPLY / TOTAL_SUPPLY) * 100;
+      if (burnPercentEl) burnPercentEl.textContent = percent.toFixed(1) + "%";
+      if (burnBarFill) burnBarFill.style.width = percent.toFixed(1) + "%";
+    }
+
+    // =========================
+    // ADDRESS COPY HELPERS
+    // =========================
+    function copyText(elId, label) {
+      const valueEl = document.getElementById(elId);
+      if (!valueEl) return;
+
+      const text = valueEl.textContent.trim();
+      const row = valueEl.closest(".address-row");
+      const copyLabel = row ? row.querySelector(".address-copy-label") : null;
+
+      const applyCopiedState = () => {
+        if (row) row.classList.add("copied");
+        if (copyLabel) {
+          const original = copyLabel.textContent;
+          copyLabel.textContent = "Copied!";
+          setTimeout(() => {
+            copyLabel.textContent = original;
+            if (row) row.classList.remove("copied");
+          }, 1500);
+        }
+      };
+
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        // Fallback
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try {
+          document.execCommand("copy");
+        } catch (e) {}
+        document.body.removeChild(temp);
+        applyCopiedState();
+      } else {
+        navigator.clipboard
+          .writeText(text)
+          .then(applyCopiedState)
+          .catch(() => {});
+      }
+
+      // Optional small alert
+      try {
+        // don’t spam if multiple clicks
+        if (!copyText._lastAlert || Date.now() - copyText._lastAlert > 1200) {
+          alert(label + " copied to clipboard.");
+          copyText._lastAlert = Date.now();
+        }
+      } catch (e) {}
+    }
+
+    // Make copyText globally available
+    window.copyText = copyText;
+
+    // =========================
+    // LO-FI AUDIO (attempt autoplay)
+    // =========================
+    function initAudio(mode) {
+      const audio = document.getElementById("bgAudio");
+      const toggle = document.getElementById("audioToggle");
+      const icon = document.getElementById("audioIcon");
+      const text = document.getElementById("audioText");
+
+      if (!audio || !toggle || !icon || !text) return;
+      if (mode === "telegram") {
+        // handled already, but double-check
+        toggle.style.display = "none";
+        return;
+      }
+
+      audio.volume = 0.4;
+
+      function setStatePlaying() {
+        icon.textContent = "🔊";
+        text.textContent = "Lo-fi: On";
+      }
+
+      function setStatePaused(initial) {
+        icon.textContent = "🔈";
+        text.textContent = initial ? "Lo-fi: Tap to play" : "Lo-fi: Off";
+      }
+
+      // Try to autoplay on load
+      audio
+        .play()
+        .then(setStatePlaying)
+        .catch(() => {
+          // Autoplay blocked
+          setStatePaused(true);
+        });
+
+      // Also try again on first user gesture
+      function onFirstInteraction() {
         if (audio.paused) {
           audio
             .play()
-            .then(() => {
-              statusEl.textContent = "On";
-              toggle.classList.add("lofi-on");
-            })
+            .then(setStatePlaying)
             .catch(() => {
-              statusEl.textContent = "Tap again to enable";
+              setStatePaused(true);
+            });
+        }
+        document.removeEventListener("click", onFirstInteraction);
+        document.removeEventListener("touchstart", onFirstInteraction);
+      }
+
+      document.addEventListener("click", onFirstInteraction, { once: true });
+      document.addEventListener("touchstart", onFirstInteraction, { once: true });
+
+      // Toggle button
+      toggle.addEventListener("click", function () {
+        if (audio.paused) {
+          audio
+            .play()
+            .then(setStatePlaying)
+            .catch(() => {
+              text.textContent = "Lo-fi: blocked by browser";
             });
         } else {
           audio.pause();
-          statusEl.textContent = "Off";
-          toggle.classList.remove("lofi-on");
+          setStatePaused(false);
         }
       });
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      attachAddressCopyHandlers();
-      setupLofiToggle();
+    // =========================
+    // INIT
+    // =========================
+    document.addEventListener("DOMContentLoaded", function () {
+      const mode = detectEnvironment();
+      initSupply();
+      initAudio(mode);
     });
   </script>
 </body>
