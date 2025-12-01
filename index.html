@@ -28,10 +28,6 @@
     font-family: 'Poppins', sans-serif;
   }
 
-  a {
-    color: inherit;
-  }
-
   header {
     text-align: center;
     padding: 60px 20px 40px;
@@ -77,292 +73,81 @@
     line-height: 1.7;
   }
 
-  .nsfw-line {
-    font-size: 1.25rem;
-    font-weight: 600;
+  .center {
+    text-align: center;
+  }
+
+  .coming {
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--purple-neon);
+    text-shadow: 0 0 16px rgba(216,150,255,0.7);
+    margin-bottom: 16px;
   }
 
-  .callout {
-    background: linear-gradient(135deg, rgba(176,38,255,0.12), rgba(13,13,40,0.96));
-    border-left: 3px solid var(--purple-main);
-    padding: 18px;
-    margin-top: 20px;
-    font-size: 1.02rem;
-    border-radius: 10px;
+  .stealth-line {
+    font-size: 1.2rem;
+    opacity: 0.9;
   }
 
-  .callout strong {
-    color: var(--purple-neon);
-  }
-
-  /* Countdown + Info */
-  .countdown-progress {
-    max-width: 900px;
-    margin: -20px auto 10px;
-    padding: 0 20px 10px;
-    display: grid;
-    grid-template-columns: 1.1fr 1.1fr;
-    gap: 16px;
-  }
-
-  @media (max-width: 768px) {
-    .countdown-progress {
-      grid-template-columns: 1fr;
-      margin-top: 8px;
-    }
-  }
-
+  /* Cards */
   .card {
     background: var(--bg-card);
     border-radius: 16px;
     border: 1px solid var(--border-subtle);
-    padding: 18px 18px 22px;
+    padding: 22px;
+    margin-top: 22px;
     box-shadow: 0 8px 26px rgba(0,0,0,0.5);
   }
 
   .card-title {
-    font-size: 1.02rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
-  .status-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(216,150,255,0.12);
-    border: 1px solid rgba(216,150,255,0.6);
-    font-size: 0.9rem;
-    margin-top: 6px;
-  }
-
-  .status-pill span {
-    margin-left: 6px;
+  /* Burn Tracker */
+  .burn-amount {
+    font-size: 1.4rem;
+    font-weight: 700;
     color: var(--purple-neon);
-    font-weight: 600;
+    margin-bottom: 10px;
   }
 
-  .countdown-sub {
-    font-size: 0.9rem;
-    opacity: 0.78;
-    margin-top: 10px;
-  }
-
-  .highlight {
-    color: var(--purple-neon);
-    font-weight: 600;
-  }
-
-  .progress-title {
-    font-size: 0.94rem;
-    opacity: 0.9;
-  }
-
-  .progress-bar {
+  .burn-bar {
     width: 100%;
     height: 14px;
     background: #19192a;
     border-radius: 999px;
     overflow: hidden;
-    margin: 10px 0 6px;
     border: 1px solid #2e2e4c;
+    margin-bottom: 8px;
   }
 
-  #progress-fill {
+  #burn-fill {
+    width: 0%;
     height: 100%;
-    width: 69%;
-    background: linear-gradient(90deg, #f4b3ff, var(--purple-main), var(--purple-soft));
-    box-shadow: 0 0 16px rgba(176,38,255,0.9);
+    background: linear-gradient(90deg, #ffcafc, var(--purple-main));
+    box-shadow: 0 0 14px rgba(176,38,255,0.8);
     transition: width 0.4s ease-out;
   }
 
-  .progress-amounts {
+  .subtext {
     font-size: 0.9rem;
-    opacity: 0.85;
-  }
-
-  .token-tracker {
-    font-size: 0.88rem;
-    opacity: 0.86;
-    margin-top: 8px;
-  }
-
-  .token-tracker strong {
-    color: var(--purple-neon);
-  }
-
-  .token-progress-bar {
-    width: 100%;
-    height: 10px;
-    background: #141428;
-    border-radius: 999px;
-    overflow: hidden;
-    margin-top: 8px;
-    border: 1px solid #313159;
-  }
-
-  #token-progress-fill {
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(90deg, #ffdbff, var(--purple-neon));
-    box-shadow: 0 0 12px rgba(216,150,255,0.8);
-    transition: width 0.4s ease-out;
-  }
-
-  /* How-to + badges */
-  .howto-list {
-    margin-top: 12px;
-    padding-left: 20px;
-  }
-
-  .howto-list li {
-    margin-bottom: 6px;
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    background: #16162a;
-    border: 1px solid #41416a;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
-
-  /* BUY CARD (repurposed as launch details) */
-  .buy-card {
-    max-width: 900px;
-    margin: 0 auto 40px;
-    padding: 20px;
-    background: radial-gradient(circle at top left, rgba(176,38,255,0.14), #101020);
-    border-radius: 16px;
-    border: 1px solid #2e2e4c;
-    box-shadow: 0 10px 26px rgba(0,0,0,0.6);
-  }
-
-  .buy-card h2 {
-    margin-top: 0;
-  }
-
-  .wallet-address-row {
-    margin-top: 10px;
-    background: rgba(5,5,20,0.9);
-    border-radius: 12px;
-    border: 1px solid #3b3b63;
-    padding: 10px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.15s;
-  }
-
-  .wallet-address-row:hover {
-    border-color: var(--purple-main);
-    box-shadow: 0 0 14px rgba(176,38,255,0.5);
-  }
-
-  .wallet-address-text {
-    font-size: 0.92rem;
-    color: var(--text-soft);
-    word-break: break-all;
-    flex: 1;
-  }
-
-  .wallet-copy-icon {
-    font-size: 0.95rem;
-    opacity: 0.8;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 24px;
-  }
-
-  .wallet-copy-icon::before {
-    content: "📋";
-  }
-
-  .wallet-copy-icon.copied::before {
-    content: "✅";
-  }
-
-  .wallet-subtext {
-    margin-top: 6px;
-    font-size: 0.8rem;
     opacity: 0.8;
   }
 
-  .launch-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-    gap: 10px;
-    margin-top: 14px;
-    font-size: 0.9rem;
+  /* Tokenomics */
+  .tokenomics p {
+    line-height: 1.8;
   }
 
-  .launch-meta-item {
-    background: rgba(8,8,26,0.9);
-    border-radius: 10px;
-    border: 1px solid #32325a;
-    padding: 10px 12px;
-  }
-
-  .launch-meta-item span {
-    display: block;
-    font-size: 0.78rem;
-    opacity: 0.75;
-    margin-bottom: 2px;
-  }
-
-  .launch-meta-item strong {
-    font-size: 0.95rem;
-  }
-
-  .cta-row {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .primary-btn {
-    background: var(--purple-main);
-    color: #000;
-    padding: 12px 20px;
-    border-radius: 999px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    font-size: 0.95rem;
-    transition: 0.18s;
-    flex: 1 1 150px;
-    text-align: center;
-  }
-
-  .primary-btn:hover {
-    background: var(--purple-neon);
-    box-shadow: 0 0 16px rgba(176,38,255,0.85);
-    transform: translateY(-1px) scale(1.02);
-  }
-
-  .wallet-note {
-    font-size: 0.8rem;
-    opacity: 0.8;
-    margin-top: 10px;
-  }
-
-  /* General buttons */
   .btn {
     display: inline-block;
     background: var(--purple-main);
     color: #000;
     padding: 14px 24px;
-    margin: 10px 10px 0 0;
+    margin: 10px 12px 0 0;
     border-radius: 999px;
     font-weight: 700;
     text-decoration: none;
@@ -391,210 +176,89 @@
   <div class="logo-wrap">
     <img src="blojob.png" alt="$BLOJOB logo">
     <h1>BLOJOB</h1>
-    <h2>Solana’s Most Seductive Degenerate Token ❤️‍🔥</h2>
+    <h2>Solana’s Most Seductive Stealth Meme Token ❤️‍🔥</h2>
   </div>
 </header>
 
-<!-- Launch Status + Info -->
-<div class="countdown-progress">
-  <div class="card">
-    <div class="card-title">🕙 Stealth Launch Status</div>
-    <div class="status-pill">
-      ⏳ Status:
-      <span>Coming Soon</span>
-    </div>
-    <p class="countdown-sub">
-      No presale. No whitelist. No mercy.<br>
-      LP will be seeded and locked. Stealth launch drops
-      when the CumUnity is least expecting it.
-    </p>
-    <p class="countdown-sub">
-      🔔 Exact launch time will be announced on
-      <span class="highlight">Telegram</span> and <span class="highlight">𝕏</span>.
-    </p>
-  </div>
+<div class="section center">
+  <div class="coming">🚀 STEALTH LAUNCH — COMING SOON</div>
+  <p class="stealth-line">
+    The presale is over. The weak were purged. The real degenerates remain.<br><br>
+    LP will be deployed without warning. No whitelist. No insiders. No mercy.
+  </p>
+</div>
 
+<!-- BURN TRACKER -->
+<div class="section">
   <div class="card">
-    <div class="card-title">📊 Launch Info</div>
-    <p class="progress-title">Launch Readiness</p>
-    <div class="progress-bar">
-      <div id="progress-fill"></div>
-    </div>
-    <p class="progress-amounts">
-      Stealth prep, LP seeding, and goon-summoning underway.
-    </p>
+    <div class="card-title">🔥 Burn Tracker</div>
 
-    <div class="token-tracker">
-      <div><strong>Ticker:</strong> $BLOJOB</div>
-      <div><strong>Network:</strong> Solana</div>
-      <div><strong>Total Supply:</strong> 62,100,000,000 BLOJOB</div>
-      <div class="token-progress-bar">
-        <div id="token-progress-fill"></div>
-      </div>
+    <div class="burn-amount" id="burnTokenAmount">
+      6,900,000,000 BLOJOB Burned
     </div>
+
+    <div class="burn-bar">
+      <div id="burn-fill"></div>
+    </div>
+
+    <div class="subtext">
+      Presale allocation permanently removed from supply.<br>
+      Effective total supply: <strong>62,100,000,000 BLOJOB</strong>
+    </div>
+
+    <p class="subtext" style="margin-top:10px;">
+      🔥 Burn address: <strong>11111111111111111111111111111111</strong><br>
+      (Click the button below once you have an actual burn TX link.)
+    </p>
   </div>
 </div>
 
-<!-- Intro -->
-<div class="section">
-  <p class="nsfw-line">
-    You came here curious… now Daddy’s taking it underground. Stealth launch only. 😏
+<!-- TOKENOMICS -->
+<div class="section tokenomics">
+  <h2>🪙 Updated Tokenomics</h2>
+
+  <p>
+    Total Minted Supply: <strong>69,000,000,000</strong><br>
+    Burned: <strong>6,900,000,000</strong><br>
+    Effective Circulating Supply: <strong>62,100,000,000</strong>
   </p>
 
   <p>
-    No presale. No promises. No corporate foreplay.<br>
-    Just raw, throbbing, <strong>pure degen momentum</strong> built to explode the moment
-    liquidity goes live and the first ape hits the chart.
-  </p>
-
-  <div class="callout">
-    <strong>Stealth launch rules:</strong><br>
-    • LP is seeded and locked — no presale, no VC, no insider mint party.<br>
-    • Announcement hits <strong>Telegram</strong> and <strong>𝕏</strong> when it’s time to go.<br>
-    • You either snipe the launch… or you chase the green candles like everyone else.
-  </div>
-</div>
-
-<!-- HOW TO CATCH THE STEALTH LAUNCH -->
-<div class="section">
-  <h2>🧾 How To Catch The Stealth Launch</h2>
-
-  <div class="callout">
-    <strong>⚠️ Use a non-custodial Solana wallet</strong><br>
-    Phantom, Solflare, Backpack, Rabby (Solana), OKX, etc.
-    <span class="badge">❌ No CEX deposits (Binance, Coinbase, etc.)</span>
-  </div>
-
-  <ul class="howto-list">
-    <li><strong>Step 1:</strong> Load your wallet with enough SOL for your buy + gas.</li>
-    <li><strong>Step 2:</strong> Join the <strong>Telegram</strong> and follow <strong>𝕏</strong> so you don’t miss the exact launch link.</li>
-    <li><strong>Step 3:</strong> At launch, use the official Raydium link to buy $BLOJOB directly from the LP.</li>
-    <li><strong>Step 4:</strong> Double-check the <strong>mint address</strong> matches what’s on this page before you ape.</li>
-    <li><strong>Step 5:</strong> Hold, scalp, swing, or full degen — your risk, your ride, your climax.</li>
-  </ul>
-
-  <p style="font-size:0.92rem; opacity:0.85; margin-top:10px;">
-    Always verify the <strong>contract / mint address</strong> before buying. If it doesn’t match what’s below,
-    you’re not getting the real $BLOJOB.
+    <strong>🍑 SpankBank (Vault):</strong> 69% — Treasury, reserves, incentives, stabilization.<br>
+    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, raiders, viral content, CumUnity pushes.<br>
+    <strong>🫟 StickyLiquidity (Liquidity Pool):</strong> 14.1% — Seeded at stealth launch with locked LP.<br>
+    <strong>💦 PreLoad (Presale):</strong> 10% — <span style="color:var(--purple-neon); font-weight:600;">Burned. Gone. Forever.</span>
   </p>
 </div>
 
-<!-- Launch Details / Mint -->
-<div class="buy-card">
-  <h2>💋 BLOJOB Stealth Launch</h2>
-  <p style="font-size:0.9rem; opacity:0.85;">
-    This is the <strong>official mint address</strong> for $BLOJOB. When launch goes live, every real chart,
-    pool, and degen tweet will point back to this contract.
-  </p>
-
-  <!-- Mint Address + copy -->
-  <div class="wallet-address-row" onclick="copyWallet()">
-    <div class="wallet-address-text" id="walletBox">
-      6K3hpzx4n1v5LkvKyoygnKJhS6a16xUWXmxPpHuUsHcg
-    </div>
-    <div class="wallet-copy-icon" id="copyIcon"></div>
-  </div>
-  <div class="wallet-subtext">
-    Tap or click to copy the <strong>official $BLOJOB mint address</strong>.
-    Always verify this before buying on Raydium or any DEX.
-  </div>
-
-  <div class="launch-meta">
-    <div class="launch-meta-item">
-      <span>Supply</span>
-      <strong>62,100,000,000 BLOJOB</strong>
-    </div>
-    <div class="launch-meta-item">
-      <span>Launch Type</span>
-      <strong>Stealth • No Presale</strong>
-    </div>
-    <div class="launch-meta-item">
-      <span>Liquidity</span>
-      <strong>Seeded & Locked</strong>
-    </div>
-    <div class="launch-meta-item">
-      <span>Where</span>
-      <strong>Raydium (Link at Launch)</strong>
-    </div>
-  </div>
-
-  <div class="cta-row">
-    <a class="primary-btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">
-      Join Telegram (Alerts)
-    </a>
-    <a class="primary-btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">
-      Follow on 𝕏
-    </a>
-  </div>
-
-  <p class="wallet-note">
-    📱 <strong>Mobile tip:</strong> When launch goes live, open the Raydium link from Telegram or 𝕏 inside your
-    wallet’s in-app browser (Phantom, Solflare, Backpack, etc.) for the smoothest degen experience.
-  </p>
-</div>
-
-<!-- Tokenomics -->
-<div class="section">
-  <h2>🪙 Tokenomics (69,000,000,000 Supply)</h2>
-
-  <p>
-    <strong>🍑 SpankBank (Vault):</strong> 69% — Long-term reserves, treasury operations, stabilization,
-    staking pools, CumUnity incentives, and micro-liquidity support.<br>
-    <strong>🔥 PreLoad (Allocation Pool):</strong> 10% — Unsold tokens burned before launch.<br>
-    <strong>🫦 MILF (Marketing Initiative Liquidity Fund):</strong> 6.9% — Influencers, promotional pushes,
-    TG/𝕏 growth, marketing campaigns, raids, and CumUnity foreplay.<br>
-    <strong>🫟 StickyLiquidity (Liquidity Pool):</strong> 14.1% — Core LP at launch, locked to keep things nice and tight.<br>
-  </p>
-</div>
-
-<!-- Socials -->
-<div class="section">
+<!-- SOCIALS -->
+<div class="section center">
   <h2>🌐 Socials</h2>
-  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank" rel="noopener noreferrer">Telegram</a>
-  <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank" rel="noopener noreferrer">𝕏 (Twitter)</a>
-  <a class="btn" href="https://solscan.io/token/HgsZcJxmngQQHBu85Fgw816LLSgeZffBahURx1WkT4FB" target="_blank" rel="noopener noreferrer">Solscan (Mint)</a>
 
-  <p class="nsfw-line" style="margin-top:30px;">
-    Stealth launch is coming. Join the CumUnity, watch the chart, and decide how hard you want to ride it. 🚀
+  <a class="btn" href="https://t.me/BLOJOBCumUnity" target="_blank">Telegram</a>
+  <a class="btn" href="https://x.com/BLOJOB_Daddy?s=09" target="_blank">𝕏 (Twitter)</a>
+  <a class="btn" href="https://solscan.io/token/76UUn8zLa9LhbBcaMsarXhjQzMubywhKXT9DXkmB15cw" target="_blank">Solscan</a>
+
+  <p class="stealth-line" style="margin-top:30px;">
+    The CumUnity awaits... stay ready. When the LP drops, it drops HARD. 💦🚀
   </p>
 </div>
 
 <footer>
-  BLOJOB is a meme token. 18+ vibes only. Not financial advice.<br>
-  Pump... Harder. Faster. Stronger.
+  BLOJOB is a meme token. 18+ vibes only.<br>
+  Stealth. Sudden. Violent. Perfect.
 </footer>
 
 <script>
-function copyWallet(){
-  const textEl = document.getElementById("walletBox");
-  const icon = document.getElementById("copyIcon");
-  if (!textEl) return;
+/* Burn tracker fill */
+(function(){
+  const totalMint = 69000000000;
+  const burned = 6900000000;
+  const percent = (burned / totalMint) * 100;
 
-  const text = textEl.textContent.trim();
-
-  if (!navigator.clipboard || !navigator.clipboard.writeText) {
-    const temp = document.createElement("textarea");
-    temp.value = text;
-    document.body.appendChild(temp);
-    temp.select();
-    try { document.execCommand("copy"); } catch(e){}
-    document.body.removeChild(temp);
-  } else {
-    navigator.clipboard.writeText(text).catch(() => {});
-  }
-
-  if (icon) {
-    icon.classList.add("copied");
-    setTimeout(() => icon.classList.remove("copied"), 1500);
-  }
-
-  alert("Mint address copied. 🫦");
-}
+  document.getElementById("burn-fill").style.width = percent + "%";
+})();
 </script>
-
-</body>
-</html>
-
 
 </body>
 </html>
